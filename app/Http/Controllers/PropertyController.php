@@ -15,7 +15,7 @@ class PropertyController extends Controller
     public function index()
     {
         $properties = properties::all();
-        return view('properties.index', compact('properties'));
+        return view('propertis.table', compact('properties'));
     }
 
     /**
@@ -35,19 +35,24 @@ class PropertyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'lokasi' => 'required',
-            'harga' => 'required|numeric',
-            'deskripsi' => 'required',
-        ]);
+{
+    $request->validate([
+        'nama' => 'required',
+        'lokasi' => 'required',
+        'harga' => 'required|integer',
+        'status' => 'required',
+        'deskripsi' => 'required',
+    ]);
 
-        properties::create($request->all());
+    // Exclude _token from the request data
+    $data = $request->except('_token');
 
-        return redirect()->route('properties.index')
-            ->with('success', 'Property created successfully.');
-    }
+    Properties::create($data);
+
+    return redirect()->route('dashboard')
+        ->with('success', 'Property created successfully.');
+}
+
 
     /**
      * Display the specified resource.
@@ -103,7 +108,7 @@ class PropertyController extends Controller
     {
         $property->delete();
 
-        return redirect()->route('properties.index')
+        return redirect()->route('dashboard')
             ->with('success', 'Property deleted successfully');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\properties;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PropertyController;
@@ -15,12 +16,13 @@ use App\Http\Controllers\PropertyController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('beranda');
-// });
+Route::get('/', function () {
+    return view('beranda');
+});
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $properties = properties::all();
+    return view('dashboard', compact('properties'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -29,5 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
+// Properties
+Route::get('/add', [PropertyController::class, 'create'])->name('properties.create');
+Route::post('/store', [PropertyController::class, 'store'])->name('properties.store');
+Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
+Route::get('/edit/{property}/edit', [PropertyController::class, 'edit'])->name('properties.edit');
+Route::put('/update/{property}', [PropertyController::class, 'update'])->name('properties.update');
+Route::delete('/dashboard/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+
 require __DIR__.'/auth.php';
