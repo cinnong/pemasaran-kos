@@ -17,7 +17,8 @@ use App\Http\Controllers\PropertyController;
 */
 
 Route::get('/', function () {
-    return view('beranda');
+    $properties = properties::all();
+    return view('beranda', compact('properties'));
 });
 
 Route::get('/dashboard', function () {
