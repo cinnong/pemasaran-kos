@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('lokasi');
             $table->integer('harga');
+            $table->string('foto')->nullable();
             $table->enum('status', ['available', 'occupied', 'under_maintenance'])->default('available');
             $table->text('deskripsi');
             $table->timestamps();

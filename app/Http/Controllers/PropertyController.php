@@ -2,113 +2,103 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\properties;
+use App\Models\Properties;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $properties = properties::all();
-        return view('propertis.table', compact('properties'));
+        $properties = Properties::all();
+        return view('properties.table', compact('properties'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('properties.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
-{
-    $request->validate([
-        'nama' => 'required',
-        'lokasi' => 'required',
-        'harga' => 'required|integer',
-        'status' => 'required',
-        'deskripsi' => 'required',
-    ]);
-
-    // Exclude _token from the request data
-    $data = $request->except('_token');
-
-    Properties::create($data);
-
-    return redirect()->route('dashboard')
-        ->with('success', 'Property created successfully.');
-}
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\properties  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function show(properties $property)
-    {
-        return view('properties.show', compact('property'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\properties  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(properties $property)
-    {
-        return view('properties.edit', compact('property'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\properties  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, properties $property)
     {
         $request->validate([
             'nama' => 'required',
             'lokasi' => 'required',
-            'harga' => 'required|numeric',
+            'harga' => 'required|integer',
+            'status' => 'required',
             'deskripsi' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $property->update($request->all());
+        $input = new Properties();
+        $input->nama = $request->nama;
+        $input->lokasi = $request->lokasi;
+        $input->harga = $request->harga;
+        $input->status = $request->status;
+        $input->deskripsi = $request->deskripsi;
 
-        return redirect()->route('properties.index')
-            ->with('success', 'Property updated successfully');
+        if ($request->hasFile('foto')) {
+            $gambar = $request->file('foto');
+            $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
+            $gambar->move(public_path('photos'), $namaFile);
+            $input->foto = $namaFile;
+        }
+
+        $input->save();
+
+        return redirect()->route('dashboard')->with('success', 'Property created successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\properties  $property
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(properties $property)
+    public function edit($id)
     {
+        $property = Properties::find($id);
+        return view('properties.edit', compact('property'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $property = Properties::find($id);
+
+        $request->validate([
+            'nama' => 'required',
+            'lokasi' => 'required',
+            'harga' => 'required|numeric',
+            'status' => 'required',
+            'deskripsi' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $property->nama = $request->nama;
+        $property->lokasi = $request->lokasi;
+        $property->harga = $request->harga;
+        $property->status = $request->status;
+        $property->deskripsi = $request->deskripsi;
+
+        if ($request->hasFile('foto')) {
+            if ($property->foto) {
+                unlink(public_path('photos/' . $property->foto));
+            }
+
+            $gambar = $request->file('foto');
+            $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
+            $gambar->move(public_path('photos'), $namaFile);
+            $property->foto = $namaFile;
+        }
+
+        $property->save();
+
+        return redirect()->route('properties.index')->with('success', 'Property updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $property = Properties::find($id);
+
+        if ($property->foto) {
+            unlink(public_path('photos/' . $property->foto));
+        }
+
         $property->delete();
 
-        return redirect()->route('dashboard')
-            ->with('success', 'Property deleted successfully');
+        return redirect()->route('properties.index')->with('success', 'Property deleted successfully!');
     }
 }
