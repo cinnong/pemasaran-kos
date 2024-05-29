@@ -24,6 +24,7 @@ class PropertyController extends Controller
             'nama' => 'required',
             'lokasi' => 'required',
             'harga' => 'required|integer',
+            'jumlah_kamar' => 'required|integer', // Added validation for jumlah_kamar
             'status' => 'required',
             'deskripsi' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -33,6 +34,7 @@ class PropertyController extends Controller
         $input->nama = $request->nama;
         $input->lokasi = $request->lokasi;
         $input->harga = $request->harga;
+        $input->jumlah_kamar = $request->jumlah_kamar; // Added jumlah_kamar
         $input->status = $request->status;
         $input->deskripsi = $request->deskripsi;
 
@@ -62,6 +64,7 @@ class PropertyController extends Controller
             'nama' => 'required',
             'lokasi' => 'required',
             'harga' => 'required|numeric',
+            'jumlah_kamar' => 'required|integer', // Added validation for jumlah_kamar
             'status' => 'required',
             'deskripsi' => 'required',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -70,6 +73,7 @@ class PropertyController extends Controller
         $property->nama = $request->nama;
         $property->lokasi = $request->lokasi;
         $property->harga = $request->harga;
+        $property->jumlah_kamar = $request->jumlah_kamar; // Added jumlah_kamar
         $property->status = $request->status;
         $property->deskripsi = $request->deskripsi;
 
@@ -86,7 +90,7 @@ class PropertyController extends Controller
 
         $property->save();
 
-        return redirect()->route('properties.index')->with('success', 'Property updated successfully!');
+        return redirect()->route('dashboard')->with('success', 'Property updated successfully!');
     }
 
     public function destroy($id)
@@ -99,6 +103,6 @@ class PropertyController extends Controller
 
         $property->delete();
 
-        return redirect()->route('properties.index')->with('success', 'Property deleted successfully!');
+        return redirect()->route('dashboard')->with('success', 'Property deleted successfully!');
     }
 }
