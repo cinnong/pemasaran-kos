@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('nama');
             $table->string('lokasi');
             $table->integer('harga');
-            $table->integer('jumlah_kamar'); 
-            $table->string('foto')->nullable();
+            $table->integer('jumlah_kamar');
             $table->enum('status', ['available', 'occupied', 'under_maintenance'])->default('available');
             $table->text('deskripsi');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
