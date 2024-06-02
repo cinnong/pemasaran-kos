@@ -4,6 +4,8 @@ use App\Models\properties;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +38,12 @@ Route::middleware('auth')->group(function () {
 Route::get('/add', [PropertyController::class, 'create'])->name('properties.create');
 Route::post('/store', [PropertyController::class, 'store'])->name('properties.store');
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
-Route::get('/edit/{property}/edit', [PropertyController::class, 'edit'])->name('properties.edit');
+Route::get('/edit/{property}', [PropertyController::class, 'edit'])->name('properties.edit');
 Route::put('/update/{property}', [PropertyController::class, 'update'])->name('properties.update');
 Route::delete('/dashboard/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+
+Route::get('/banner-admin', function () {
+    return view('admin.banner');
+});
 
 require __DIR__.'/auth.php';

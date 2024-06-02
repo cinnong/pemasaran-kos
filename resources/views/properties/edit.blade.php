@@ -14,7 +14,7 @@
         <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-md">
             <div class="p-6">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6">Edit Property</h2>
-                <form action="{{ route('properties.edit', $property->id) }}" method="POST"
+                <form action="{{ route('properties.update', $property->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
