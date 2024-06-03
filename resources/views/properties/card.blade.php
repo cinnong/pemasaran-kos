@@ -8,9 +8,9 @@
                     class="block w-full h-full object-cover transition duration-300 transform scale-100 group-hover:scale-110"
                     alt="{{ $property->nama }}" />
                 <div
-                    class="absolute bottom-0 p-4 text-white transition duration-300 ease-in-out transform translate-y-0 translate-x-0 group-hover:-translate-y-1 group-hover:translate-x-3">
+                    class="absolute bottom-0 p-4 text-slate-800 transition duration-300 ease-in-out transform translate-y-0 translate-x-0 group-hover:-translate-y-1 group-hover:translate-x-3">
                     <h1 class="text-2xl font-bold">{{ $property->nama }}</h1>
-                    <p class="text-sm font-light">{{ $property->deskripsi }}</p>
+                    <p class="text-sm font-bold">{{ $property->deskripsi }}</p>
                 </div>
             </div>
         </a>
