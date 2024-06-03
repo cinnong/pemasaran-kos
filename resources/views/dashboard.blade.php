@@ -12,7 +12,7 @@
 
         </div>
     </div>
-    
+
     <script>
         function initMap() {
             // Inisialisasi peta

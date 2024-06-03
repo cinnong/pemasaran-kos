@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Kos-Pedia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    
+
 </head>
 
 <body>
@@ -19,17 +19,17 @@
         @include('properties.card')
     </div>
 
-    {{-- <div id="map" style="height: 400px;"></div>
+    <div id="map" style="height: 400px;"></div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> --}
-    {{-- <div claa="w-56">
+     <div claa="w-56">
         <script>
             var map = L.map('map').setView([51.505, -0.09], 13); // Inisialisasi peta dengan koordinat dan zoom level
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); // Tambahkan layer tile
             // Tambahkan marker, polyline, atau fitur lainnya sesuai kebutuhan
         </script>
 
-        </div> --}
+        </div>
     {{-- @foreach ($data['banner'] as $banner)
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <img src="/uploads/{{ $banner['image'] }}"
