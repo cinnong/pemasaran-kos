@@ -1,6 +1,6 @@
 <div class="container mx-auto py-8">
     <div class="flex justify-between mb-4">
-        <h1 class="text-2xl font-bold text-white">Properties</h1>
+        <h1 class="text-2xl font-bold text-black">Properties</h1>
         <a href="{{ route('properties.create') }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add
             Property</a>
     </div>
@@ -35,6 +35,8 @@
                             @endif
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
+                            <a href="{{ route('beranda')}}"
+                                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">View</a>
                             <a href="{{ route('properties.edit', $property->id) }}"
                                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</a>
                             <form action="{{ route('properties.destroy', $property->id) }}" method="POST"

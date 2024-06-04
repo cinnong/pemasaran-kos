@@ -23,7 +23,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     $properties = properties::all();
     return view('beranda', compact('properties'));
-});
+})->name('beranda');
 
 Route::get('/dashboard', function () {
     $properties = properties::all();
