@@ -35,7 +35,7 @@
                             @endif
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
-                            <a href="{{ route('beranda')}}"
+                            <a href="{{ route('beranda', $property->id)}}"
                                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">View</a>
                             <a href="{{ route('properties.edit', $property->id) }}"
                                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</a>

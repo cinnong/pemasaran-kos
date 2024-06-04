@@ -56,6 +56,14 @@ class PropertyController extends Controller
         return view('properties.edit', compact('property'));
     }
 
+    // siapa tau kepake nanti!
+
+    public function show($id)
+    {
+        $property = Properties::find($id);
+        return view('properties.show', compact('property'));
+    }
+
     public function update(Request $request, $id)
     {
         $property = Properties::find($id);
