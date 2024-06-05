@@ -27,7 +27,7 @@ class PropertyController extends Controller
             'jumlah_kamar' => 'required|integer',
             'status' => 'required|string|max:50',
             'deskripsi' => 'required|string',
-            'no_telepon' => 'required|string|max:15',
+            'notlp' => 'required|string|max:15',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -69,6 +69,7 @@ class PropertyController extends Controller
             'status' => 'required|string|max:50',
             'deskripsi' => 'required|string',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'notlp' => 'required|string|max:15',
         ]);
 
         $property->nama = $request->nama;
@@ -77,6 +78,7 @@ class PropertyController extends Controller
         $property->jumlah_kamar = $request->jumlah_kamar;
         $property->status = $request->status;
         $property->deskripsi = $request->deskripsi;
+        $property->notlp = $request->notlp;
 
         if ($request->hasFile('foto')) {
             if ($property->foto) {

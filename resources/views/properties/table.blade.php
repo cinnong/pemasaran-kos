@@ -29,7 +29,7 @@
                         <td class="px-4 py-2 border-b border-gray-200">{{ $property->jumlah_kamar }}</td>
                         <td class="px-4 py-2 border-b border-gray-200">{{ $property->status }}</td>
                         <td class="px-4 py-2 border-b border-gray-200">{{ $property->deskripsi }}</td>
-                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->no_telepon }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->notlp }}</td>
                         <td class="px-4 py-2 border-b border-gray-200">
                             @if ($property->foto)
                                 <img src="{{ asset('photos/' . $property->foto) }}" alt="Property Photo"

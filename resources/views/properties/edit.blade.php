@@ -64,8 +64,8 @@
                     <div class="mb-4">
                         <label for="nama" class="block text-gray-700">Nomor_Telepon</label>
                         <input type="text"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                            name="nomor_telepon" id="nomor_telepon" value="{{ $property->no_telepon }}" required>
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        name="notlp" id="notlp" value="{{ $property->notlp }}" required>
                     </div>
                     <div class="mb-4">
                         <label for="foto" class="block text-gray-700">Photo</label>
