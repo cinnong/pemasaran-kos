@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('jumlah_kamar');
             $table->enum('status', ['available', 'occupied', 'under_maintenance'])->default('available');
             $table->text('deskripsi');
+            $table->string('no_telepon');
             $table->string('foto')->nullable();
             $table->timestamps();
         });

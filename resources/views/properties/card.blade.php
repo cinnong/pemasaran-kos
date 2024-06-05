@@ -1,6 +1,6 @@
 @foreach ($properties as $property)
     <div class="relative overflow-hidden bg-gray-50 mb-8 rounded-xl shadow-xl ring-gray-900/5">
-        <a href="{{ route('properties.show', $property->id)}}">
+        <a href="{{ route('properties.show', $property->id) }}">
             <div class="relative inset-0 bg-center dark:bg-black"></div>
             <div
                 class="group relative flex h-full rounded-xl border border-gray-200 transition duration-300 ease-in-out group-hover:border-gray-700 dark:border-gray-700">

@@ -15,6 +15,7 @@
                     <th class="px-4 py-2 border-b border-gray-200 text-left">Jumlah Kamar</th>
                     <th class="px-4 py-2 border-b border-gray-200 text-left">Status</th>
                     <th class="px-4 py-2 border-b border-gray-200 text-left">Deskripsi</th>
+                    <th class="px-4 py-2 border-b border-gray-200 text-left">No Telepon</th>
                     <th class="px-4 py-2 border-b border-gray-200 text-left">Foto</th>
                     <th class="px-4 py-2 border-b border-gray-200 text-left">Action</th>
                 </tr>
@@ -28,6 +29,7 @@
                         <td class="px-4 py-2 border-b border-gray-200">{{ $property->jumlah_kamar }}</td>
                         <td class="px-4 py-2 border-b border-gray-200">{{ $property->status }}</td>
                         <td class="px-4 py-2 border-b border-gray-200">{{ $property->deskripsi }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->no_telepon }}</td>
                         <td class="px-4 py-2 border-b border-gray-200">
                             @if ($property->foto)
                                 <img src="{{ asset('photos/' . $property->foto) }}" alt="Property Photo"
@@ -35,7 +37,7 @@
                             @endif
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
-                            <a href="{{ route('beranda', $property->id)}}"
+                            <a href="{{ route('beranda', $property->id) }}"
                                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">View</a>
                             <a href="{{ route('properties.edit', $property->id) }}"
                                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</a>

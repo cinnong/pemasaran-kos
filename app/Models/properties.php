@@ -10,12 +10,13 @@ class properties extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 
-        'lokasi', 
-        'harga', 
-        'status', 
-        'jumlah_kamar',  
-        'deskripsi', 
+        'nama',
+        'lokasi',
+        'harga',
+        'status',
+        'jumlah_kamar',
+        'deskripsi',
+        'no_telepon',
         'foto'
     ];
 }
