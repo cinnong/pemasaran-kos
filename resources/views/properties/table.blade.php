@@ -1,8 +1,8 @@
 <div class="container mx-auto py-8">
     <div class="flex justify-between mb-4">
-        <h1 class="text-2xl font-bold text-black">Properties</h1>
-        <a href="{{ route('properties.create') }}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add
-            Property</a>
+        <h1 class="text-2xl font-bold text-black">Data Kosan</h1>
+        <a href="{{ route('properties.create') }}"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Tambah Kos</a>
     </div>
     <!-- List of properties -->
     <div class="overflow-x-auto">
