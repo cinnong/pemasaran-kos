@@ -16,7 +16,7 @@ class properties extends Model
         'status',
         'jumlah_kamar',
         'deskripsi',
-        'no_telepon',
+        'notlp',
         'foto'
     ];
 }

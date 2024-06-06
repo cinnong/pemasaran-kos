@@ -62,7 +62,7 @@
                             name="deskripsi" id="deskripsi" required>{{ $property->deskripsi }}</textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="nama" class="block text-gray-700">Nomor_Telepon</label>
+                        <label for="nama" class="block text-gray-700">Nomor Telepon</label>
                         <input type="text"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         name="notlp" id="notlp" value="{{ $property->notlp }}" required>
