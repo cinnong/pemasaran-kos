@@ -44,8 +44,4 @@ Route::get('/edit/{property}', [PropertyController::class, 'edit'])->name('prope
 Route::put('/update/{property}', [PropertyController::class, 'update'])->name('properties.update');
 Route::delete('/dashboard/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 
-Route::get('/banner-admin', function () {
-    return view('admin.banner');
-});
-
 require __DIR__.'/auth.php';
