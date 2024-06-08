@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\properties;
+use App\Models\Datakos;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\DatakosController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 
@@ -21,13 +21,13 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::get('/', function () {
-    $properties = properties::all();
-    return view('beranda', compact('properties'));
+    $datakos = datakos::all();
+    return view('beranda', compact('datakos'));
 })->name('beranda');
 
 Route::get('/input', function () {
-    $properties = properties::all();
-    return view('input', compact('properties'));
+    $datakos = datakos::all();
+    return view('input', compact('datakos'));
 })->middleware(['auth', 'verified'])->name('input');
 
 Route::middleware('auth')->group(function () {
@@ -36,12 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Properties
-Route::get('/add', [PropertyController::class, 'create'])->name('properties.create');
-Route::post('/store', [PropertyController::class, 'store'])->name('properties.store');
-Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
-Route::get('/edit/{property}', [PropertyController::class, 'edit'])->name('properties.edit');
-Route::put('/update/{property}', [PropertyController::class, 'update'])->name('properties.update');
-Route::delete('/input/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+// datakos
+Route::get('/add', [DatakosController::class, 'create'])->name('datakos.create');
+Route::post('/store', [DatakosController::class, 'store'])->name('datakos.store');
+Route::get('/datakos/{datakos}', [DatakosController::class, 'show'])->name('datakos.show');
+Route::get('/edit/{datakos}', [DatakosController::class, 'edit'])->name('datakos.edit');
+Route::put('/update/{datakos}', [DatakosController::class, 'update'])->name('datakos.update');
+Route::delete('/input/{datakos}', [DatakosController::class, 'destroy'])->name('datakos.destroy');
 
 require __DIR__.'/auth.php';

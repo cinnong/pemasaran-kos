@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\foto_properties>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\datakos>
  */
-class FotoPropertiesFactory extends Factory
+class DatakosFactory extends Factory
 {
     /**
      * Define the model's default state.

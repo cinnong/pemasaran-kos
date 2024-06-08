@@ -1,10 +1,10 @@
 <div class="container mx-auto py-8">
     <div class="flex justify-between mb-4">
         <h1 class="text-2xl font-bold text-black">Data Kosan</h1>
-        <a href="{{ route('properties.create') }}"
+        <a href="{{ route('datakos.create') }}"
             class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Tambah Kos</a>
     </div>
-    <!-- List of properties -->
+    <!-- List of datakos -->
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white border border-gray-200">
             <thead>
@@ -21,27 +21,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($properties as $property)
+                @foreach ($datakos as $datakos)
                     <tr>
-                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->nama }}</td>
-                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->lokasi }}</td>
-                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->harga }}</td>
-                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->jumlah_kamar }}</td>
-                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->status }}</td>
-                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->deskripsi }}</td>
-                        <td class="px-4 py-2 border-b border-gray-200">{{ $property->notlp }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->nama }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->lokasi }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->harga }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->jumlah_kamar }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->status }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->deskripsi }}</td>
+                        <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->notlp }}</td>
                         <td class="px-4 py-2 border-b border-gray-200">
-                            @if ($property->foto)
-                                <img src="{{ asset('photos/' . $property->foto) }}" alt="Property Photo"
+                            @if ($datakos->foto)
+                                <img src="{{ asset('photos/' . $datakos->foto) }}" alt="datakos Photo"
                                     class="w-24 h-auto">
                             @endif
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
-                            <a href="{{ route('beranda', $property->id) }}"
+                            <a href="{{ route('beranda', $datakos->id) }}"
                                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">View</a>
-                            <a href="{{ route('properties.edit', $property->id) }}"
+                            <a href="{{ route('datakos.edit', $datakos->id) }}"
                                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</a>
-                            <form action="{{ route('properties.destroy', $property->id) }}" method="POST"
+                            <form action="{{ route('datakos.destroy', $datakos->id) }}" method="POST"
                                 class="inline-block">
                                 @csrf
                                 @method('DELETE')

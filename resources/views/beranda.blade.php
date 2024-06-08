@@ -21,7 +21,7 @@
     </div>
     <div
         class="grid gap-6 mt-8 overflow-hidden text-gray-700 shadow-md rounded-xl bg-clip-border sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        @include('properties.card')
+        @include('datakos.card')
     </div>
 
 

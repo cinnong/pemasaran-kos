@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Storefoto_propertiesRequest extends FormRequest
+class Updatefoto_datakoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

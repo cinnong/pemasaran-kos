@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Properties;
+use App\Models\datakos;
 use Illuminate\Http\Request;
 
-class PropertyController extends Controller
+class DatakosController extends Controller
 {
     public function index()
     {
-        $properties = Properties::all();
-        return view('properties.table', compact('properties'));
+        $datakos = Datakos::all();
+        return view('datakos.table', compact('datakos'));
     }
 
     public function create()
     {
-        return view('properties.create');
+        return view('datakos.create');
     }
 
     public function store(Request $request)
@@ -40,26 +40,26 @@ class PropertyController extends Controller
             $input['foto'] = $namaFile;
         }
 
-        Properties::create($input);
+        Datakos::create($input);
 
-        return redirect()->route('input')->with('success', 'Property created successfully!');
+        return redirect()->route('input')->with('success', 'Datakos created successfully!');
     }
 
     public function edit($id)
     {
-        $property = Properties::findOrFail($id);
-        return view('properties.edit', compact('property'));
+        $datakos = Datakos::findOrFail($id);
+        return view('datakos.edit', compact('datakos'));
     }
 
     public function show($id)
     {
-        $property = Properties::findOrFail($id);
-        return view('properties.show', compact('property'));
+        $datakos = Datakos::findOrFail($id);
+        return view('datakos.show', compact('datakos'));
     }
 
     public function update(Request $request, $id)
     {
-        $property = Properties::findOrFail($id);
+        $datakos = Datakos::findOrFail($id);
 
         $request->validate([
             'nama' => 'required|string|max:255',
@@ -72,40 +72,40 @@ class PropertyController extends Controller
             'notlp' => 'required|string|max:15',
         ]);
 
-        $property->nama = $request->nama;
-        $property->lokasi = $request->lokasi;
-        $property->harga = $request->harga;
-        $property->jumlah_kamar = $request->jumlah_kamar;
-        $property->status = $request->status;
-        $property->deskripsi = $request->deskripsi;
-        $property->notlp = $request->notlp;
+        $datakos->nama = $request->nama;
+        $datakos->lokasi = $request->lokasi;
+        $datakos->harga = $request->harga;
+        $datakos->jumlah_kamar = $request->jumlah_kamar;
+        $datakos->status = $request->status;
+        $datakos->deskripsi = $request->deskripsi;
+        $datakos->notlp = $request->notlp;
 
         if ($request->hasFile('foto')) {
-            if ($property->foto) {
-                unlink(public_path('photos/' . $property->foto));
+            if ($datakos->foto) {
+                unlink(public_path('photos/' . $datakos->foto));
             }
 
             $gambar = $request->file('foto');
             $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
             $gambar->move(public_path('photos'), $namaFile);
-            $property->foto = $namaFile;
+            $datakos->foto = $namaFile;
         }
 
-        $property->save();
+        $datakos->save();
 
-        return redirect()->route('input')->with('success', 'Property updated successfully!');
+        return redirect()->route('input')->with('success', 'Datakos updated successfully!');
     }
 
     public function destroy($id)
     {
-        $property = Properties::findOrFail($id);
+        $datakos = Datakos::findOrFail($id);
 
-        if ($property->foto) {
-            unlink(public_path('photos/' . $property->foto));
+        if ($datakos->foto) {
+            unlink(public_path('photos/' . $datakos->foto));
         }
 
-        $property->delete();
+        $datakos->delete();
 
-        return redirect()->route('input')->with('success', 'Property deleted successfully!');
+        return redirect()->route('input')->with('success', 'Datakos deleted successfully!');
     }
 }
