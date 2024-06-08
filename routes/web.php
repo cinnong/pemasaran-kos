@@ -1,13 +1,13 @@
 <?php
 
 use App\Models\Datakos;
+use App\Models\Datapemilik;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DatakosController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
-
-
+use App\Http\Controllers\DatapemilikController;
 
 
 /*
@@ -25,10 +25,27 @@ Route::get('/', function () {
     return view('beranda', compact('datakos'));
 })->name('beranda');
 
-Route::get('/input', function () {
+Route::get('/beranda', function () {
     $datakos = datakos::all();
-    return view('input', compact('datakos'));
-})->middleware(['auth', 'verified'])->name('input');
+    $count = datakos::count();
+    return view('beranda-admin', compact('count'));
+})->middleware(['auth', 'verified'])->name('beranda-admin');
+
+Route::get('/datakos', function () {
+    $datakos = datakos::all();
+    $datapemilik = Datapemilik::all();
+    return view('datakos.table-kos', compact('datakos'));
+})->name('datakos');
+
+Route::get('/datauser', function () {
+    return view('datakos.data-user');
+})->name('datauser');
+
+Route::get('/datapemilik', function () {
+    $datapemilik = Datapemilik::all();
+    return view('datakos.data-pemilik', compact('pemilikKosan'));
+})->name('datapemilik');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,5 +60,15 @@ Route::get('/datakos/{datakos}', [DatakosController::class, 'show'])->name('data
 Route::get('/edit/{datakos}', [DatakosController::class, 'edit'])->name('datakos.edit');
 Route::put('/update/{datakos}', [DatakosController::class, 'update'])->name('datakos.update');
 Route::delete('/input/{datakos}', [DatakosController::class, 'destroy'])->name('datakos.destroy');
+
+//datapemilik
+Route::get('/datapemilik', [DatapemilikController::class, 'index'])->name('datapemilik.index');
+Route::get('/datapemilik/create', [DatapemilikController::class, 'create'])->name('datakos.form-pemilik-kos');
+Route::post('/datapemilik', [DatapemilikController::class, 'store'])->name('datapemilik.store');
+Route::get('/datapemilik/{datapemilik}', [DatapemilikController::class, 'show'])->name('datapemilik.show');
+Route::get('/datapemilik/{datapemilik}/edit', [DatapemilikController::class, 'edit'])->name('datapemilik.edit');
+Route::put('/datapemilik/{datapemilik}', [DatapemilikController::class, 'update'])->name('datapemilik.update');
+Route::delete('/datapemilik/{datapemilik}', [DatapemilikController::class, 'destroy'])->name('datapemilik.destroy');
+
 
 require __DIR__.'/auth.php';

@@ -23,6 +23,14 @@
                             name="nama" id="nama" required>
                     </div>
                     <div class="mb-4">
+                        <label for="datapemilik_id">Pemilik:</label>
+                        <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" id="datapemilik_id" name="datapemilik_id" required>
+                            @foreach($datapemilik as $pemilik)
+                                <option value="{{ $pemilik->id }}">{{ $pemilik->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
                         <label for="lokasi" class="block text-gray-700">Lokasi</label>
                         <input type="text"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"

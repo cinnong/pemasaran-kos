@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\datakos;
 use Illuminate\Http\Request;
+use App\Models\Datapemilik;
+use App\Models\Datakos;
 
 class DatakosController extends Controller
 {
     public function index()
     {
-        $datakos = Datakos::all();
-        return view('datakos.table', compact('datakos'));
+        $datakos = Datakos::with('datapemilik')->get();
+        return view('datakos.table-kos', compact('datakos'));
     }
 
     public function create()
     {
-        return view('datakos.create');
+        $datapemilik = Datapemilik::all();
+        return view('datakos.create', compact('datapemilik'));
     }
 
     public function store(Request $request)
@@ -29,6 +31,7 @@ class DatakosController extends Controller
             'deskripsi' => 'required|string',
             'notlp' => 'required|string|max:15',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'datapemilik_id' => 'required|exists:datapemilik,id'
         ]);
 
         $input = $request->all();
@@ -42,18 +45,19 @@ class DatakosController extends Controller
 
         Datakos::create($input);
 
-        return redirect()->route('input')->with('success', 'Datakos created successfully!');
+        return redirect()->route('beranda-admin')->with('success', 'Data kos created successfully!');
     }
 
     public function edit($id)
     {
         $datakos = Datakos::findOrFail($id);
-        return view('datakos.edit', compact('datakos'));
+        $datapemilik = Datapemilik::all();
+        return view('datakos.edit', compact('datakos', 'datapemilik'));
     }
 
     public function show($id)
     {
-        $datakos = Datakos::findOrFail($id);
+        $datakos = Datakos::with('datapemilik')->findOrFail($id);
         return view('datakos.show', compact('datakos'));
     }
 
@@ -70,6 +74,7 @@ class DatakosController extends Controller
             'deskripsi' => 'required|string',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'notlp' => 'required|string|max:15',
+            'datapemilik_id' => 'required|exists:datapemilik,id'
         ]);
 
         $datakos->nama = $request->nama;
@@ -79,6 +84,7 @@ class DatakosController extends Controller
         $datakos->status = $request->status;
         $datakos->deskripsi = $request->deskripsi;
         $datakos->notlp = $request->notlp;
+        $datakos->datapemilik_id = $request->datapemilik_id;
 
         if ($request->hasFile('foto')) {
             if ($datakos->foto) {
@@ -93,7 +99,7 @@ class DatakosController extends Controller
 
         $datakos->save();
 
-        return redirect()->route('input')->with('success', 'Datakos updated successfully!');
+        return redirect()->route('beranda-admin')->with('success', 'Data kos updated successfully!');
     }
 
     public function destroy($id)
@@ -106,6 +112,6 @@ class DatakosController extends Controller
 
         $datakos->delete();
 
-        return redirect()->route('input')->with('success', 'Datakos deleted successfully!');
+        return redirect()->route('beranda-admin')->with('success', 'Data kos deleted successfully!');
     }
 }

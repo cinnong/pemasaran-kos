@@ -4,20 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Datapemilik;
 
-class datakos extends Model
+class Datakos extends Model
 {
     use HasFactory;
 
-    protected $table = 'datakos';  
     protected $fillable = [
         'nama',
         'lokasi',
         'harga',
-        'status',
         'jumlah_kamar',
+        'status',
         'deskripsi',
         'notlp',
-        'foto'
+        'foto',
+        'datapemilik_id', // Tambahkan kolom datapemilik_id ke dalam $fillable
     ];
+
+    public function datapemilik()
+    {
+        return $this->belongsTo(Datapemilik::class);
+    }
 }
