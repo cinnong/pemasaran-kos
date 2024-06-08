@@ -42,7 +42,7 @@ class PropertyController extends Controller
 
         Properties::create($input);
 
-        return redirect()->route('dashboard')->with('success', 'Property created successfully!');
+        return redirect()->route('input')->with('success', 'Property created successfully!');
     }
 
     public function edit($id)
@@ -93,7 +93,7 @@ class PropertyController extends Controller
 
         $property->save();
 
-        return redirect()->route('dashboard')->with('success', 'Property updated successfully!');
+        return redirect()->route('input')->with('success', 'Property updated successfully!');
     }
 
     public function destroy($id)
@@ -106,6 +106,6 @@ class PropertyController extends Controller
 
         $property->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Property deleted successfully!');
+        return redirect()->route('input')->with('success', 'Property deleted successfully!');
     }
 }

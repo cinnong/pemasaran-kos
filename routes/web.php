@@ -25,10 +25,10 @@ Route::get('/', function () {
     return view('beranda', compact('properties'));
 })->name('beranda');
 
-Route::get('/dashboard', function () {
+Route::get('/input', function () {
     $properties = properties::all();
-    return view('dashboard', compact('properties'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('input', compact('properties'));
+})->middleware(['auth', 'verified'])->name('input');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,6 +42,6 @@ Route::post('/store', [PropertyController::class, 'store'])->name('properties.st
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
 Route::get('/edit/{property}', [PropertyController::class, 'edit'])->name('properties.edit');
 Route::put('/update/{property}', [PropertyController::class, 'update'])->name('properties.update');
-Route::delete('/dashboard/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+Route::delete('/input/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 
 require __DIR__.'/auth.php';
