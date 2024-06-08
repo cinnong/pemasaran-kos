@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Property</title>
+    <title>Tambahkan Kos</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
@@ -13,7 +13,7 @@
     <div class="container mx-auto py-8">
         <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-md">
             <div class="p-6">
-                <h2 class="text-2xl font-semibold text-gray-700 mb-6">Create Property</h2>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6">Tambahkan Kos</h2>
                 <form action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
@@ -45,9 +45,8 @@
                         <select
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             name="status" id="status" required>
-                            <option value="available">Available</option>
-                            <option value="occupied">Occupied</option>
-                            <option value="under_maintenance">Under Maintenance</option>
+                            <option value="tersedia">Tersedia</option>
+                            <option value="terisi">Terisi</option>
                         </select>
                     </div>
                     <div class="mb-4">
