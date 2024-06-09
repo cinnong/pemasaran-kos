@@ -57,11 +57,11 @@
                                                 class="w-24 h-auto">
                                         @endif
                                     </td>
-                                    <td class="px-4 py-2 border-b border-gray-200">
+                                    <td class="flex px-4 py-2 border-b border-gray-200">
                                         <a href="{{ route('beranda', $datakos->id) }}"
-                                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">View</a>
+                                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">View</a>
                                         <a href="{{ route('datakos.edit', $datakos->id) }}"
-                                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</a>
+                                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">Edit</a>
                                         <form action="{{ route('datakos.destroy', $datakos->id) }}" method="POST"
                                             class="inline-block">
                                             @csrf
