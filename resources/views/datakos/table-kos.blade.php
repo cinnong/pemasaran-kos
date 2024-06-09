@@ -44,7 +44,7 @@
                             @foreach ($datakos as $datakos)
                                 <tr>
                                     <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->nama }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->pemilik->nama }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->pemilik }}</td>
                                     <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->lokasi }}</td>
                                     <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->harga }}</td>
                                     <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->jumlah_kamar }}</td>

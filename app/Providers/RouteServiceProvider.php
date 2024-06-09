@@ -17,7 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/input';
+    public const HOME = '/';
+    public const USER = '/kospedia';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

@@ -8,6 +8,7 @@ use App\Http\Controllers\DatakosController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DatapemilikController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 /*
@@ -20,10 +21,18 @@ use App\Http\Controllers\DatapemilikController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
 Route::get('/', function () {
     $datakos = datakos::all();
     return view('beranda', compact('datakos'));
 })->name('beranda');
+
+// Route::get('/kospedia', function () {
+//     $datakos = datakos::all();
+//     return view('beranda-user', compact('datakos'));
+// })->name('beranda-user');
 
 Route::get('/beranda', function () {
     $datakos = datakos::all();
