@@ -9,7 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-
 </head>
 
 <body>
@@ -43,21 +42,23 @@
                         <tbody>
                             @foreach ($datakos as $datakos)
                                 <tr>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->nama }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->pemilik }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->lokasi }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->harga }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->jumlah_kamar }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->status }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->deskripsi }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">{{ $datakos->notlp }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200">
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->nama }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->pemilik }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->lokasi }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->harga }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->jumlah_kamar }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->status }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">
+                                        <div class="truncate w-40">{{ $datakos->deskripsi }}</div>
+                                    </td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->notlp }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">
                                         @if ($datakos->foto)
                                             <img src="{{ asset('photos/' . $datakos->foto) }}" alt="datakos Photo"
                                                 class="w-24 h-auto">
                                         @endif
                                     </td>
-                                    <td class="flex px-4 py-2 border-b border-gray-200">
+                                    <td class="flex px-4 py-2 border-b border-gray-200 text-center">
                                         <a href="{{ route('beranda', $datakos->id) }}"
                                             class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">View</a>
                                         <a href="{{ route('datakos.edit', $datakos->id) }}"

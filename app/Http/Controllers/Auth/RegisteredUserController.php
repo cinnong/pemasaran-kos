@@ -28,6 +28,12 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    public function index(): View
+    {
+        $users = User::all();
+        return view('datakos.data-user', compact('users'));
+    }
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -47,5 +53,11 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect()->route('beranda');
+    }
+
+    public function show($id): View
+    {
+        $user = User::findOrFail($id);
+        return view('datauser.show', compact('user'));
     }
 }

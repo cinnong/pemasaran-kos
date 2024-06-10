@@ -2,14 +2,15 @@
 
 use App\Models\Datakos;
 use App\Models\Datapemilik;
+use App\Models\User;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DatakosController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DatapemilikController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -21,40 +22,33 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 Route::get('/', function () {
-    $datakos = datakos::all();
+    $datakos = Datakos::all();
     return view('beranda', compact('datakos'));
 })->name('beranda');
 
-// Route::get('/kospedia', function () {
-//     $datakos = datakos::all();
-//     return view('beranda-user', compact('datakos'));
-// })->name('beranda-user');
-
 Route::get('/beranda', function () {
-    $datakos = datakos::all();
-    $count = datakos::count();
+    $datakos = Datakos::all();
+    $count = Datakos::count();
     return view('beranda-admin', compact('count'));
 })->middleware(['auth', 'verified'])->name('beranda-admin');
 
 Route::get('/datakos', function () {
-    $datakos = datakos::all();
+    $datakos = Datakos::all();
     $datapemilik = Datapemilik::all();
-    return view('datakos.table-kos', compact('datakos'));
+    return view('datakos.table-kos', compact('datakos', 'datapemilik'));
 })->name('datakos');
 
-Route::get('/datauser', function () {
-    return view('datakos.data-user');
-})->name('datauser');
+Route::get('/datauser', [RegisteredUserController::class, 'index'])->name('datauser');
 
 Route::get('/datapemilik', function () {
     $datapemilik = Datapemilik::all();
-    return view('datakos.data-pemilik', compact('pemilikKosan'));
+    return view('datakos.data-pemilik', compact('datapemilik'));
 })->name('datapemilik');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -79,5 +73,6 @@ Route::get('/datapemilik/{datapemilik}/edit', [DatapemilikController::class, 'ed
 Route::put('/datapemilik/{datapemilik}', [DatapemilikController::class, 'update'])->name('datapemilik.update');
 Route::delete('/datapemilik/{datapemilik}', [DatapemilikController::class, 'destroy'])->name('datapemilik.destroy');
 
+Route::get('/datauser/{user}', [RegisteredUserController::class, 'show'])->name('datauser.show');
 
 require __DIR__.'/auth.php';

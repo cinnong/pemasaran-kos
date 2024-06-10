@@ -19,14 +19,14 @@
                     class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                     aria-controls="dropdown-home" data-collapse-toggle="dropdown-home">
                     <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 3l10 9h-4v9H6v-9H2z" />
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Beranda</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 4 4 4-4" />
-                    </svg>
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 3l10 9h-4v9H6v-9H2z" />
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Beranda</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
+                        </svg>
                 </button>
                 <ul id="dropdown-home" class="hidden py-2 space-y-2">
                     <li>
@@ -34,7 +34,8 @@
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <!-- Unique Home Icon -->
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 24 24">
                                 <path d="M12 3l10 9h-4v9H6v-9H2z" />
                             </svg>
                             <span>Beranda KosPedia</span>
@@ -45,16 +46,17 @@
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <!-- Unique Home Icon -->
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 24 24">
                                 <path d="M12 3l10 9h-4v9H6v-9H2z" />
                             </svg>
                             <span>Beranda Admin</span>
                         </a>
                     </li>
-                    <!-- Tambahkan submenu lainnya di sini jika diperlukan -->
                 </ul>
-
             </li>
+
+            {{-- Data Master --}}
             <li>
                 <button type="button"
                     class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
@@ -111,29 +113,64 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="#"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            {{-- <li>
+                <button type="button"
+                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    aria-controls="dropdown-transaksi" data-collapse-toggle="dropdown-transaksi">
                     <!-- Unique Transaction Management Icon -->
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 24 24">
                         <path d="M12 1l8 8-3 2-5-5v8l5 3-5 5-8-8 3-2 5 5V6l-5-3z" />
                     </svg>
                     <span class="flex-1 ms-3 whitespace-nowrap">Kelola Transaksi</span>
-                </a>
-            </li>
-            <li>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+                <ul id="dropdown-transaksi" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="/pemesan"
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                            <!-- Unique Pemesan Icon -->
+                            <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <!-- Tambahkan ikon untuk pemesan di sini -->
+                            </svg>
+                            <span>Pemesan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pembayaran"
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                            <!-- Unique Pembayaran Icon -->
+                            <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <!-- Tambahkan ikon untuk pembayaran di sini -->
+                            </svg>
+                            <span>Pembayaran</span>
+                        </a>
+                    </li>
+                </ul>
+            </li> --}}
+
+            {{-- <li>
                 <a href="#"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <!-- Unique Report Management Icon -->
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 24 24">
                         <path
                             d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm1 14.93V17h-2v-.07A7.05 7.05 0 017.07 13H7v-2h.07A7.05 7.05 0 0111 7.07V7h2v.07A7.05 7.05 0 0116.93 11H17v2h-.07A7.05 7.05 0 0113 16.93z" />
                     </svg>
                     <span class="flex-1 ms-3 whitespace-nowrap">Kelola Laporan</span>
                 </a>
-            </li>
+            </li> --}}
             <li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

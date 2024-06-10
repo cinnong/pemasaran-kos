@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+<nav class="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 left-0 w-full z-50">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('photos/logo.png') }}" class="h-8" alt="Flowbite Logo" />
