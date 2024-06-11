@@ -14,8 +14,7 @@
         <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-md">
             <div class="p-6">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6">Edit Kos</h2>
-                <form action="{{ route('datakos.update', $datakos->id) }}" method="POST"
-                    enctype="multipart/form-data">
+                <form action="{{ route('datakos.update', $datakos->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-4">
@@ -49,8 +48,7 @@
                             name="status" id="status" required>
                             <option value="tersedia" {{ $datakos->status == 'tersedia' ? 'selected' : '' }}>Tersedia
                             </option>
-                            <option value="terisi" {{ $datakos->status == 'terisi' ? 'selected' : '' }}>Terisi
-                            </option>
+                            <option value="terisi" {{ $datakos->status == 'terisi' ? 'selected' : '' }}>Terisi</option>
                         </select>
                     </div>
                     <div class="mb-4">
@@ -59,13 +57,13 @@
                             name="deskripsi" id="deskripsi" required>{{ $datakos->deskripsi }}</textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="nama" class="block text-gray-700">Nomor Telepon</label>
+                        <label for="notlp" class="block text-gray-700">Nomor Telepon</label>
                         <input type="text"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             name="notlp" id="notlp" value="{{ $datakos->notlp }}" required>
                     </div>
                     <div class="mb-4">
-                        <label for="foto" class="block text-gray-700">Photo</label>
+                        <label for="foto" class="block text-gray-700">Foto</label>
                         <input type="file"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             name="foto" id="foto">
@@ -76,7 +74,6 @@
             </div>
         </div>
     </div>
-    {{-- belum bisa update tanya pak yusril --}}
 </body>
 
 </html>

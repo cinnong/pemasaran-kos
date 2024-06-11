@@ -33,8 +33,12 @@ Route::get('/', function () {
 
 Route::get('/beranda', function () {
     $datakos = Datakos::all();
+    $user = User::all();
+    $datapemilik = Datapemilik::all();
     $count = Datakos::count();
-    return view('beranda-admin', compact('count'));
+    $countuser = User::count();
+    $countpemilik = Datapemilik::count();
+    return view('beranda-admin', compact('count', 'countuser','countpemilik'));
 })->middleware(['auth', 'verified'])->name('beranda-admin');
 
 Route::get('/datakos', function () {

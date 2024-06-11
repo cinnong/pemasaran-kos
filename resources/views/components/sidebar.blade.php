@@ -184,6 +184,19 @@
                         </svg>
                         <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
                     </button>
+
+                    {{-- buttun hover full tpi tulisa d tengah
+                    <button type="submit"
+                        class="flex items-center justify-start w-full p-2 text-gray-900 rounded-lg dark:text-white group hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <!-- Unique Logout Icon -->
+                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path d="M12 2L2 7v2h2v11h16V9h2V7zm0 2l7 4v10h-3v-8H8v8H5V8l7-4zm-3 7h6v8h-6z" />
+                        </svg>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
+                    </button> --}}
+
                 </form>
             </li>
         </ul>
