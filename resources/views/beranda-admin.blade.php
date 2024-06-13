@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">{{ $countuser }}</div>
-                        <a href="/datakos"
+                        <a href="{{ route('datauser') }}"
                             class="inline-flex items-center mt-4 text-sm font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
                             More info
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">{{ $countpemilik }}</div>
-                        <a href="/datakos"
+                        <a href="/datapemilik"
                             class="inline-flex items-center mt-4 text-sm font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
                             More info
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"

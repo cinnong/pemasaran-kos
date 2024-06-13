@@ -80,3 +80,5 @@ Route::delete('/datapemilik/{datapemilik}', [DatapemilikController::class, 'dest
 Route::get('/datauser/{user}', [RegisteredUserController::class, 'show'])->name('datauser.show');
 
 require __DIR__.'/auth.php';
+
+

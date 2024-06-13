@@ -43,15 +43,21 @@
                             @foreach ($datakos as $datakos)
                                 <tr>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->nama }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->pemilik }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->lokasi }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->harga }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->jumlah_kamar }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->status }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->pemilik }}
+                                    </td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->lokasi }}
+                                    </td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->harga }}
+                                    </td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">
+                                        {{ $datakos->jumlah_kamar }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->status }}
+                                    </td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">
                                         <div class="truncate w-40">{{ $datakos->deskripsi }}</div>
                                     </td>
-                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->notlp }}</td>
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->notlp }}
+                                    </td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">
                                         @if ($datakos->foto)
                                             <img src="{{ asset('photos/' . $datakos->foto) }}" alt="datakos Photo"
