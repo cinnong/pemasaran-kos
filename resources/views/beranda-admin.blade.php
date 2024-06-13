@@ -101,7 +101,7 @@
                                     <h5 class="text-lg leading-6 font-semibold text-gray-900 dark:text-white">Data
                                         Pemilik</h5>
                                     <p class="text-sm leading-5 font-medium text-gray-500 dark:text-gray-400">Total Data
-                                        Pemilik</p>
+                                        Pemili</p>
                                 </div>
                             </div>
                         </div>
