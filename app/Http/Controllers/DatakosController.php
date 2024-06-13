@@ -84,6 +84,7 @@ class DatakosController extends Controller
         'jumlah_kamar' => $request->jumlah_kamar,
         'status' => $request->status,
         'deskripsi' => $request->deskripsi,
+
         'notlp' => $request->notlp,
         'datapemilik_id' => $request->datapemilik_id,
     ]);
