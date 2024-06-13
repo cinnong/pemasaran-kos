@@ -9,7 +9,7 @@ use App\Models\Datakos;
 class DatapemilikController extends Controller
 {
     public function index()
-    {       
+    {
         $datapemilik = Datapemilik::all();
         return view('datakos.data-pemilik', compact('datapemilik'));
     }
@@ -42,7 +42,7 @@ class DatapemilikController extends Controller
     public function edit($id)
     {
         $datapemilik = Datapemilik::findOrFail($id);
-        return view('datapemilik.edit', compact('datapemilik'));
+        return view('datakos.edit-datapemilik', compact('datapemilik'));
     }
 
     public function update(Request $request, $id)
