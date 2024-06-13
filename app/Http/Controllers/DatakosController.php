@@ -62,47 +62,59 @@ class DatakosController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    $datakos = Datakos::findOrFail($id);
+    {
+        $datakos = Datakos::findOrFail($id);
 
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'lokasi' => 'required|string|max:255',
-        'harga' => 'required|integer',
-        'jumlah_kamar' => 'required|integer',
-        'status' => 'required|string|max:50',
-        'deskripsi' => 'required|string',
-        'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'notlp' => 'required|string|max:15',
-        'datapemilik_id' => 'required|exists:datapemilik,id'
-    ]);
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'lokasi' => 'required|string|max:255',
+            'harga' => 'required|integer',
+            'jumlah_kamar' => 'required|integer',
+            'status' => 'required|string|max:50',
+            'deskripsi' => 'required|string',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'notlp' => 'required|string|max:15',
+            'datapemilik_id' => 'required|exists:datapemilik,id'
+        ]);
 
-    $datakos->update([
-        'nama' => $request->nama,
-        'lokasi' => $request->lokasi,
-        'harga' => $request->harga,
-        'jumlah_kamar' => $request->jumlah_kamar,
-        'status' => $request->status,
-        'deskripsi' => $request->deskripsi,
+        $datakos->update([
+            'nama' => $request->nama,
+            'lokasi' => $request->lokasi,
+            'harga' => $request->harga,
+            'jumlah_kamar' => $request->jumlah_kamar,
+            'status' => $request->status,
+            'deskripsi' => $request->deskripsi,
+            'foto' => $request->foto,
+            'notlp' => $request->notlp,
+            'datapemilik_id' => $request->datapemilik_id,
+        ]);
 
-        'notlp' => $request->notlp,
-        'datapemilik_id' => $request->datapemilik_id,
-    ]);
+        if ($request->hasFile('foto')) {
+            if ($datakos->foto) {
+                unlink(public_path('photos/' . $datakos->foto));
+            }
 
-    if ($request->hasFile('foto')) {
+            $gambar = $request->file('foto');
+            $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
+            $gambar->move(public_path('photos'), $namaFile);
+            $datakos->foto = $namaFile;
+        }
+
+        $datakos->save();
+
+        return redirect()->route('beranda-admin')->with('success', 'Data kos updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $datakos = Datakos::findOrFail($id);
+
         if ($datakos->foto) {
             unlink(public_path('photos/' . $datakos->foto));
         }
 
-        $gambar = $request->file('foto');
-        $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
-        $gambar->move(public_path('photos'), $namaFile);
-        $datakos->foto = $namaFile;
+        $datakos->delete();
+
+        return redirect()->route('beranda-admin')->with('success', 'Data kos deleted successfully!');
     }
-
-    $datakos->save();
-
-    return redirect()->route('beranda-admin')->with('success', 'Data kos updated successfully!');
-}
-
 }
