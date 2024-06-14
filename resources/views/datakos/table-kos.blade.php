@@ -44,7 +44,7 @@
                                 <tr>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->nama }}</td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">
-                                        {{ $datakos->pemilik }}
+                                        {{ $datakos->datapemilik->nama ?? 'N/A' }}
                                     </td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->lokasi }}
                                     </td>

@@ -1,5 +1,6 @@
 <?php
 
+// app/Http/Controllers/DatakosController.php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class DatakosController extends Controller
             'status' => 'required|string|max:50',
             'deskripsi' => 'required|string',
             'notlp' => 'required|string|max:15',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'datapemilik_id' => 'required|exists:datapemilik,id'
         ]);
 
@@ -76,21 +77,11 @@ class DatakosController extends Controller
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'datapemilik_id' => 'required|exists:datapemilik,id'
         ]);
-        
-        $datakos->update([
-            'nama' => $request->nama,
-            'lokasi' => $request->lokasi,
-            'harga' => $request->harga,
-            'jumlah_kamar' => $request->jumlah_kamar,
-            'status' => $request->status,
-            'deskripsi' => $request->deskripsi,
-            'foto' => $request->foto,
-            'notlp' => $request->notlp,
-            'datapemilik_id' => $request->datapemilik_id,
-        ]);
-        
+
+        $datakos->update($request->all());
+
         if ($request->hasFile('foto')) {
-            if ($datakos->foto && file_exists(public_path('photos/' . $datakos->foto))) {
+            if ($datakos->foto) {
                 unlink(public_path('photos/' . $datakos->foto));
             }
 
@@ -99,8 +90,6 @@ class DatakosController extends Controller
             $gambar->move(public_path('photos'), $namaFile);
             $datakos->foto = $namaFile;
         }
-
-        $datakos->save();
 
         return redirect()->route('beranda-admin')->with('success', 'Data kos updated successfully!');
     }
