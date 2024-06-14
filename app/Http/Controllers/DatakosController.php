@@ -1,6 +1,5 @@
 <?php
 
-// app/Http/Controllers/DatakosController.php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -78,18 +77,19 @@ class DatakosController extends Controller
             'datapemilik_id' => 'required|exists:datapemilik,id'
         ]);
 
-        $datakos->update($request->all());
+        $input = $request->all();
 
         if ($request->hasFile('foto')) {
-            if ($datakos->foto) {
-                unlink(public_path('photos/' . $datakos->foto));
-            }
-
             $gambar = $request->file('foto');
             $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
             $gambar->move(public_path('photos'), $namaFile);
-            $datakos->foto = $namaFile;
+            $input['foto'] = $namaFile;
+        } else {
+            // Retain the old photo if no new photo is uploaded
+            $input['foto'] = $datakos->foto;
         }
+
+        $datakos->update($input);
 
         return redirect()->route('beranda-admin')->with('success', 'Data kos updated successfully!');
     }

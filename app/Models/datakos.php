@@ -19,7 +19,7 @@ class Datakos extends Model
         'deskripsi',
         'notlp',
         'foto',
-        'datapemilik_id', // Tambahkan kolom datapemilik_id ke dalam $fillable
+        'datapemilik_id',
     ];
 
     public function datapemilik()
