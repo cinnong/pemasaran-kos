@@ -27,9 +27,9 @@
                 <p><strong>Status:</strong> {{ ucfirst(str_replace('_', ' ', $datakos->status)) }}</p>
                 <p class="overflow-wrap break-word"><strong>Deskripsi:</strong> {{ $datakos->deskripsi }}</p>
                 <p><strong>No. Telepon:</strong> {{ $datakos->notlp }}</p>
-                <a href="tel:{{ $datakos->notlp }}">
+                <a href="#">
                     <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Hubungi Pemilik
+                        Pesan
                     </button>
                 </a>
             </div>

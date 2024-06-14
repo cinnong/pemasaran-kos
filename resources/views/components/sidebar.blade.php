@@ -113,7 +113,7 @@
                     </li>
                 </ul>
             </li>
-            {{-- <li>
+            <li>
                 <button type="button"
                     class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                     aria-controls="dropdown-transaksi" data-collapse-toggle="dropdown-transaksi">
@@ -123,7 +123,7 @@
                         viewBox="0 0 24 24">
                         <path d="M12 1l8 8-3 2-5-5v8l5 3-5 5-8-8 3-2 5 5V6l-5-3z" />
                     </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Kelola Transaksi</span>
+                    <span class="flex-1 ms-3 text-left whitespace-nowrap">Kelola Transaksi</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -134,11 +134,11 @@
                     <li>
                         <a href="/pemesan"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <!-- Unique Pemesan Icon -->
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 24 24">
-                                <!-- Tambahkan ikon untuk pemesan di sini -->
+                                <path
+                                    d="M12 12a5 5 0 110-10 5 5 0 010 10zm0-12a7 7 0 100 14 7 7 0 000-14zm-2 10h4v2h-4v-2z" />
                             </svg>
                             <span>Pemesan</span>
                         </a>
@@ -146,17 +146,17 @@
                     <li>
                         <a href="/pembayaran"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            <!-- Unique Pembayaran Icon -->
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 24 24">
-                                <!-- Tambahkan ikon untuk pembayaran di sini -->
+                                <path d="M12 3v18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />
                             </svg>
                             <span>Pembayaran</span>
                         </a>
                     </li>
                 </ul>
-            </li> --}}
+
+            </li>
 
             {{-- <li>
                 <a href="#"
@@ -184,19 +184,6 @@
                         </svg>
                         <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
                     </button>
-
-                    {{-- buttun hover full tpi tulisa d tengah
-                    <button type="submit"
-                        class="flex items-center justify-start w-full p-2 text-gray-900 rounded-lg dark:text-white group hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <!-- Unique Logout Icon -->
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path d="M12 2L2 7v2h2v11h16V9h2V7zm0 2l7 4v10h-3v-8H8v8H5V8l7-4zm-3 7h6v8h-6z" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
-                    </button> --}}
-
                 </form>
             </li>
         </ul>
