@@ -24,6 +24,19 @@
                             name="nama" id="nama" value="{{ $datakos->nama }}" required>
                     </div>
                     <div class="mb-4">
+                        <label for="datapemilik_id" class="block text-gray-700">Pemilik</label>
+                        <select name="datapemilik_id" id="datapemilik_id"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            required>
+                            @foreach ($datapemilik as $pemilik)
+                                <option value="{{ $pemilik->id }}"
+                                    {{ $datakos->datapemilik_id == $pemilik->id ? 'selected' : '' }}>
+                                    {{ $pemilik->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
                         <label for="lokasi" class="block text-gray-700">Lokasi</label>
                         <input type="text"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"

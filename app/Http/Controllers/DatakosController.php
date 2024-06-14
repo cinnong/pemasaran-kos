@@ -72,11 +72,11 @@ class DatakosController extends Controller
             'jumlah_kamar' => 'required|integer',
             'status' => 'required|string|max:50',
             'deskripsi' => 'required|string',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'notlp' => 'required|string|max:15',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'datapemilik_id' => 'required|exists:datapemilik,id'
         ]);
-
+        
         $datakos->update([
             'nama' => $request->nama,
             'lokasi' => $request->lokasi,
@@ -88,9 +88,9 @@ class DatakosController extends Controller
             'notlp' => $request->notlp,
             'datapemilik_id' => $request->datapemilik_id,
         ]);
-
+        
         if ($request->hasFile('foto')) {
-            if ($datakos->foto) {
+            if ($datakos->foto && file_exists(public_path('photos/' . $datakos->foto))) {
                 unlink(public_path('photos/' . $datakos->foto));
             }
 
