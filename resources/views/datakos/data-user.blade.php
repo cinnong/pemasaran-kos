@@ -22,6 +22,9 @@
                         <tr>
                             <th class="py-2 px-4 bg-gray-200 text-center">ID</th>
                             <th class="py-2 px-4 bg-gray-200 text-center">Nama</th>
+                            <th class="py-2 px-4 bg-gray-200 text-center">Usia</th>
+                            <th class="py-2 px-4 bg-gray-200 text-center">Jenis Kelamin</th>
+                            <th class="py-2 px-4 bg-gray-200 text-center">Pekerjaan</th>
                             <th class="py-2 px-4 bg-gray-200 text-center">Email</th>
                             <th class="py-2 px-4 bg-gray-200 text-center">Tanggal Dibuat</th>
                         </tr>
@@ -31,6 +34,9 @@
                             <tr>
                                 <td class="border px-4 py-2 text-center">{{ $user->id }}</td>
                                 <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
+                                <td class="border px-4 py-2 text-center">{{ $user->usia }}</td>
+                                <td class="border px-4 py-2 text-center">{{ $user->jenis_kelamin }}</td>
+                                <td class="border px-4 py-2 text-center">{{ $user->pekerjaan }}</td>
                                 <td class="border px-4 py-2 text-center">{{ $user->email }}</td>
                                 <td class="border px-4 py-2 text-center">{{ $user->created_at }}</td>
                             </tr>
