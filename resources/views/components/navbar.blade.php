@@ -13,8 +13,26 @@
                     <a href="{{ route('login') }}"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-4">Login</a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="ml-4 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Register</a>
+                        <div class="relative">
+                            <button type="button"
+                                class="ml-4 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                                aria-haspopup="true" aria-expanded="false" id="register-dropdown">
+                                Register
+                            </button>
+                            <ul class="absolute right-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded-md shadow-lg hidden"
+                                id="register-options">
+                                <li>
+                                    <a href="register-pemilik"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pemilik
+                                        Kos</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('register') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pencari
+                                        Kos</a>
+                                </li>
+                            </ul>
+                        </div>
                     @endif
                 @endauth
             @endif
@@ -41,11 +59,29 @@
                     <a href="#kos"
                         class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Kosan</a>
                 </li>
-                {{-- <li>
-                    <a href="#"
-                        class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                </li> --}}
+                <li>
+                    <form action="{{ route('search') }}" method="GET" class="relative flex items-center">
+                        <input type="text" name="query" id="query" placeholder="Search..."
+                            class="w-full p-2 pl-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <svg class="w-5 h-5 text-gray-500 absolute left-3 pointer-events-none dark:text-gray-400"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M10 2a8 8 0 0 1 5.292 13.708l5.363 5.364-1.414 1.414-5.364-5.363A8 8 0 1 1 10 2m0-2C4.477 0 0 4.477 0 10s4.477 10 10 10a9.95 9.95 0 0 0 6.364-2.236l5.517 5.518L24 22.093l-5.518-5.517A9.95 9.95 0 0 0 20 10c0-5.523-4.477-10-10-10z" />
+                        </svg>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const registerDropdown = document.getElementById('register-dropdown');
+        const registerOptions = document.getElementById('register-options');
+
+        registerDropdown.addEventListener('click', function() {
+            registerOptions.classList.toggle('hidden');
+        });
+    });
+</script>

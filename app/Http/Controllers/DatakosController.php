@@ -14,6 +14,17 @@ class DatakosController extends Controller
         return view('datakos.table-kos', compact('datakos'));
     }
 
+    public function searchByLocation(Request $request)
+{
+    $locationQuery = $request->input('location_query');
+
+    // Query untuk mencari data kosan berdasarkan lokasi
+    $datakos = Datakos::where('lokasi', 'like', '%' . $locationQuery . '%')->get();
+
+    return view('datakos.search-by-location', compact('datakos', 'locationQuery'));
+}
+
+
     public function create()
     {
         $datapemilik = Datapemilik::all();
@@ -80,12 +91,17 @@ class DatakosController extends Controller
         $input = $request->all();
 
         if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($datakos->foto && file_exists(public_path('photos/' . $datakos->foto))) {
+                unlink(public_path('photos/' . $datakos->foto));
+            }
+
             $gambar = $request->file('foto');
             $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
             $gambar->move(public_path('photos'), $namaFile);
             $input['foto'] = $namaFile;
         } else {
-            // Retain the old photo if no new photo is uploaded
+            // Pertahankan foto lama jika tidak ada foto baru yang diunggah
             $input['foto'] = $datakos->foto;
         }
 
@@ -98,7 +114,7 @@ class DatakosController extends Controller
     {
         $datakos = Datakos::findOrFail($id);
 
-        if ($datakos->foto) {
+        if ($datakos->foto && file_exists(public_path('photos/' . $datakos->foto))) {
             unlink(public_path('photos/' . $datakos->foto));
         }
 
