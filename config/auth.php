@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'pemilik_kos' => [
+        'driver' => 'session',
+        'provider' => 'pemilik_kos',
+        ],
     ],
 
     /*
@@ -64,7 +68,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'pemilik_kos' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\PemilikKos::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

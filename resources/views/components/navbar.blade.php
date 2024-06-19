@@ -22,7 +22,7 @@
                             <ul class="absolute right-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded-md shadow-lg hidden"
                                 id="register-options">
                                 <li>
-                                    <a href="register-pemilik"
+                                    <a href="{{ route('pemilik_kos.register') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pemilik
                                         Kos</a>
                                 </li>

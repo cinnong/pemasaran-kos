@@ -12,7 +12,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DatapemilikController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\SearchController;
-
+use App\Http\Controllers\Auth\PemilikKosRegisterController;
+use App\Http\Controllers\PemilikKosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,10 @@ use App\Http\Controllers\SearchController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('pemilik_kos/register', [PemilikKosRegisterController::class, 'create'])->name('pemilik_kos.register');
+Route::post('pemilik_kos/register', [PemilikKosRegisterController::class, 'store'])->name('pemilik_kos.register.store');
+Route::get('/dashboard', [PemilikKosController::class, 'dashboard'])->name('pemilik_kos.dashboard');
+
 Route::get('/search', [DatakosController::class, 'searchByLocation'])->name('search');
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
