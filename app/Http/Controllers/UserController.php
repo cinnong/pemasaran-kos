@@ -20,11 +20,30 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-        return redirect()->route('user.index')->with('success', 'User updated successfully');
-    }
+{
+    $request->validate([
+        'name' => 'required|string',
+        'usia' => 'nullable|integer',
+        'jenis_kelamin' => 'required|string',
+        'pekerjaan' => 'required|string',
+        'notlp' => 'required|string', 
+        'email' => 'required|email|unique:users,email,'.$id,
+    ]);
+
+    $user = User::findOrFail($id);
+
+    $user->name = $request->input('name');
+    $user->usia = $request->input('usia');
+    $user->jenis_kelamin = $request->input('jenis_kelamin');
+    $user->pekerjaan = $request->input('pekerjaan');
+    $user->notlp = $request->input('notlp');
+    $user->email = $request->input('email');
+
+    $user->save();
+
+    return redirect()->route('user.index')->with('success', 'Data pengguna berhasil diupdate.');
+}
+
 
     public function destroy($id)
     {

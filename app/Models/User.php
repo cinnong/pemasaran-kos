@@ -20,12 +20,12 @@ class User extends Authenticatable
     use HasRoles;
     protected $fillable = [
         'name',
-        'email',
         'usia',
         'jenis_kelamin',
         'pekerjaan',
+        'notlp', // Pastikan notlp termasuk dalam fillable
+        'email',
         'password',
-
     ];
 
     /**

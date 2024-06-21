@@ -62,6 +62,16 @@
                         <x-input-error :messages="$errors->get('pekerjaan')" class="mt-2" />
                     </div>
 
+                    <!-- Nomor Telepon -->
+                    <div>
+                        <x-input-label for="notlp" :value="'Nomor Telepon'"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
+                        <x-text-input id="notlp"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text" name="notlp" :value="old('notlp')" required autocomplete="notlp" />
+                        <x-input-error :messages="$errors->get('notlp')" class="mt-2" />
+                    </div>
+
                     <!-- Email Address -->
                     <div>
                         <x-input-label for="email" :value="'Email'"
@@ -109,4 +119,3 @@
 </body>
 
 </html>
-

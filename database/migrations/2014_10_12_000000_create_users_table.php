@@ -19,12 +19,13 @@ return new class extends Migration
             $table->integer('usia')->nullable();
             $table->string('jenis_kelamin');
             $table->string('pekerjaan');
+            $table->string('notlp'); // Tidak menggunakan nullable()
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-        });
+        });        
     }
 
     /**

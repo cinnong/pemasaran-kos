@@ -38,27 +38,29 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'usia' => ['required', 'integer'],
             'jenis_kelamin' => ['required', 'string', 'max:255'],
             'pekerjaan' => ['required', 'string', 'max:255'],
+            'notlp' => ['required', 'string', 'max:20'], // Definisi validasi untuk nomor telepon
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'usia' => $request->usia,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'pekerjaan' => $request->pekerjaan,
-            'password' => Hash::make($request->password),
-        ]);
+        'name' => $request->name,
+        'email' => $request->email,
+        'usia' => $request->usia,
+        'jenis_kelamin' => $request->jenis_kelamin,
+        'pekerjaan' => $request->pekerjaan,
+        'notlp' => $request->notlp, // Menyimpan nomor telepon yang diinput
+        'password' => Hash::make($request->password),
+    ]);
 
-        event(new Registered($user));
+    event(new Registered($user));
 
-        Auth::login($user);
+    Auth::login($user);
 
-        return redirect()->route('beranda');
+    return redirect()->route('beranda');
     }
 
     public function show($id): View

@@ -25,6 +25,7 @@
                             <th class="py-2 px-4 bg-gray-200 text-center">Usia</th>
                             <th class="py-2 px-4 bg-gray-200 text-center">Jenis Kelamin</th>
                             <th class="py-2 px-4 bg-gray-200 text-center">Pekerjaan</th>
+                            <th class="py-2 px-4 bg-gray-200 text-center">Nomor Telepon</th>
                             <th class="py-2 px-4 bg-gray-200 text-center">Email</th>
                             <th class="py-2 px-4 bg-gray-200 text-center">Tanggal Dibuat</th>
                             <th class="py-2 px-4 bg-gray-200 text-center">Aksi</th>
@@ -38,6 +39,7 @@
                                 <td class="border px-4 py-2 text-center">{{ $user->usia }}</td>
                                 <td class="border px-4 py-2 text-center">{{ $user->jenis_kelamin }}</td>
                                 <td class="border px-4 py-2 text-center">{{ $user->pekerjaan }}</td>
+                                <td class="border px-4 py-2 text-center">{{ $user->notlp }}</td>
                                 <td class="border px-4 py-2 text-center">{{ $user->email }}</td>
                                 <td class="border px-4 py-2 text-center">{{ $user->created_at }}</td>
                                 <td class="border px-4 py-2 text-center">

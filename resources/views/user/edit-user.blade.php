@@ -32,12 +32,25 @@
                     </div>
                     <div class="mb-4">
                         <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
-                        <input type="text" name="jenis_kelamin" id="jenis_kelamin" value="{{ $user->jenis_kelamin }}"
+                        <select name="jenis_kelamin" id="jenis_kelamin"
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            <option value="laki-laki"
+                                {{ old('jenis_kelamin', $user->jenis_kelamin ?? '') == 'laki-laki' ? 'selected' : '' }}>
+                                Laki-laki</option>
+                            <option value="perempuan"
+                                {{ old('jenis_kelamin', $user->jenis_kelamin ?? '') == 'perempuan' ? 'selected' : '' }}>
+                                Perempuan</option>
+                        </select>
                     </div>
+
                     <div class="mb-4">
                         <label for="pekerjaan" class="block text-sm font-medium text-gray-700">Pekerjaan</label>
                         <input type="text" name="pekerjaan" id="pekerjaan" value="{{ $user->pekerjaan }}"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="notlp" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                        <input type="text" name="notlp" id="notlp" value="{{ $user->notlp }}"
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                     </div>
                     <div class="mb-4">
