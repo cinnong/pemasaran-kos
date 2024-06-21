@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
     public function index(): View
     {
         $users = User::all();
-        return view('datakos.data-user', compact('users'));
+        return view('user.data-user', compact('users'));
     }
 
     public function store(Request $request): RedirectResponse

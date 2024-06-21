@@ -85,6 +85,12 @@ Route::delete('/datapemilik/{datapemilik}', [DatapemilikController::class, 'dest
 
 Route::get('/datauser/{user}', [RegisteredUserController::class, 'show'])->name('datauser.show');
 
+// datauser
+Route::resource('user', UserController::class);
+Route::get('/data-user', function () {
+    return view('user.data-user');
+});
+
 require __DIR__.'/auth.php';
 
 
