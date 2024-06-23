@@ -24,6 +24,11 @@ class Datakos extends Model
 
     public function datapemilik()
     {
-        return $this->belongsTo(Datapemilik::class, 'datapemilik_id');
+        return $this->belongsTo(PemilikKos::class, 'datapemilik_id');
+    }
+
+    public function pemilik()
+    {
+    return $this->belongsTo(PemilikKos::class, 'pemilik_kos_id');
     }
 }

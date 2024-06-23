@@ -21,4 +21,9 @@ class PemilikKos extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function datakos()
+    {
+    return $this->hasMany(Datakos::class, 'pemilik_kos_id');
+    }
 }

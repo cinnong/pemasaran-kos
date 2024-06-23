@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Datapemilik;
+use App\Models\Datapemili;
 use App\Models\Datakos;
+use App\Models\PemilikKos;
 
 class DatakosController extends Controller
 {
@@ -27,42 +28,47 @@ class DatakosController extends Controller
 
     public function create()
     {
-        $datapemilik = Datapemilik::all();
-        return view('datakos.create', compact('datapemilik'));
+        $pemilik_kos = PemilikKos::all();
+        return view('datakos.create', compact('pemilik_kos'));
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'lokasi' => 'required|string|max:255',
-            'harga' => 'required|integer',
-            'jumlah_kamar' => 'required|integer',
-            'tipekos' => 'required|string|max:50',
-            'deskripsi' => 'required|string',
-            'notlp' => 'required|string|max:15',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'datapemilik_id' => 'required|exists:datapemilik,id'
-        ]);
+{
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'lokasi' => 'required|string|max:255',
+        'harga' => 'required|integer',
+        'jumlah_kamar' => 'required|integer',
+        'tipekos' => 'required|string|max:50',
+        'deskripsi' => 'required|string',
+        'notlp' => 'required|string|max:15',
+        'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'datapemilik_id' => 'required|exists:datapemilik,id'
+    ]);
 
-        $input = $request->all();
+    // Mengambil semua input dari form
+    $input = $request->all();
 
-        if ($request->hasFile('foto')) {
-            $gambar = $request->file('foto');
-            $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move(public_path('photos'), $namaFile);
-            $input['foto'] = $namaFile;
-        }
-
-        Datakos::create($input);
-
-        return redirect()->route('beranda-admin')->with('success', 'Data kos created successfully!');
+    // Upload gambar jika ada
+    if ($request->hasFile('foto')) {
+        $gambar = $request->file('foto');
+        $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
+        $gambar->move(public_path('photos'), $namaFile);
+        $input['foto'] = $namaFile;
     }
+
+    // Menyimpan data menggunakan metode create dari model Datakos
+    Datakos::create($input);
+
+    // Redirect ke halaman beranda admin dengan pesan sukses
+    return redirect()->route('beranda-admin')->with('success', 'Data kos berhasil ditambahkan.');
+}
+
 
     public function edit($id)
     {
         $datakos = Datakos::findOrFail($id);
-        $datapemilik = Datapemilik::all();
+        $pemilikKos = PemilikKos::all();
         return view('datakos.edit', compact('datakos', 'datapemilik'));
     }
 
@@ -122,4 +128,5 @@ class DatakosController extends Controller
 
         return redirect()->route('beranda-admin')->with('success', 'Data kos deleted successfully!');
     }
+
 }
