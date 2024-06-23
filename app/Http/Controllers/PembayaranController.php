@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Pembayaran;
-use App\Http\Requests\StorePembayaranRequest;
-use App\Http\Requests\UpdatePembayaranRequest;
+use App\Models\Pemesanan;
 
 class PembayaranController extends Controller
 {
@@ -15,7 +15,8 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        //
+        $pembayarans = Pembayaran::all();
+        return view('pembayaran.data-pembayaran', compact('pembayarans'));
     }
 
     /**
@@ -25,18 +26,39 @@ class PembayaranController extends Controller
      */
     public function create()
     {
-        //
+        return view('pembayarans.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePembayaranRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePembayaranRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pemesanan_id' => 'required|exists:pemesanans,id',
+            'upload_bukti_pembayaran' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status_pembayaran' => 'required|in:pending,berhasil,gagal',
+        ]);
+
+        // Handle file upload
+        if ($request->hasFile('upload_bukti_pembayaran')) {
+            $file = $request->file('upload_bukti_pembayaran');
+            $path = $file->store('bukti_pembayaran', 'public');
+        } else {
+            return redirect()->back()->withInput()->withErrors(['upload_bukti_pembayaran' => 'File bukti pembayaran diperlukan.']);
+        }
+
+        // Create Pembayaran
+        Pembayaran::create([
+            'pemesanan_id' => $request->input('pemesanan_id'),
+            'upload_bukti_pembayaran' => $path,
+            'status_pembayaran' => $request->input('status_pembayaran'),
+        ]);
+
+        return redirect()->route('pembayarans.index')->with('success', 'Pembayaran berhasil dibuat.');
     }
 
     /**
@@ -47,7 +69,7 @@ class PembayaranController extends Controller
      */
     public function show(Pembayaran $pembayaran)
     {
-        //
+        return view('pembayarans.show', compact('pembayaran'));
     }
 
     /**
@@ -58,19 +80,37 @@ class PembayaranController extends Controller
      */
     public function edit(Pembayaran $pembayaran)
     {
-        //
+        return view('pembayarans.edit', compact('pembayaran'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePembayaranRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Pembayaran  $pembayaran
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePembayaranRequest $request, Pembayaran $pembayaran)
+    public function update(Request $request, Pembayaran $pembayaran)
     {
-        //
+        $request->validate([
+            'pemesanan_id' => 'required|exists:pemesanans,id',
+            'upload_bukti_pembayaran' => 'sometimes|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status_pembayaran' => 'required|in:pending,berhasil,gagal',
+        ]);
+
+        // Handle file upload if new file provided
+        if ($request->hasFile('upload_bukti_pembayaran')) {
+            $file = $request->file('upload_bukti_pembayaran');
+            $path = $file->store('bukti_pembayaran', 'public');
+            $pembayaran->upload_bukti_pembayaran = $path;
+        }
+
+        // Update Pembayaran
+        $pembayaran->pemesanan_id = $request->input('pemesanan_id');
+        $pembayaran->status_pembayaran = $request->input('status_pembayaran');
+        $pembayaran->save();
+
+        return redirect()->route('pembayarans.index')->with('success', 'Pembayaran berhasil diperbarui.');
     }
 
     /**
@@ -81,6 +121,8 @@ class PembayaranController extends Controller
      */
     public function destroy(Pembayaran $pembayaran)
     {
-        //
+        $pembayaran->delete();
+
+        return redirect()->route('pembayarans.index')->with('success', 'Pembayaran berhasil dihapus.');
     }
 }

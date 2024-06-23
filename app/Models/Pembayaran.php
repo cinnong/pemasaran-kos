@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Pembayaran extends Model
 {
     use HasFactory;
+
+    protected $table = 'pembayarans';
+
+    protected $fillable = [
+        'pemesanan_id',
+        'tanggal_pembayaran',
+        'upload_bukti_pembayaran',
+        'status_pembayaran'
+    ];
+
+    public function pemesanan()
+    {
+        return $this->belongsTo(Pemesanan::class, 'pemesanan_id');
+    }
 }

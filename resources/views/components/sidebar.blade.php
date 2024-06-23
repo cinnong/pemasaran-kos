@@ -158,7 +158,7 @@
 
             </li>
 
-            {{-- <li>
+            <li>
                 <a href="#"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <!-- Unique Report Management Icon -->
@@ -170,7 +170,7 @@
                     </svg>
                     <span class="flex-1 ms-3 whitespace-nowrap">Kelola Laporan</span>
                 </a>
-            </li> --}}
+            </li>
             <li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

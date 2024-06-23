@@ -14,6 +14,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Auth\PemilikKosRegisterController;
 use App\Http\Controllers\PemilikKosController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PemesananController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,6 +92,14 @@ Route::resource('user', UserController::class);
 Route::get('/data-user', function () {
     return view('user.data-user');
 });
+
+//PembayaranController
+Route::resource('pembayarans', PembayaranController::class);
+Route::get('/pembayaran', [PembayaranController::class, 'index']);
+
+// Routes for PemesananController
+Route::resource('pemesanans', PemesananController::class);
+
 
 require __DIR__.'/auth.php';
 

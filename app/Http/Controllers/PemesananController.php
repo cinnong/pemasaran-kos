@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Pemesanan;
 use App\Http\Requests\StorePemesananRequest;
 use App\Http\Requests\UpdatePemesananRequest;
@@ -15,7 +16,8 @@ class PemesananController extends Controller
      */
     public function index()
     {
-        //
+        $pemesanans = Pemesanan::all();
+        return view('pemesanans.index', compact('pemesanans'));
     }
 
     /**
@@ -25,7 +27,7 @@ class PemesananController extends Controller
      */
     public function create()
     {
-        //
+        return view('pemesanans.create');
     }
 
     /**
@@ -36,7 +38,21 @@ class PemesananController extends Controller
      */
     public function store(StorePemesananRequest $request)
     {
-        //
+        $request->validate([
+            'nama_penyewa' => 'required',
+            'tanggal_pemesanan' => 'required|date',
+            'tanggal_masuk' => 'required|date',
+            'tanggal_keluar' => 'required|date|after:tanggal_masuk',
+            'tipe_kos' => 'required|in:pria,wanita,campuran',
+            'per_bulan' => 'required',
+            'harga' => 'required',
+            'total_biaya' => 'required',
+            'status_pemesanan' => 'required|in:Dipesan,Dikonfirmasi,Dibatalkan,Selesai',
+        ]);
+
+        Pemesanan::create($request->all());
+
+        return redirect()->route('pemesanans.index')->with('success', 'Pemesanan berhasil dibuat.');
     }
 
     /**
@@ -47,7 +63,7 @@ class PemesananController extends Controller
      */
     public function show(Pemesanan $pemesanan)
     {
-        //
+        return view('pemesanans.show', compact('pemesanan'));
     }
 
     /**
@@ -58,7 +74,7 @@ class PemesananController extends Controller
      */
     public function edit(Pemesanan $pemesanan)
     {
-        //
+        return view('pemesanans.edit', compact('pemesanan'));
     }
 
     /**
@@ -70,7 +86,21 @@ class PemesananController extends Controller
      */
     public function update(UpdatePemesananRequest $request, Pemesanan $pemesanan)
     {
-        //
+        $request->validate([
+            'nama_penyewa' => 'required',
+            'tanggal_pemesanan' => 'required|date',
+            'tanggal_masuk' => 'required|date',
+            'tanggal_keluar' => 'required|date|after:tanggal_masuk',
+            'tipe_kos' => 'required|in:pria,wanita,campuran',
+            'per_bulan' => 'required',
+            'harga' => 'required',
+            'total_biaya' => 'required',
+            'status_pemesanan' => 'required|in:Dipesan,Dikonfirmasi,Dibatalkan,Selesai',
+        ]);
+
+        $pemesanan->update($request->all());
+
+        return redirect()->route('pemesanans.index')->with('success', 'Pemesanan berhasil diperbarui.');
     }
 
     /**
@@ -81,6 +111,8 @@ class PemesananController extends Controller
      */
     public function destroy(Pemesanan $pemesanan)
     {
-        //
+        $pemesanan->delete();
+
+        return redirect()->route('pemesanans.index')->with('success', 'Pemesanan berhasil dihapus.');
     }
 }
