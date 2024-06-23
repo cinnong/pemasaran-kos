@@ -100,6 +100,12 @@ Route::get('/pembayaran', [PembayaranController::class, 'index']);
 // PemesananController
 Route::resource('pemesanans', PemesananController::class);
 Route::get('/pemesanans/create', [PemesananController::class, 'create'])->name('pemesanan.pesan');
+// Menampilkan formulir untuk upload bukti pembayaran berdasarkan pemesanan_id
+Route::get('pembayaran/create/{pemesanan_id}', [PembayaranController::class, 'create'])->name('pembayaran.create');
+
+// Menyimpan bukti pembayaran yang diupload dan membuat entri pembayaran baru
+Route::post('pembayaran/store', [PembayaranController::class, 'store'])->name('pembayaran.store');
+
 
 
 

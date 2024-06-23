@@ -24,9 +24,13 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($pemesanan_id)
     {
-        return view('pembayaran.create');
+        // Mencari pemesanan berdasarkan ID
+        $pemesanan = Pemesanan::findOrFail($pemesanan_id);
+
+        // Menampilkan view upload-bukti dengan data pemesanan
+        return view('pemesanan.upload-bukti', compact('pemesanan'));
     }
 
     /**
@@ -35,6 +39,8 @@ class PembayaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     // Memproses dan menyimpan data pembayaran
     public function store(Request $request)
     {
         $request->validate([
@@ -43,22 +49,17 @@ class PembayaranController extends Controller
             'status_pembayaran' => 'required|in:pending,berhasil,gagal',
         ]);
 
-        // Handle file upload
-        if ($request->hasFile('upload_bukti_pembayaran')) {
-            $file = $request->file('upload_bukti_pembayaran');
-            $path = $file->store('bukti_pembayaran', 'public');
-        } else {
-            return redirect()->back()->withInput()->withErrors(['upload_bukti_pembayaran' => 'File bukti pembayaran diperlukan.']);
-        }
-
-        // Create Pembayaran
-        Pembayaran::create([
-            'pemesanan_id' => $request->input('pemesanan_id'),
+         $path = $request->file('upload_bukti_pembayaran')->store('bukti_pembayaran');
+ 
+         // Membuat entri pembayaran baru
+         Pembayaran::create([
+            'pemesanan_id' => $request->pemesanan_id,
             'upload_bukti_pembayaran' => $path,
-            'status_pembayaran' => $request->input('status_pembayaran'),
+            'status_pembayaran' => 'pending',
         ]);
-
-        return redirect()->route('pembayarans.index')->with('success', 'Pembayaran berhasil dibuat.');
+ 
+         // Redirect ke halaman pemesanan dengan pesan sukses
+         return redirect()->route('datakos.show')->with('success', 'Bukti pembayaran berhasil diupload. Silakan menunggu konfirmasi.');
     }
 
     /**

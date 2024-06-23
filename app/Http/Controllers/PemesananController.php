@@ -32,24 +32,24 @@ class PemesananController extends Controller
         return view('pemesanan.pesan', compact('datakos'));
     }
 
-    public function store(Pemesanan $request)
+    public function store(Request $request)
     {
+        //untuk nampilin error
+        // dd($request->all());
         $request->validate([
-            'nama_penyewa' => 'required',
-            'tanggal_pemesanan' => 'required|date',
             'tanggal_masuk' => 'required|date',
-            'tanggal_keluar' => 'required|date|after:tanggal_masuk',
-            'tipe_kos' => 'required|in:pria,wanita,campuran',
-            'per_bulan' => 'required',
-            'harga' => 'required',
-            'total_biaya' => 'required',
-            'status_pemesanan' => 'required|in:Dipesan,Dikonfirmasi,Dibatalkan,Selesai',
+            'tanggal_keluar' => 'required|date',
+            'tipe_kos' => 'required',
+            'harga' => 'required|numeric',
+            'total_biaya' => 'required|numeric',
         ]);
 
-        Pemesanan::create($request->all());
+        $pemesanan = Pemesanan::create($request->all());
 
-        return redirect()->route('pemesanan.index')->with('success', 'Pemesanan berhasil dibuat.');
+        return redirect()->route('pembayaran.create', ['pemesanan_id' => $pemesanan->id])
+        ->with('success', 'Pemesanan berhasil dibuat. Silakan upload bukti pembayaran.');
     }
+
 
     /**
      * Display the specified resource.

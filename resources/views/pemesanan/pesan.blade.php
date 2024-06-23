@@ -50,24 +50,21 @@
                         value="{{ $datakos->harga }}" readonly>
                 </div>
 
-                @push('scripts')
-                    <script>
-                        function updateTotalBiaya() {
-                            var harga = parseFloat(document.querySelector('input[name="harga"]').value);
-                            var perBulan = parseInt(document.querySelector('input[name="per_bulan"]').value);
-                            var totalBiaya = harga * perBulan;
-                            document.getElementById('total_biaya').value = totalBiaya;
-                            document.getElementById('total_biaya_label').value = totalBiaya;
-                        }
-                    </script>
-                @endpush
+                <script>
+                    function updateTotalBiaya() {
+                        var harga = parseFloat(document.querySelector('input[name="harga"]').value);
+                        var perBulan = parseInt(document.querySelector('input[name="per_bulan"]').value);
+                        var totalBiaya = harga * perBulan;
+                        document.getElementById('total_biaya').value = totalBiaya;
+                        document.getElementById('total_biaya_label').value = totalBiaya;
+                    }
+                </script>
+
                 <button type="submit"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pesan</button>
             </form>
         </div>
     </div>
-
-    @stack('scripts')
 
 </body>
 
