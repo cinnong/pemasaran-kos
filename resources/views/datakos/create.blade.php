@@ -24,8 +24,10 @@
                     </div>
                     <div class="mb-4">
                         <label for="datapemilik_id">Pemilik:</label>
-                        <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" id="datapemilik_id" name="datapemilik_id" required>
-                            @foreach($datapemilik as $pemilik)
+                        <select
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            id="datapemilik_id" name="datapemilik_id" required>
+                            @foreach ($datapemilik as $pemilik)
                                 <option value="{{ $pemilik->id }}">{{ $pemilik->nama }}</option>
                             @endforeach
                         </select>
@@ -49,12 +51,13 @@
                             name="jumlah_kamar" id="jumlah_kamar" required>
                     </div>
                     <div class="mb-4">
-                        <label for="status" class="block text-gray-700">Status</label>
+                        <label for="tipekos" class="block text-gray-700">Tipe Kos</label>
                         <select
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                            name="status" id="status" required>
-                            <option value="tersedia">Tersedia</option>
-                            <option value="terisi">Terisi</option>
+                            name="tipekos" id="tipekos" required>
+                            <option value="pria">Pria</option>
+                            <option value="wanita">Wanita</option>
+                            <option value="campuran">Campuran</option>
                         </select>
                     </div>
                     <div class="mb-4">

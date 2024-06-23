@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('lokasi');
             $table->integer('harga');
             $table->integer('jumlah_kamar');
-            $table->enum('status', ['tersedia', 'terisi'])->default('tersedia');
+            $table->enum('tipekos', ['pria', 'wanita', 'campuran']);
             $table->text('deskripsi');
             $table->string('notlp');
             $table->string('foto')->nullable();

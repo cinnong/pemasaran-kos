@@ -15,7 +15,7 @@ class Datakos extends Model
         'lokasi',
         'harga',
         'jumlah_kamar',
-        'status',
+        'tipekos',
         'deskripsi',
         'notlp',
         'foto',

@@ -32,7 +32,7 @@
                                 <th class="px-4 py-2 border-b border-gray-200 text-left">Lokasi</th>
                                 <th class="px-4 py-2 border-b border-gray-200 text-left">Harga</th>
                                 <th class="px-4 py-2 border-b border-gray-200 text-left">Jumlah Kamar</th>
-                                <th class="px-4 py-2 border-b border-gray-200 text-left">Status</th>
+                                <th class="px-4 py-2 border-b border-gray-200 text-left">Tipe Kos</th>
                                 <th class="px-4 py-2 border-b border-gray-200 text-left">Deskripsi</th>
                                 <th class="px-4 py-2 border-b border-gray-200 text-left">No Telepon</th>
                                 <th class="px-4 py-2 border-b border-gray-200 text-left">Foto</th>
@@ -52,7 +52,8 @@
                                     </td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">
                                         {{ $datakos->jumlah_kamar }}</td>
-                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->status }}
+                                    <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->tipekos }}
+                                    </td>
                                     </td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">
                                         <div class="truncate w-40">{{ $datakos->deskripsi }}</div>

@@ -55,13 +55,14 @@
                             name="jumlah_kamar" id="jumlah_kamar" value="{{ $datakos->jumlah_kamar }}" required>
                     </div>
                     <div class="mb-4">
-                        <label for="status" class="block text-gray-700">Status</label>
+                        <label for="tipekos" class="block text-gray-700">Tipe Kos</label>
                         <select
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                            name="status" id="status" required>
-                            <option value="tersedia" {{ $datakos->status == 'tersedia' ? 'selected' : '' }}>Tersedia
+                            name="tipekos" id="tipekos" required>
+                            <option value="pria" {{ $datakos->tipekos == 'pria' ? 'selected' : '' }}>Pria</option>
+                            <option value="wanita" {{ $datakos->tipekos == 'wanita' ? 'selected' : '' }}>Wanita</option>
+                            <option value="campuran" {{ $datakos->tipekos == 'campuran' ? 'selected' : '' }}>Campuran
                             </option>
-                            <option value="terisi" {{ $datakos->status == 'terisi' ? 'selected' : '' }}>Terisi</option>
                         </select>
                     </div>
                     <div class="mb-4">
