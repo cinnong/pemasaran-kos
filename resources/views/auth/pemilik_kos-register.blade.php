@@ -11,7 +11,8 @@
 
 <body class="bg-gray-50 dark:bg-gray-900">
     <section class="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen">
-        <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div
+            class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Daftar sebagai Pemilik Kos
@@ -20,72 +21,57 @@
                     @csrf
                     <!-- Nama -->
                     <div>
-                        <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                        <input id="nama"
+                        <x-input-label for="nama" :value="'Nama'"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
+                        <x-text-input id="nama"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            type="text" name="nama" value="{{ old('nama') }}" required autofocus autocomplete="nama" />
-                        @error('nama')
-                            <span class="invalid-feedback text-red-600" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                            type="text" name="nama" :value="old('nama')" required autofocus autocomplete="nama" />
+                        <x-input-error :messages="$errors->get('nama')" class="mt-2" />
                     </div>
 
                     <!-- No HP -->
                     <div>
-                        <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No HP</label>
-                        <input id="no_hp"
+                        <x-input-label for="no_hp" :value="'No HP'"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
+                        <x-text-input id="no_hp"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            type="text" name="no_hp" value="{{ old('no_hp') }}" required autocomplete="no_hp" />
-                        @error('no_hp')
-                            <span class="invalid-feedback text-red-600" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                            type="text" name="no_hp" :value="old('no_hp')" required autocomplete="no_hp" />
+                        <x-input-error :messages="$errors->get('no_hp')" class="mt-2" />
                     </div>
 
                     <!-- Email -->
                     <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                        <input id="email"
+                        <x-input-label for="email" :value="'Email'"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
+                        <x-text-input id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            type="email" name="email" value="{{ old('email') }}" required autocomplete="email" />
-                        @error('email')
-                            <span class="invalid-feedback text-red-600" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                            type="email" name="email" :value="old('email')" required autocomplete="email" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Password -->
                     <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                        <input id="password"
+                        <x-input-label for="password" :value="'Password'"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
+                        <x-text-input id="password"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="password" name="password" required autocomplete="new-password"
                             placeholder="••••••••" />
-                        @error('password')
-                            <span class="invalid-feedback text-red-600" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     <!-- Confirm Password -->
                     <div>
-                        <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Konfirmasi Password</label>
-                        <input id="password_confirmation"
+                        <x-input-label for="password_confirmation" :value="'Konfirmasi Password'"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
+                        <x-text-input id="password_confirmation"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="password" name="password_confirmation" required autocomplete="new-password"
                             placeholder="••••••••" />
-                        @error('password_confirmation')
-                            <span class="invalid-feedback text-red-600" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
 
-                    <x-primary-button>
+                    <x-primary-button class="ms-3">
                         {{ __('Register') }}
                     </x-primary-button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">

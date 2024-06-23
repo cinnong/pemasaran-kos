@@ -3,6 +3,7 @@
 use App\Models\Datakos;
 use App\Models\Datapemilik;
 use App\Models\User;
+use App\Models\PemilikKos;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DatakosController;
@@ -12,7 +13,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DatapemilikController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\Auth\PemilikKosRegisterController;
+use App\Http\Controllers\Auth\RegisteredPemilikController;
 use App\Http\Controllers\PemilikKosController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
@@ -26,8 +27,8 @@ use App\Http\Controllers\PemesananController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('pemilik_kos/register', [PemilikKosRegisterController::class, 'create'])->name('pemilik_kos.register');
-Route::post('pemilik_kos/register', [PemilikKosRegisterController::class, 'store'])->name('pemilik_kos.register.store');
+Route::get('pemilik_kos/register', [RegisteredPemilikController::class, 'create'])->name('pemilik_kos.register');
+Route::post('pemilik_kos/register', [RegisteredPemilikController::class, 'store'])->name('pemilik_kos.register.store');
 Route::get('/dashboard', [PemilikKosController::class, 'dashboard'])->name('pemilik_kos.dashboard');
 
 Route::get('/search', [DatakosController::class, 'searchByLocation'])->name('search');
@@ -42,25 +43,24 @@ Route::get('/', function () {
 Route::get('/beranda', function () {
     $datakos = Datakos::all();
     $user = User::all();
-    $datapemilik = Datapemilik::all();
+    $datapemilik = PemilikKos::all();
     $count = Datakos::count();
     $countuser = User::count();
-    $countpemilik = Datapemilik::count();
+    $countpemilik = PemilikKos::count();
     return view('beranda-admin', compact('count', 'countuser','countpemilik'));
 })->middleware(['auth', 'verified'])->name('beranda-admin');
 
 Route::get('/datakos', function () {
     $datakos = Datakos::all();
-    $datapemilik = Datapemilik::all();
+    $datapemilik = PemilikKos::all();
     return view('datakos.table-kos', compact('datakos', 'datapemilik'));
 })->name('datakos');
 
 Route::get('/datauser', [RegisteredUserController::class, 'index'])->name('datauser');
 
-Route::get('/datapemilik', function () {
-    $datapemilik = Datapemilik::all();
-    return view('datakos.data-pemilik', compact('datapemilik'));
-})->name('datapemilik');
+Route::get('/datapemilik',
+[RegisteredPemilikController::class, 'index'])
+->name('datapemilik');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -77,13 +77,21 @@ Route::put('/update/{datakos}', [DatakosController::class, 'update'])->name('dat
 Route::delete('/input/{datakos}', [DatakosController::class, 'destroy'])->name('datakos.destroy');
 
 //datapemilik
-Route::get('/datapemilik', [DatapemilikController::class, 'index'])->name('datapemilik.index');
-Route::get('/datapemilik/create', [DatapemilikController::class, 'create'])->name('datakos.form-pemilik-kos');
-Route::post('/datapemilik', [DatapemilikController::class, 'store'])->name('datapemilik.store');
-Route::get('/datapemilik/{datapemilik}', [DatapemilikController::class, 'show'])->name('datapemilik.show');
-Route::get('/datapemilik/{datapemilik}/edit', [DatapemilikController::class, 'edit'])->name('datapemilik.edit');
-Route::put('/datapemilik/{datapemilik}', [DatapemilikController::class, 'update'])->name('datapemilik.update');
-Route::delete('/datapemilik/{datapemilik}', [DatapemilikController::class, 'destroy'])->name('datapemilik.destroy');
+
+Route::get('/datapemilik/{pemilik_Kos}', [RegisteredPemilikController::class, 'show'])->name('datapemilik.show');
+
+Route::resource('pemilik_kos', PemilikKosController::class);
+Route::get('/data-pemilik', function () {
+    return view('pemilik_kos.data-pemilik');
+});
+
+// Route::get('/datapemilik', [DatapemilikController::class, 'index'])->name('datapemilik.index');
+// Route::get('/datapemilik/create', [DatapemilikController::class, 'create'])->name('datakos.form-pemilik-kos');
+// Route::post('/datapemilik', [DatapemilikController::class, 'store'])->name('datapemilik.store');
+// Route::get('/datapemilik/{datapemilik}', [DatapemilikController::class, 'show'])->name('datapemilik.show');
+// Route::get('/datapemilik/{datapemilik}/edit', [DatapemilikController::class, 'edit'])->name('datapemilik.edit');
+// Route::put('/datapemilik/{datapemilik}', [DatapemilikController::class, 'update'])->name('datapemilik.update');
+// Route::delete('/datapemilik/{datapemilik}', [DatapemilikController::class, 'destroy'])->name('datapemilik.destroy');
 
 Route::get('/datauser/{user}', [RegisteredUserController::class, 'show'])->name('datauser.show');
 
@@ -92,6 +100,8 @@ Route::resource('user', UserController::class);
 Route::get('/data-user', function () {
     return view('user.data-user');
 });
+
+
 
 //PembayaranController
 Route::resource('pembayarans', PembayaranController::class);
@@ -106,7 +116,7 @@ Route::get('pembayaran/create/{pemesanan_id}', [PembayaranController::class, 'cr
 // Menyimpan bukti pembayaran yang diupload dan membuat entri pembayaran baru
 Route::post('pembayaran/store', [PembayaranController::class, 'store'])->name('pembayaran.store');
 
-
+Route::resource('pemilik_kos', PemilikKosController::class);
 
 
 

@@ -26,7 +26,7 @@ class UserController extends Controller
         'usia' => 'nullable|integer',
         'jenis_kelamin' => 'required|string',
         'pekerjaan' => 'required|string',
-        'notlp' => 'required|string', 
+        'notlp' => 'required|string',
         'email' => 'required|email|unique:users,email,'.$id,
     ]);
 
