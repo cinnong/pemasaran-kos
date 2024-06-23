@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pemesanan;
-use App\Http\Requests\StorePemesananRequest;
+use App\Models\Datakos;
 use App\Http\Requests\UpdatePemesananRequest;
 
 class PemesananController extends Controller
@@ -17,7 +17,7 @@ class PemesananController extends Controller
     public function index()
     {
         $pemesanans = Pemesanan::all();
-        return view('pemesanans.index', compact('pemesanans'));
+        return view('pemesanan.index', compact('pemesanans'));
     }
 
     /**
@@ -25,18 +25,14 @@ class PemesananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('pemesanans.create');
+        $datakos_id = $request->get('datakos_id');
+            $datakos = \App\Models\Datakos::findOrFail($datakos_id);
+        return view('pemesanan.pesan', compact('datakos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePemesananRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePemesananRequest $request)
+    public function store(Pemesanan $request)
     {
         $request->validate([
             'nama_penyewa' => 'required',
@@ -52,7 +48,7 @@ class PemesananController extends Controller
 
         Pemesanan::create($request->all());
 
-        return redirect()->route('pemesanans.index')->with('success', 'Pemesanan berhasil dibuat.');
+        return redirect()->route('pemesanan.index')->with('success', 'Pemesanan berhasil dibuat.');
     }
 
     /**
@@ -63,7 +59,7 @@ class PemesananController extends Controller
      */
     public function show(Pemesanan $pemesanan)
     {
-        return view('pemesanans.show', compact('pemesanan'));
+        return view('pemesanan.show', compact('pemesanan'));
     }
 
     /**

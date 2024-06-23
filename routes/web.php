@@ -97,8 +97,11 @@ Route::get('/data-user', function () {
 Route::resource('pembayarans', PembayaranController::class);
 Route::get('/pembayaran', [PembayaranController::class, 'index']);
 
-// Routes for PemesananController
+// PemesananController
 Route::resource('pemesanans', PemesananController::class);
+Route::get('/pemesanans/create', [PemesananController::class, 'create'])->name('pemesanan.pesan');
+
+
 
 
 require __DIR__.'/auth.php';

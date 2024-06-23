@@ -32,7 +32,7 @@
                         Hubungi Pemilik
                     </button>
                 </a>
-                <a href="#">
+                <a href="{{ route('pemesanan.pesan', ['datakos_id' => $datakos->id]) }}">
                     <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Pesan
                     </button>
