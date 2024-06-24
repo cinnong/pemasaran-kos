@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('per_bulan');
             $table->integer('harga');
             $table->integer('total_biaya');
-            $table->enum('status_pemesanan', ['Dipesan', 'Dikonfirmasi', 'Dibatalkan', 'Selesai'])->default('Dipesan');
+            $table->enum('aksi', ['Setuju', 'Tidak setuju']);
             $table->timestamp('created_at')->default(now());
             $table->timestamp('updated_at')->default(now())->onUpdate(now());
 

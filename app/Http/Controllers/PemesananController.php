@@ -91,7 +91,7 @@ class PemesananController extends Controller
             'per_bulan' => 'required',
             'harga' => 'required',
             'total_biaya' => 'required',
-            'status_pemesanan' => 'required|in:Dipesan,Dikonfirmasi,Dibatalkan,Selesai',
+            'aksi' => 'required|in:Setuju,Tidak Setuju',
         ]);
 
         $pemesanan->update($request->all());

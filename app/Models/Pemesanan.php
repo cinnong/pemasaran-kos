@@ -20,7 +20,7 @@ class Pemesanan extends Model
         'per_bulan',
         'harga',
         'total_biaya',
-        'status_pemesanan'
+        'aksi'
     ];
 
     public function user()
