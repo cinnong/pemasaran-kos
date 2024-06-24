@@ -28,7 +28,7 @@
                         <select name="pemilik_kos_id" id="pemilik_kos_id"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             required>
-                            @foreach ($datapemilik as $pemilik)
+                            @foreach ($pemilikKos as $pemilik)
                                 <option value="{{ $pemilik->id }}"
                                     {{ $datakos->pemilik_kos_id == $pemilik->id ? 'selected' : '' }}>
                                     {{ $pemilik->nama }}

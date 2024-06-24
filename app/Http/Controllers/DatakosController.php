@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Datakos;
 use App\Models\PemilikKos;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class DatakosController extends Controller
 {
@@ -80,11 +80,11 @@ class DatakosController extends Controller
         $datakos->pemilik_kos_id = $validated['pemilik_kos_id'];
 
         if ($request->hasFile('foto')) {
-            if ($datakos->foto && file_exists(public_path('storage/' . $datakos->foto))) {
-                unlink(public_path('storage/' . $datakos->foto));
+            if ($datakos->foto && Storage::exists('public/' . $datakos->foto)) {
+                Storage::delete('public/' . $datakos->foto);
             }
-            $path = $request->file('foto')->store('public/foto_kos');
-            $datakos->foto = $path;
+            $path = $request->file('foto')->store('public/photos');
+            $datakos->foto = str_replace('public/', '', $path);
         }
 
         $datakos->save();
@@ -109,8 +109,8 @@ class DatakosController extends Controller
     {
         $datakos = Datakos::findOrFail($id);
 
-        if ($datakos->foto && file_exists(public_path('storage/' . $datakos->foto))) {
-            unlink(public_path('storage/' . $datakos->foto));
+        if ($datakos->foto && Storage::exists('public/' . $datakos->foto)) {
+            Storage::delete('public/' . $datakos->foto);
         }
 
         $datakos->delete();
