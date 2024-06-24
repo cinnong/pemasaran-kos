@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// datakos
+// datakoss
 Route::get('/add', [DatakosController::class, 'create'])->name('datakos.create');
 Route::post('/store', [DatakosController::class, 'store'])->name('datakos.store');
 Route::get('/datakos/{datakos}', [DatakosController::class, 'show'])->name('datakos.show');
