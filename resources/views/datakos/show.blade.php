@@ -12,10 +12,10 @@
 <body class="bg-gray-100">
     @include('components.navbar')
 
-    <div class="container mx-auto py-8">
+    <div class="container mx-auto py-8 mt-8">
         <div class="bg-white shadow-md rounded-lg p-6 flex flex-wrap">
             <div class="w-full lg:w-1/2">
-                <img src="{{ asset('photos/' . $datakos->foto) }}" alt="Datakos Photo"
+                <img src="{{ asset('storage/' . $datakos->foto) }}" alt="Foto Kos"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
             </div>
             <div class="w-full lg:w-1/2 lg:pl-8 mt-6 lg:mt-0">

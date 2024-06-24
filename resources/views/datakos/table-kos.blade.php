@@ -62,7 +62,8 @@
                                     </td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">
                                         @if ($datakos->foto)
-                                            <img src="{{ asset('photos/' . $datakos->foto) }}" alt="datakos Photo"
+                                            <img src="{{ asset('storage/' . $datakos->foto) }}"
+                                            alt="Foto Kos"
                                                 class="w-24 h-auto">
                                         @endif
                                     </td>

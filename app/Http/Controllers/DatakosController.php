@@ -46,20 +46,14 @@ class DatakosController extends Controller
         $dataKos->datapemilik_id = $validated['datapemilik_id'];
 
         if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('public/foto_kos');
-            $dataKos->foto = $path;
+            $path = $request->file('foto')->store('public/photos');
+            // Ubah path agar sesuai dengan yang bisa diakses publik
+            $dataKos->foto = str_replace('public/', '', $path);
         }
 
         $dataKos->save();
 
         return redirect()->route('beranda-admin')->with('success', 'Data kos berhasil ditambahkan');
-    }
-
-    public function edit($id)
-    {
-        $datakos = Datakos::findOrFail($id);
-        $pemilikKos = PemilikKos::all();
-        return view('datakos.edit', compact('datakos', 'pemilikKos'));
     }
 
     public function update(Request $request, $id)
@@ -97,6 +91,19 @@ class DatakosController extends Controller
         $datakos->save();
 
         return redirect()->route('beranda-admin')->with('success', 'Data kos berhasil diperbarui');
+    }
+
+    public function edit($id)
+    {
+        $datakos = Datakos::findOrFail($id);
+        $pemilikKos = PemilikKos::all();
+        return view('datakos.edit', compact('datakos', 'pemilikKos'));
+    }
+
+    public function show($id)
+    {
+        $datakos = Datakos::with('datapemilik')->findOrFail($id);
+        return view('datakos.show', compact('datakos'));
     }
 
     public function destroy($id)
