@@ -26,9 +26,4 @@ class Datakos extends Model
     {
         return $this->belongsTo(PemilikKos::class, 'datapemilik_id');
     }
-
-    public function pemilik()
-    {
-    return $this->belongsTo(PemilikKos::class, 'pemilik_kos_id');
-    }
 }

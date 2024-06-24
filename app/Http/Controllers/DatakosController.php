@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Datapemili;
+use App\Models\Datapemilik;
 use App\Models\Datakos;
 use App\Models\PemilikKos;
+use Illuminate\Support\Facades\Log;
 
 class DatakosController extends Controller
 {
@@ -15,17 +16,6 @@ class DatakosController extends Controller
         return view('datakos.table-kos', compact('datakos'));
     }
 
-    public function searchByLocation(Request $request)
-{
-    $locationQuery = $request->input('location_query');
-
-    // Query untuk mencari data kosan berdasarkan lokasi
-    $datakos = Datakos::where('lokasi', 'like', '%' . $locationQuery . '%')->get();
-
-    return view('datakos.search-by-location', compact('datakos', 'locationQuery'));
-}
-
-
     public function create()
     {
         $pemilik_kos = PemilikKos::all();
@@ -33,100 +23,92 @@ class DatakosController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'lokasi' => 'required|string|max:255',
-        'harga' => 'required|integer',
-        'jumlah_kamar' => 'required|integer',
-        'tipekos' => 'required|string|max:50',
-        'deskripsi' => 'required|string',
-        'notlp' => 'required|string|max:15',
-        'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'datapemilik_id' => 'required|exists:datapemilik,id'
-    ]);
-
-    // Mengambil semua input dari form
-    $input = $request->all();
-
-    // Upload gambar jika ada
-    if ($request->hasFile('foto')) {
-        $gambar = $request->file('foto');
-        $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
-        $gambar->move(public_path('photos'), $namaFile);
-        $input['foto'] = $namaFile;
-    }
-
-    // Menyimpan data menggunakan metode create dari model Datakos
-    Datakos::create($input);
-
-    // Redirect ke halaman beranda admin dengan pesan sukses
-    return redirect()->route('beranda-admin')->with('success', 'Data kos berhasil ditambahkan.');
-}
-
-
-    public function edit($id)
     {
-        $datakos = Datakos::findOrFail($id);
-        $pemilikKos = PemilikKos::all();
-        return view('datakos.edit', compact('datakos', 'datapemilik'));
-    }
-
-    public function show($id)
-    {
-        $datakos = Datakos::with('datapemilik')->findOrFail($id);
-        return view('datakos.show', compact('datakos'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $datakos = Datakos::findOrFail($id);
-
-        $request->validate([
+        $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'lokasi' => 'required|string|max:255',
             'harga' => 'required|integer',
             'jumlah_kamar' => 'required|integer',
             'tipekos' => 'required|string|max:50',
             'deskripsi' => 'required|string',
-            'notlp' => 'required|string|max:15',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'datapemilik_id' => 'required|exists:datapemilik,id'
+            'datapemilik_id' => 'required|exists:pemilik_kos,id'
         ]);
 
-        $input = $request->all();
+        $dataKos = new Datakos;
+        $dataKos->nama = $validated['nama'];
+        $dataKos->lokasi = $validated['lokasi'];
+        $dataKos->harga = $validated['harga'];
+        $dataKos->jumlah_kamar = $validated['jumlah_kamar'];
+        $dataKos->tipekos = $validated['tipekos'];
+        $dataKos->deskripsi = $validated['deskripsi'];
+        $dataKos->notlp = PemilikKos::findOrFail($validated['datapemilik_id'])->no_hp;
+        $dataKos->datapemilik_id = $validated['datapemilik_id'];
 
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
-            if ($datakos->foto && file_exists(public_path('photos/' . $datakos->foto))) {
-                unlink(public_path('photos/' . $datakos->foto));
-            }
-
-            $gambar = $request->file('foto');
-            $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move(public_path('photos'), $namaFile);
-            $input['foto'] = $namaFile;
-        } else {
-            // Pertahankan foto lama jika tidak ada foto baru yang diunggah
-            $input['foto'] = $datakos->foto;
+            $path = $request->file('foto')->store('public/foto_kos');
+            $dataKos->foto = $path;
         }
 
-        $datakos->update($input);
+        $dataKos->save();
 
-        return redirect()->route('beranda-admin')->with('success', 'Data kos updated successfully!');
+        return redirect()->route('beranda-admin')->with('success', 'Data kos berhasil ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $datakos = Datakos::findOrFail($id);
+        $pemilikKos = PemilikKos::all();
+        return view('datakos.edit', compact('datakos', 'pemilikKos'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $datakos = Datakos::findOrFail($id);
+
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'lokasi' => 'required|string|max:255',
+            'harga' => 'required|integer',
+            'jumlah_kamar' => 'required|integer',
+            'tipekos' => 'required|string|max:50',
+            'deskripsi' => 'required|string',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'datapemilik_id' => 'required|exists:pemilik_kos,id'
+        ]);
+
+        $datakos->nama = $validated['nama'];
+        $datakos->lokasi = $validated['lokasi'];
+        $datakos->harga = $validated['harga'];
+        $datakos->jumlah_kamar = $validated['jumlah_kamar'];
+        $datakos->tipekos = $validated['tipekos'];
+        $datakos->deskripsi = $validated['deskripsi'];
+        $datakos->notlp = PemilikKos::findOrFail($validated['datapemilik_id'])->no_hp;
+        $datakos->datapemilik_id = $validated['datapemilik_id'];
+
+        if ($request->hasFile('foto')) {
+            if ($datakos->foto && file_exists(public_path('storage/' . $datakos->foto))) {
+                unlink(public_path('storage/' . $datakos->foto));
+            }
+            $path = $request->file('foto')->store('public/foto_kos');
+            $datakos->foto = $path;
+        }
+
+        $datakos->save();
+
+        return redirect()->route('beranda-admin')->with('success', 'Data kos berhasil diperbarui');
     }
 
     public function destroy($id)
     {
         $datakos = Datakos::findOrFail($id);
 
-        if ($datakos->foto && file_exists(public_path('photos/' . $datakos->foto))) {
-            unlink(public_path('photos/' . $datakos->foto));
+        if ($datakos->foto && file_exists(public_path('storage/' . $datakos->foto))) {
+            unlink(public_path('storage/' . $datakos->foto));
         }
 
         $datakos->delete();
 
-        return redirect()->route('beranda-admin')->with('success', 'Data kos deleted successfully!');
+        return redirect()->route('beranda-admin')->with('success', 'Data kos berhasil dihapus');
     }
-
 }
