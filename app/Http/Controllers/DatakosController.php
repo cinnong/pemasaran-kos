@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Datapemilik;
 use App\Models\Datakos;
 use App\Models\PemilikKos;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +11,7 @@ class DatakosController extends Controller
 {
     public function index()
     {
-        $datakos = Datakos::with('datapemilik')->get();
+        $datakos = Datakos::with('pemilikkos')->get();
         return view('datakos.table-kos', compact('datakos'));
     }
 
@@ -32,7 +31,7 @@ class DatakosController extends Controller
             'tipekos' => 'required|string|max:50',
             'deskripsi' => 'required|string',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'datapemilik_id' => 'required|exists:pemilik_kos,id'
+            'pemilik_kos_id' => 'required|exists:pemilik_kos,id'
         ]);
 
         $dataKos = new Datakos;
@@ -42,8 +41,8 @@ class DatakosController extends Controller
         $dataKos->jumlah_kamar = $validated['jumlah_kamar'];
         $dataKos->tipekos = $validated['tipekos'];
         $dataKos->deskripsi = $validated['deskripsi'];
-        $dataKos->notlp = PemilikKos::findOrFail($validated['datapemilik_id'])->no_hp;
-        $dataKos->datapemilik_id = $validated['datapemilik_id'];
+        $dataKos->notlp = PemilikKos::findOrFail($validated['pemilik_kos_id'])->no_hp;
+        $dataKos->pemilik_kos_id = $validated['pemilik_kos_id'];
 
         if ($request->hasFile('foto')) {
             $path = $request->file('foto')->store('public/photos');
@@ -68,7 +67,7 @@ class DatakosController extends Controller
             'tipekos' => 'required|string|max:50',
             'deskripsi' => 'required|string',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'datapemilik_id' => 'required|exists:pemilik_kos,id'
+            'pemilik_kos_id' => 'required|exists:pemilik_kos,id'
         ]);
 
         $datakos->nama = $validated['nama'];
@@ -77,8 +76,8 @@ class DatakosController extends Controller
         $datakos->jumlah_kamar = $validated['jumlah_kamar'];
         $datakos->tipekos = $validated['tipekos'];
         $datakos->deskripsi = $validated['deskripsi'];
-        $datakos->notlp = PemilikKos::findOrFail($validated['datapemilik_id'])->no_hp;
-        $datakos->datapemilik_id = $validated['datapemilik_id'];
+        $datakos->notlp = PemilikKos::findOrFail($validated['pemilik_kos_id'])->no_hp;
+        $datakos->pemilik_kos_id = $validated['pemilik_kos_id'];
 
         if ($request->hasFile('foto')) {
             if ($datakos->foto && file_exists(public_path('storage/' . $datakos->foto))) {
@@ -102,7 +101,7 @@ class DatakosController extends Controller
 
     public function show($id)
     {
-        $datakos = Datakos::with('datapemilik')->findOrFail($id);
+        $datakos = Datakos::with('pemilikkos')->findOrFail($id);
         return view('datakos.show', compact('datakos'));
     }
 

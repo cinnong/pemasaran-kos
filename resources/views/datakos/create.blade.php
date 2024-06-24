@@ -25,10 +25,10 @@
                             name="nama" id="nama" required>
                     </div>
                     <div class="mb-4">
-                        <label for="datapemilik_id">Pemilik:</label>
+                        <label for="pemilik_kos_id">Pemilik:</label>
                         <select
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                            id="datapemilik_id" name="datapemilik_id" required onchange="fillPhoneNumber()">
+                            id="pemilik_kos_id" name="pemilik_kos_id" required onchange="fillPhoneNumber()">
                             @foreach ($pemilik_kos as $pemilik)
                                 <option value="{{ $pemilik->id }}" data-nohp="{{ $pemilik->no_hp }}">{{ $pemilik->nama }}</option>
                             @endforeach
@@ -93,7 +93,7 @@
         fillPhoneNumber();
 
         function fillPhoneNumber() {
-            var select = document.getElementById('datapemilik_id');
+            var select = document.getElementById('pemilik_kos_id');
             var selectedOption = select.options[select.selectedIndex];
             var nohp = selectedOption.getAttribute('data-nohp');
             document.getElementById('notlp').value = nohp;

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Datapemilik;
+use App\Models\PemilikKos;
 
 class Datakos extends Model
 {
@@ -19,11 +19,11 @@ class Datakos extends Model
         'deskripsi',
         'notlp',
         'foto',
-        'datapemilik_id',
+        'pemilik_kos_id',
     ];
 
-    public function datapemilik()
+    public function pemilikkos()
     {
-        return $this->belongsTo(PemilikKos::class, 'datapemilik_id');
+        return $this->belongsTo(PemilikKos::class, 'pemilik_kos_id');
     }
 }
