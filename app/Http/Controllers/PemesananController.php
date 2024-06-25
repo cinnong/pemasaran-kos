@@ -11,9 +11,16 @@ class PemesananController extends Controller
 {
     public function index()
     {
-        $pemesanans = Pemesanan::all();
-        return view('pemesanan.data-pemesanan', compact('pemesanans'));
+        $pemesanans = Pemesanan::with('user')->get();
+    return view('pemesanan.data-pemesanan', compact('pemesanans'));
     }
+
+    public function pesan($datakos_id)
+{
+    $datakos = Datakos::findOrFail($datakos_id);
+        return view('pemesanan.pesan', compact('datakos'));
+}
+
 
     public function create(Request $request)
     {

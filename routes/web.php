@@ -122,7 +122,6 @@ Route::resource('pemilik_kos', PemilikKosController::class);
 
 //baru
 Route::get('/pemesanan/pesan', [PemesananController::class, 'pesan'])->name('pesan');
-Route::get('/pemesanan/pesan', [PemesananController::class, 'create'])->name('pemesanan.pesan');
 Route::post('/pemesanan/pesan', [PemesananController::class, 'store'])->name('pemesanan.store');
 
 // Route untuk menyimpan data pemesanan baru
@@ -131,9 +130,11 @@ Route::post('/pemesanans/store', [PemesananController::class, 'store'])->name('p
 // Route untuk menampilkan form pemesanan
 Route::get('/pemesanans/create', [PemesananController::class, 'create'])->name('pemesanans.create');
 
+//utk nampilin halaman pesa
+Route::get('/pemesanan/pesan/{datakos_id}', [PemesananController::class, 'pesan'])->name('pemesanan.pesan');
 
 
-
+Route::get('/pemesanans', [PemesananController::class, 'index'])->name('pemesanans.index');
 // Route untuk menampilkan halaman "card-nunggu"
 Route::get('/pemesanan/card-nunggu', function () {
     return view('pemesanan.card-nunggu');
@@ -154,7 +155,14 @@ Route::put('/pemesanans/{pemesanan}', [PemesananController::class, 'update'])->n
 
 
 //utk tampilkn data-pmsanan di sidebar
+
 Route::get('/pemesan', [PemesananController::class, 'index'])->name('pemesanans.index');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/pemesanans/store', [PemesananController::class, 'store'])->name('pemesanans.store');
+    // Rute lainnya yang membutuhkan autentikasi
+});
 
 
 

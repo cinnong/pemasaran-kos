@@ -24,9 +24,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('total_biaya');
             $table->enum('aksi', ['Setuju', 'Tidak setuju']);
-            $table->timestamp('created_at')->default(now());
-            $table->timestamp('updated_at')->default(now())->onUpdate(now());
-
+            $table->timestamps();
             // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users');
         });
