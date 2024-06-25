@@ -9,33 +9,21 @@ use App\Http\Requests\UpdatePemesananRequest;
 
 class PemesananController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $pemesanans = Pemesanan::all();
-        return view('pemesanan.index', compact('pemesanans'));
+        return view('pemesanan.data-pemesanan', compact('pemesanans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         $datakos_id = $request->get('datakos_id');
-            $datakos = \App\Models\Datakos::findOrFail($datakos_id);
+        $datakos = Datakos::findOrFail($datakos_id);
         return view('pemesanan.pesan', compact('datakos'));
     }
 
     public function store(Request $request)
     {
-        //untuk nampilin error
-        // dd($request->all());
         $request->validate([
             'tanggal_masuk' => 'required|date',
             'tanggal_keluar' => 'required|date',
@@ -46,43 +34,23 @@ class PemesananController extends Controller
 
         $pemesanan = Pemesanan::create($request->all());
 
-        return redirect()->route('pembayaran.create', ['pemesanan_id' => $pemesanan->id])
-        ->with('success', 'Pemesanan berhasil dibuat. Silakan upload bukti pembayaran.');
+        return redirect()->route('card.nunggu');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pemesanan  $pemesanan
-     * @return \Illuminate\Http\Response
-     */
     public function show(Pemesanan $pemesanan)
     {
         return view('pemesanan.show', compact('pemesanan'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pemesanan  $pemesanan
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Pemesanan $pemesanan)
     {
-        return view('pemesanans.edit', compact('pemesanan'));
+        return view('pemesanan.edit', compact('pemesanan'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePemesananRequest  $request
-     * @param  \App\Models\Pemesanan  $pemesanan
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdatePemesananRequest $request, Pemesanan $pemesanan)
     {
         $request->validate([
+            'aksi' => 'required|in:Setuju,Tidak setuju',
             'nama_penyewa' => 'required',
             'tanggal_pemesanan' => 'required|date',
             'tanggal_masuk' => 'required|date',
@@ -91,20 +59,16 @@ class PemesananController extends Controller
             'per_bulan' => 'required',
             'harga' => 'required',
             'total_biaya' => 'required',
-            'aksi' => 'required|in:Setuju,Tidak Setuju',
+            'aksi' => 'required|string',
         ]);
 
-        $pemesanan->update($request->all());
+        $pemesanan->update($request->all());([
+            'aksi' => $request->aksi,
+        ]);
 
         return redirect()->route('pemesanans.index')->with('success', 'Pemesanan berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pemesanan  $pemesanan
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Pemesanan $pemesanan)
     {
         $pemesanan->delete();

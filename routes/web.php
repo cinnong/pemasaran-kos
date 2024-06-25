@@ -120,6 +120,44 @@ Route::resource('pemilik_kos', PemilikKosController::class);
 
 
 
+//baru
+Route::get('/pemesanan/pesan', [PemesananController::class, 'pesan'])->name('pesan');
+Route::get('/pemesanan/pesan', [PemesananController::class, 'create'])->name('pemesanan.pesan');
+Route::post('/pemesanan/pesan', [PemesananController::class, 'store'])->name('pemesanan.store');
+
+// Route untuk menyimpan data pemesanan baru
+Route::post('/pemesanans/store', [PemesananController::class, 'store'])->name('pemesanans.store');
+
+// Route untuk menampilkan form pemesanan
+Route::get('/pemesanans/create', [PemesananController::class, 'create'])->name('pemesanans.create');
+
+
+
+
+// Route untuk menampilkan halaman "card-nunggu"
+Route::get('/pemesanan/card-nunggu', function () {
+    return view('pemesanan.card-nunggu');
+})->name('card.nunggu');
+Route::get('/pemesanan/card-setuju', function () {
+    return view('pemesanan.card-setuju');
+})->name('card.setuju');
+Route::get('/pemesanan/upload-bukti', function () {
+    return view('pemesanan.upload-bukti');
+})->name('upload.bukti');
+Route::get('/pemesanan/card-welcome', function () {
+    return view('pemesanan.card-welcome');
+})->name('card.welcome');
+Route::get('/pemesanan/card-tidak-setuju', function () {
+    return view('pemesanan.card-tidak-setuju');
+})->name('card.tidak.setuju');
+Route::put('/pemesanans/{pemesanan}', [PemesananController::class, 'update'])->name('pemesanans.update');
+
+
+//utk tampilkn data-pmsanan di sidebar
+Route::get('/pemesan', [PemesananController::class, 'index'])->name('pemesanans.index');
+
+
+
 require __DIR__.'/auth.php';
 
 

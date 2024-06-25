@@ -132,7 +132,7 @@
                 </button>
                 <ul id="dropdown-transaksi" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="/pemesan"
+                        <a href="{{ route('pemesanans.index') }}}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -140,7 +140,7 @@
                                 <path
                                     d="M12 12a5 5 0 110-10 5 5 0 010 10zm0-12a7 7 0 100 14 7 7 0 000-14zm-2 10h4v2h-4v-2z" />
                             </svg>
-                            <span>Pemesan</span>
+                            <span>Data Pemesan</span>
                         </a>
                     </li>
                     <li>
