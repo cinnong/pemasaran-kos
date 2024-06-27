@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.pemilik')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menunggu Persetujuan</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-</head>
-
-<body class="bg-gray-100">
-
+@section('content')
     <div class="container mx-auto py-6 px-6 bg-white rounded-lg shadow-lg">
         <h2 class="text-2xl text-center font-bold mb-6 text-gray-800">Data Pemesanan</h2>
         <div class="overflow-x-auto overflow-y-auto relative">
@@ -30,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-black text-sm font-dark">
-                    @foreach ($pemesanans as $pemesanan)
+                    @foreach ($pesananKos as $pemesanan)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-6 text-center whitespace-nowrap">{{ $loop->iteration }}</td>
                             <td class="py-3 px-6 text-center">{{ $pemesanan->user->name }}</td>
@@ -42,19 +32,18 @@
                             <td class="py-3 px-6 text-center">{{ $pemesanan->harga }}</td>
                             <td class="py-3 px-6 text-center">{{ $pemesanan->total_biaya }}</td>
                             <td class="py-3 px-6 text-center">
-                                <form action="{{ route('pemesanans.update', ['pemesanan' => $pemesanan]) }}"
-                                    method="POST">
+                                <form action="{{ route('pemesanans.update', ['pemesanan' => $pemesanan]) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
                                         <select class="form-control rounded-lg border-gray-200" name="aksi" required>
-                                            <option value="Setuju"
-                                                {{ $pemesanan->aksi == 'Setuju' ? 'selected' : '' }}>Setuju</option>
+                                            <option value="Setuju" {{ $pemesanan->aksi == 'Setuju' ? 'selected' : '' }}>
+                                                Setuju</option>
                                             <option value="Tidak setuju"
                                                 {{ $pemesanan->aksi == 'Tidak setuju' ? 'selected' : '' }}>Tidak setuju
                                             </option>
-                                            <option value="Pending"
-                                                {{ $pemesanan->aksi == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                            <option value="Pending" {{ $pemesanan->aksi == 'Pending' ? 'selected' : '' }}>
+                                                Pending</option>
                                         </select>
                                     </div>
                                     <button type="submit"
@@ -68,7 +57,4 @@
             </table>
         </div>
     </div>
-
-</body>
-
-</html>
+@endsection

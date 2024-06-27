@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datakos;
 use Illuminate\Http\Request;
 use App\Models\PemilikKos;
+use App\Models\Pemesanan;
+use Illuminate\Support\Facades\Auth;
 
 class PemilikKosController extends Controller
 {
@@ -11,6 +14,14 @@ class PemilikKosController extends Controller
     {
         $pemilikKos = PemilikKos::all();
         return view('pemilik_kos.data-pemilik', compact('pemilikKos'));
+    }
+
+    public function datakospemilik()
+    {
+        $pemilikKos = Auth::guard('pemilik_kos')->user();
+        $dataKos = Datakos::where('pemilik_kos_id', $pemilikKos->id)->get();
+
+        return view('pemilik_kos.data-kos', compact('dataKos'));
     }
 
     public function edit($id)
@@ -24,7 +35,7 @@ class PemilikKosController extends Controller
         $request->validate([
             'nama' => 'required|string',
             'no_hp' => 'required|string|max:15',
-            'email' => 'required|email|unique:pemilik_kos,email,'.$id,
+            'email' => 'required|email|unique:pemilik_kos,email,' . $id,
         ]);
 
         $pemilikKos = PemilikKos::findOrFail($id);
@@ -43,5 +54,33 @@ class PemilikKosController extends Controller
         $pemilikKos = PemilikKos::findOrFail($id);
         $pemilikKos->delete();
         return redirect()->route('pemilik_kos.index')->with('success', 'Pemilik Kos berhasil dihapus.');
+    }
+
+    public function pesanan()
+    {
+        // Mendapatkan pemilik kos yang sedang login
+        $pemilikKos = Auth::guard('pemilik_kos')->user();
+
+        // Mengambil data pemesanan yang terkait dengan pemilik kos tersebut
+        $pesananKos = $pemilikKos->pemesanan()->with('user')->get();
+
+        // Mengirim data ke view pemilik.pesanan.blade.php
+        return view('pemilik_kos.data-user', compact('pesananKos'));
+    }
+
+    public function pembayaran()
+    {
+        // Mendapatkan pemilik kos yang sedang login
+        $pemilikKos = Auth::guard('pemilik_kos')->user();
+
+        // Mengambil data pemesanan yang terkait dengan pemilik kos tersebut
+        $dataPembayaran = $pemilikKos->pemesanan()
+            ->with(['pembayaran', 'user'])
+            ->get()
+            ->pluck('pembayaran')
+            ->flatten();
+
+        // Mengirim data ke view pemilik.pembayaran.blade.php
+        return view('pemilik_kos.data-pembayaran', compact('dataPembayaran'));
     }
 }

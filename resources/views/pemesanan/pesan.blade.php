@@ -9,7 +9,6 @@
 </head>
 
 <body class="bg-gray-100">
-
     <div class="container mx-auto py-8">
         <div class="bg-white shadow-md rounded-lg p-6">
             <h1 class="text-2xl font-bold mb-4">Pesan Kos</h1>
@@ -20,6 +19,8 @@
                     <input type="hidden" name="tanggal_pemesanan" value="{{ now() }}">
                     <input type="hidden" name="tipe_kos" value="{{ $datakos->tipekos }}">
                     <input type="hidden" name="harga" value="{{ $datakos->harga }}">
+                    <input type="hidden" name="id_kos" value="{{ $datakos->id }}">
+                    <input type="hidden" name="pemilik_kos_id" value="{{ $datakos->pemilik_kos_id }}">
                     <input type="hidden" name="total_biaya" id="total_biaya" value="{{ $datakos->harga }}">
                     <div class="mb-4">
                         <label for="tanggal_masuk" class="block text-sm font-medium text-gray-700">Tanggal Masuk</label>

@@ -123,7 +123,7 @@
                         viewBox="0 0 24 24">
                         <path d="M12 1l8 8-3 2-5-5v8l5 3-5 5-8-8 3-2 5 5V6l-5-3z" />
                     </svg>
-                    <span class="flex-1 ms-3 text-left whitespace-nowrap">Kelola Transaksi</span>
+                    <span class="flex-1 ms-3 text-left whitespace-nowrap">Data Transaksi</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -152,26 +152,13 @@
                                 viewBox="0 0 24 24">
                                 <path d="M12 3v18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />
                             </svg>
-                            <span>Pembayaran</span>
+                            <span>Data Pembayaran</span>
                         </a>
                     </li>
                 </ul>
 
             </li>
 
-            <li>
-                <a href="#"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <!-- Unique Report Management Icon -->
-                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm1 14.93V17h-2v-.07A7.05 7.05 0 017.07 13H7v-2h.07A7.05 7.05 0 0111 7.07V7h2v.07A7.05 7.05 0 0116.93 11H17v2h-.07A7.05 7.05 0 0113 16.93z" />
-                    </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Kelola Laporan</span>
-                </a>
-            </li>
             <li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -12,11 +12,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DatapemilikController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\PemilikKosAuthController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Auth\RegisteredPemilikController;
 use App\Http\Controllers\PemilikKosController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
+use App\Models\Pemesanan;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,17 +30,25 @@ use App\Http\Controllers\PemesananController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('pemilik_kos/register', [RegisteredPemilikController::class, 'create'])->name('pemilik_kos.register');
 Route::post('pemilik_kos/register', [RegisteredPemilikController::class, 'store'])->name('pemilik_kos.register.store');
 Route::get('/dashboard', [PemilikKosController::class, 'dashboard'])->name('pemilik_kos.dashboard');
+Route::get('pemilik-kos/login', [PemilikKosAuthController::class, 'showLoginForm'])->name('pemilik_kos.login_form');
+Route::post('pemilik-kos/login', [PemilikKosAuthController::class, 'login'])->name('pemilik_kos.login');
 
-Route::get('/search', [DatakosController::class, 'searchByLocation'])->name('search');
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::get('/search', [DatakosController::class, 'search'])->name('search');
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('Login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 Route::get('/', function () {
     $datakos = Datakos::all();
-    return view('beranda', compact('datakos'));
+    $user = User::all();
+    $datapemilik = PemilikKos::all();
+    $count = Datakos::count();
+    $countuser = User::count();
+    $countpemilik = PemilikKos::count();
+    return view('beranda', compact('datakos', 'count', 'countuser', 'countpemilik'));
 })->name('beranda');
 
 Route::get('/beranda', function () {
@@ -47,7 +58,7 @@ Route::get('/beranda', function () {
     $count = Datakos::count();
     $countuser = User::count();
     $countpemilik = PemilikKos::count();
-    return view('beranda-admin', compact('count', 'countuser','countpemilik'));
+    return view('beranda-admin', compact('count', 'countuser', 'countpemilik'));
 })->middleware(['auth', 'verified'])->name('beranda-admin');
 
 Route::get('/datakos', function () {
@@ -58,9 +69,17 @@ Route::get('/datakos', function () {
 
 Route::get('/datauser', [RegisteredUserController::class, 'index'])->name('datauser');
 
-Route::get('/datapemilik',
-[RegisteredPemilikController::class, 'index'])
-->name('datapemilik');
+Route::get('/datapemilik', [RegisteredPemilikController::class, 'index'])
+    ->name('datapemilik');
+
+Route::get('/pemilik-kos/dashboard', function () {
+    return view('pemilik_kos.dashboard');
+})->name('pemilik.dashboard');
+Route::get('/pemilik-kos/datakos', [PemilikKosController::class, 'datakospemilik'])->name('pemilik.datakos');
+Route::get('/pemilik-kos/pemesanan', [PemesananController::class, 'pesanan'])->name('pemilik.pemesanan');
+Route::get('/pemilik-kos/pesanan', [PemilikKosController::class, 'pesanan'])->name('pemilik.user');
+Route::get('/pemilik-kos/pembayaran', [PemilikKosController::class, 'pembayaran'])->name('pemilik.pembayaran');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -85,13 +104,6 @@ Route::get('/data-pemilik', function () {
     return view('pemilik_kos.data-pemilik');
 });
 
-// Route::get('/datapemilik', [DatapemilikController::class, 'index'])->name('datapemilik.index');
-// Route::get('/datapemilik/create', [DatapemilikController::class, 'create'])->name('datakos.form-pemilik-kos');
-// Route::post('/datapemilik', [DatapemilikController::class, 'store'])->name('datapemilik.store');
-// Route::get('/datapemilik/{datapemilik}', [DatapemilikController::class, 'show'])->name('datapemilik.show');
-// Route::get('/datapemilik/{datapemilik}/edit', [DatapemilikController::class, 'edit'])->name('datapemilik.edit');
-// Route::put('/datapemilik/{datapemilik}', [DatapemilikController::class, 'update'])->name('datapemilik.update');
-// Route::delete('/datapemilik/{datapemilik}', [DatapemilikController::class, 'destroy'])->name('datapemilik.destroy');
 
 Route::get('/datauser/{user}', [RegisteredUserController::class, 'show'])->name('datauser.show');
 
@@ -100,7 +112,6 @@ Route::resource('user', UserController::class);
 Route::get('/data-user', function () {
     return view('user.data-user');
 });
-
 
 
 //PembayaranController
@@ -135,22 +146,21 @@ Route::get('/pemesanan/pesan/{datakos_id}', [PemesananController::class, 'pesan'
 
 
 Route::get('/pemesanans', [PemesananController::class, 'index'])->name('pemesanans.index');
-// Route untuk menampilkan halaman "card-nunggu"
-Route::get('/pemesanan/card-nunggu', function () {
-    return view('pemesanan.card-nunggu');
-})->name('card.nunggu');
-Route::get('/pemesanan/card-setuju', function () {
-    return view('pemesanan.card-setuju');
-})->name('card.setuju');
-Route::get('/pemesanan/upload-bukti', function () {
-    return view('pemesanan.upload-bukti');
+
+Route::get('/pemesanan/upload-bukti/{id}', function ($id) {
+    $pemesanan = Pemesanan::findOrFail($id);
+    return view('pemesanan.upload-bukti', compact('pemesanan'));
 })->name('upload.bukti');
+
 Route::get('/pemesanan/card-welcome', function () {
-    return view('pemesanan.card-welcome');
+    $datakos = Datakos::all();
+    return view('pemesanan.card-welcome', compact('datakos'));
 })->name('card.welcome');
-Route::get('/pemesanan/card-tidak-setuju', function () {
-    return view('pemesanan.card-tidak-setuju');
-})->name('card.tidak.setuju');
+
+Route::get('/pemesanan/card/{id}', function ($id) {
+    $pemesanan = Pemesanan::findOrFail($id);
+    return view('pemesanan.card-pemesanan', compact('pemesanan'));
+})->name('card.pemesanan');
 Route::put('/pemesanans/{pemesanan}', [PemesananController::class, 'update'])->name('pemesanans.update');
 
 
@@ -166,6 +176,4 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-require __DIR__.'/auth.php';
-
-
+require __DIR__ . '/auth.php';

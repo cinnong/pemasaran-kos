@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datakos;
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
 use App\Models\Pemesanan;
@@ -40,27 +41,43 @@ class PembayaranController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     // Memproses dan menyimpan data pembayaran
+    // Memproses dan menyimpan data pembayaran
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $request->validate([
-            'pemesanan_id' => 'required|exists:pemesanans,id',
+            'pemesanan_id' => 'required',
             'upload_bukti_pembayaran' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'status_pembayaran' => 'required|in:pending,berhasil,gagal',
         ]);
 
-         $path = $request->file('upload_bukti_pembayaran')->store('bukti_pembayaran');
- 
-         // Membuat entri pembayaran baru
-         Pembayaran::create([
+        $image = $request->file('upload_bukti_pembayaran');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('photos/bukti'), $imageName);
+
+        // Membuat entri pembayaran baru
+        Pembayaran::create([
             'pemesanan_id' => $request->pemesanan_id,
-            'upload_bukti_pembayaran' => $path,
+            'tanggal_pembayaran' => now(),
+            'upload_bukti_pembayaran' => $imageName,
             'status_pembayaran' => 'pending',
         ]);
- 
-         // Redirect ke halaman pemesanan dengan pesan sukses
-         return redirect()->route('datakos.show')->with('success', 'Bukti pembayaran berhasil diupload. Silakan menunggu konfirmasi.');
+
+        // Mengurangi jumlah kamar pada datakos
+        $pemesanan = Pemesanan::find($request->pemesanan_id); // Asumsi pemesanan_id mengacu ke Pemesanan
+        $datakos = Datakos::find($pemesanan->id_kos); // Asumsi pemesanan memiliki datakos_id
+
+        // dd($pemesanan, $datakos);
+
+        if ($datakos) {
+            $datakos->jumlah_kamar -= 1; // Kurangi jumlah kamar
+            $datakos->save(); // Simpan perubahan
+        }
+
+        // Redirect ke halaman pemesanan dengan pesan sukses
+        return redirect()->route('card.welcome')->with('success', 'Bukti pembayaran berhasil diupload. Silakan menunggu konfirmasi.');
     }
+
 
     /**
      * Display the specified resource.

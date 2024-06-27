@@ -28,7 +28,8 @@
                 @foreach ($pembayarans as $pembayaran)
                     <tr class="border-t border-gray-200">
                         <td class="py-2 px-4">{{ $pembayaran->id }}</td>
-                        <td class="py-2 px-4">{{ $pembayaran->pemesanan->nama_penyewa }}</td>
+                        <td class="py-2 px-4">{{ $pembayaran->user->name ?? 'Belum Terdaftar' }}</td>
+
                         <td class="py-2 px-4">{{ $pembayaran->tanggal_pembayaran }}</td>
                         <td class="py-2 px-4">{{ $pembayaran->status_pembayaran }}</td>
                         <td class="py-2 px-4">

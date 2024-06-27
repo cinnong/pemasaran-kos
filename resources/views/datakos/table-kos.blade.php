@@ -44,7 +44,7 @@
                                 <tr>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->nama }}</td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">
-                                        {{ $datakos->datapemilik->nama ?? 'N/A' }}
+                                        {{ $datakos->pemilikkos->nama ?? 'N/A' }}
                                     </td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">{{ $datakos->lokasi }}
                                     </td>
@@ -62,7 +62,7 @@
                                     </td>
                                     <td class="px-4 py-2 border-b border-gray-200 text-center">
                                         @if ($datakos->foto)
-                                            <img src="{{ asset('storage/' . $datakos->foto) }}" alt="Foto Kos"
+                                            <img src="{{ asset('photos/kos/' . $datakos->foto) }}" alt="Foto Kos"
                                                 class="w-24 h-auto">
                                         @endif
                                     </td>

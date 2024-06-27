@@ -15,9 +15,9 @@
     <div class="container mx-auto py-8 mt-8">
         <div class="bg-white shadow-md rounded-lg p-6 flex flex-wrap">
             <div class="w-full lg:w-1/2">
-                <img src="{{ asset('storage/' . $datakos->foto) }}" alt="Foto Kos"
+                <img src="{{ asset('photos/kos/' . $datakos->foto) }}" alt="Foto Kos"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-            </div>
+            </div>            
             <div class="w-full lg:w-1/2 lg:pl-8 mt-6 lg:mt-0">
                 <h1 class="text-2xl font-bold mb-4">KOS</h1>
                 <p><strong>Nama:</strong> {{ $datakos->nama }}</p>
@@ -32,7 +32,7 @@
                         Hubungi Pemilik
                     </button>
                 </a>
-                <a href="{{ route('pemesanan.pesan', ['datakos_id' => $datakos->id]) }}">
+                <a href="{{ route('pemesanan.pesan', ['datakos_id' => $datakos->id]) }}" target="_blank">
                     <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Pesan
                     </button>

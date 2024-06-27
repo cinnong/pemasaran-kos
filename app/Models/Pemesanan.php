@@ -12,7 +12,9 @@ class Pemesanan extends Model
     protected $table = 'pemesanans';
 
     protected $fillable = [
+        'id_kos',
         'user_id',
+        'pemilik_kos_id',
         'tanggal_pemesanan',
         'tanggal_masuk',
         'tanggal_keluar',
@@ -31,5 +33,10 @@ class Pemesanan extends Model
     public function pembayaran()
     {
         return $this->hasMany(Pembayaran::class, 'pemesanan_id');
+    }
+
+    public function datakos()
+    {
+        return $this->hasMany(Datakos::class, 'id_kos');
     }
 }

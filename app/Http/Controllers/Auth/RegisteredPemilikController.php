@@ -52,9 +52,8 @@ class RegisteredPemilikController extends Controller
 
         event(new Registered($pemilikKos));
 
-        Auth::login($pemilikKos);
 
-        return redirect()->route('beranda');
+        return redirect()->route('pemilik_kos.login_form');
     }
 
     public function show($id): View

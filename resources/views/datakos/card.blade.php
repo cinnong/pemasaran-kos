@@ -1,10 +1,10 @@
 @foreach ($datakos as $datakos)
     <div class="relative overflow-hidden bg-gray-50 mb-8 rounded-xl shadow-xl ring-gray-900/5">
-        <a href="{{ route('datakos.show', $datakos->id) }}">
+        <a href="{{ route('datakos.show', $datakos->id) }}" target="_blank">
             <div class="relative inset-0 bg-center dark:bg-black"></div>
             <div
                 class="group relative flex h-full rounded-xl border border-gray-200 transition duration-300 ease-in-out group-hover:border-gray-700 dark:border-gray-700">
-                <img src="{{ asset('storage/' . $datakos->foto) }}"
+                <img src="{{ asset('photos/kos/' . $datakos->foto) }}"
                     class="block w-full h-full object-cover transition duration-300 transform scale-100 group-hover:scale-110"
                     alt="{{ $datakos->nama }}" />
                 <div

@@ -25,16 +25,6 @@
                             name="nama" id="nama" required>
                     </div>
                     <div class="mb-4">
-                        <label for="pemilik_kos_id">Pemilik:</label>
-                        <select
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                            id="pemilik_kos_id" name="pemilik_kos_id" required onchange="fillPhoneNumber()">
-                            @foreach ($pemilik_kos as $pemilik)
-                                <option value="{{ $pemilik->id }}" data-nohp="{{ $pemilik->no_hp }}">{{ $pemilik->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-4">
                         <label for="lokasi" class="block text-gray-700">Lokasi</label>
                         <input type="text"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -67,12 +57,6 @@
                         <textarea
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             name="deskripsi" id="deskripsi" required></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="notlp" class="block text-gray-700">Nomor Telepon</label>
-                        <input type="text"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                            name="notlp" id="notlp" required readonly>
                     </div>
 
                     <div class="mb-4">

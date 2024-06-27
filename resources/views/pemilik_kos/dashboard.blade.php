@@ -1,30 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard Pemilik Kos</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50 dark:bg-gray-900">
-    <div class="container mx-auto">
-        <h1 class="text-2xl font-bold my-4">Dashboard Pemilik Kos</h1>
+@extends('layouts.pemilik')
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            @foreach ($datakos as $kos)
-            <div class="bg-white p-4 rounded-lg shadow">
-                <h2 class="text-lg font-bold">{{ $kos->nama }}</h2>
-                <p class="text-gray-600">Lokasi: {{ $kos->lokasi }}</p>
-                <p class="text-gray-600">Harga: {{ $kos->harga }}</p>
-                <p class="text-gray-600">Jumlah Kamar: {{ $kos->jumlah_kamar }}</p>
-                <p class="text-gray-600">Deskripsi: {{ $kos->deskripsi }}</p>
-                <p class="text-gray-600">Nama Pemilik: {{ $kos->datapemilik->nama }}</p>
-                <p class="text-gray-600">No Telepon: {{ $kos->notlp }}</p>
-                <!-- Tambahkan kode untuk menampilkan foto jika ada -->
+@section('content')
+    <div class="container mx-auto mt-4">
+        <h2 class="text-3xl font-bold mb-6">Dashboard Pemilik Kos</h2>
+        
+        <!-- Statistik -->
+        <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 11h16M2 7h16m-8 8h8"></path>
+                    </svg>
+                </div>
+                <div>
+                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total User</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">1,234</p>
+                </div>
             </div>
-            @endforeach
+
+            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 11h16M2 7h16m-8 8h8"></path>
+                    </svg>
+                </div>
+                <div>
+                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total Pemesanan</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">567</p>
+                </div>
+            </div>
+
+            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                <div class="p-3 mr-4 text-red-500 bg-red-100 rounded-full">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 11h16M2 7h16m-8 8h8"></path>
+                    </svg>
+                </div>
+                <div>
+                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total Pembayaran</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">789</p>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+@endsection

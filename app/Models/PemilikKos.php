@@ -24,6 +24,11 @@ class PemilikKos extends Authenticatable
 
     public function datakos()
     {
-    return $this->hasMany(Datakos::class, 'pemilik_kos_id');
+        return $this->hasMany(Datakos::class, 'pemilik_kos_id');
+    }
+
+    public function pemesanan()
+    {
+        return $this->hasMany(Pemesanan::class, 'pemilik_kos_id');
     }
 }

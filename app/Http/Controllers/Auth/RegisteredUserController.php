@@ -47,20 +47,20 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'usia' => $request->usia,
-        'jenis_kelamin' => $request->jenis_kelamin,
-        'pekerjaan' => $request->pekerjaan,
-        'notlp' => $request->notlp, // Menyimpan nomor telepon yang diinput
-        'password' => Hash::make($request->password),
-    ]);
+            'name' => $request->name,
+            'email' => $request->email,
+            'usia' => $request->usia,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'pekerjaan' => $request->pekerjaan,
+            'notlp' => $request->notlp, // Menyimpan nomor telepon yang diinput
+            'password' => Hash::make($request->password),
+            'role' => 'pencari',
+        ]);
 
-    event(new Registered($user));
+        event(new Registered($user));
 
-    Auth::login($user);
 
-    return redirect()->route('beranda');
+        return redirect()->route('login');
     }
 
     public function show($id): View

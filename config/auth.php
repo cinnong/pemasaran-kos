@@ -41,8 +41,8 @@ return [
             'provider' => 'users',
         ],
         'pemilik_kos' => [
-        'driver' => 'session',
-        'provider' => 'pemilik_kos',
+            'driver' => 'session',
+            'provider' => 'pemilik_kos',
         ],
     ],
 

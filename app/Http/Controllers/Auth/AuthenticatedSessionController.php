@@ -30,9 +30,6 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
 
-        if ($user->hasRole('admin')) {
-            return redirect()->route('beranda-admin');
-        }
 
         return redirect()->route('beranda');
     }
@@ -48,6 +45,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('beranda');
     }
 }
