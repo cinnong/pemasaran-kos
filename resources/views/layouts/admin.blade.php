@@ -11,7 +11,7 @@
     <meta name="description" content="" />
 
 
-    <!-- Fonts -->
+   
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&ampdisplay=swap"
@@ -44,8 +44,6 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             @include('components.sidebar-admin')
-            <div class="layout-pages w-100">
-                @include('components.navbar-admin')
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row gy-4">
