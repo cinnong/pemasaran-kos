@@ -19,11 +19,23 @@ class Datakos extends Model
         'deskripsi',
         'notlp',
         'foto',
+        'nomor_rekening',
         'pemilik_kos_id',
+        'status'
     ];
 
     public function pemilikkos()
     {
         return $this->belongsTo(PemilikKos::class, 'pemilik_kos_id');
+    }
+
+    public function pemesanan()
+    {
+        return $this->hasMany(Pemesanan::class, 'id_kos');
+    }
+
+    public function pemesanans()
+    {
+        return $this->hasMany(Pemesanan::class, 'id_kos');
     }
 }

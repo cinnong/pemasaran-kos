@@ -18,7 +18,9 @@ use App\Http\Controllers\Auth\RegisteredPemilikController;
 use App\Http\Controllers\PemilikKosController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
+use App\Models\Pembayaran;
 use App\Models\Pemesanan;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,17 +43,15 @@ Route::get('/search', [DatakosController::class, 'search'])->name('search');
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('Login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
+
 Route::get('/', function () {
-    $datakos = Datakos::all();
-    $user = User::all();
-    $datapemilik = PemilikKos::all();
-    $count = Datakos::count();
-    $countuser = User::count();
-    $countpemilik = PemilikKos::count();
-    return view('beranda', compact('datakos', 'count', 'countuser', 'countpemilik'));
+    $datakos = Datakos::where('status', 'Setuju')->get();
+    return view('beranda', compact('datakos'));
 })->name('beranda');
 
-Route::get('/beranda', function () {
+
+
+Route::get('/beranda-admin', function () {
     $datakos = Datakos::all();
     $user = User::all();
     $datapemilik = PemilikKos::all();
@@ -59,25 +59,46 @@ Route::get('/beranda', function () {
     $countuser = User::count();
     $countpemilik = PemilikKos::count();
     return view('beranda-admin', compact('count', 'countuser', 'countpemilik'));
-})->middleware(['auth', 'verified'])->name('beranda-admin');
+})->name('beranda-admin');
 
 Route::get('/datakos', function () {
     $datakos = Datakos::all();
     $datapemilik = PemilikKos::all();
-    return view('datakos.table-kos', compact('datakos', 'datapemilik'));
+    return view('admin.data-kos', compact('datakos', 'datapemilik'));
 })->name('datakos');
 
-Route::get('/datauser', [RegisteredUserController::class, 'index'])->name('datauser');
+Route::put('/kos/{id}/status', [DatakosController::class, 'updateStatus'])->name('kos.updateStatus');
 
-Route::get('/datapemilik', [RegisteredPemilikController::class, 'index'])
+Route::get('/login-admin', function() {
+    return view('admin.login-admin');
+})->name('login-admin');
+
+Route::get('/datauser', [AdminController::class, 'index'])->name('datauser');
+
+Route::get('/datapemilik', [AdminController::class, 'pemilik'])
     ->name('datapemilik');
 
 Route::get('/pemilik-kos/dashboard', function () {
-    return view('pemilik_kos.dashboard');
+    $pemilikKos = Auth::guard('pemilik_kos')->user();
+
+    // Jumlah user yang melakukan pesanan pada kos yang dimiliki pemilik kos yang login
+    $jumlahUserPesan = Pemesanan::where('pemilik_kos_id', $pemilikKos->id)
+        ->distinct('user_id')
+        ->count('user_id');
+
+    // Jumlah pemesanan yang dilakukan user pada kos yang dimiliki pemilik kos yang login
+    $jumlahPemesanan = Pemesanan::where('pemilik_kos_id', $pemilikKos->id)
+        ->count();
+
+    // Jumlah pembayaran yang dilakukan user pada kos yang dimiliki pemilik kos yang login
+    $jumlahPembayaran = Pembayaran::whereHas('pemesanan', function ($query) use ($pemilikKos) {
+        $query->where('pemilik_kos_id', $pemilikKos->id);
+    })->count();
+    return view('pemilik_kos.dashboard', compact('jumlahUserPesan', 'jumlahPemesanan', 'jumlahPembayaran'));
 })->name('pemilik.dashboard');
 Route::get('/pemilik-kos/datakos', [PemilikKosController::class, 'datakospemilik'])->name('pemilik.datakos');
 Route::get('/pemilik-kos/pemesanan', [PemesananController::class, 'pesanan'])->name('pemilik.pemesanan');
-Route::get('/pemilik-kos/pesanan', [PemilikKosController::class, 'pesanan'])->name('pemilik.user');
+Route::get('/pemilik-kos/pesanan', [PemilikKosController::class, 'pemesan'])->name('pemilik.user');
 Route::get('/pemilik-kos/pembayaran', [PemilikKosController::class, 'pembayaran'])->name('pemilik.pembayaran');
 
 
@@ -104,19 +125,13 @@ Route::get('/data-pemilik', function () {
     return view('pemilik_kos.data-pemilik');
 });
 
-
 Route::get('/datauser/{user}', [RegisteredUserController::class, 'show'])->name('datauser.show');
 
-// datauser
-Route::resource('user', UserController::class);
-Route::get('/data-user', function () {
-    return view('user.data-user');
-});
 
 
 //PembayaranController
 Route::resource('pembayarans', PembayaranController::class);
-Route::get('/pembayaran', [PembayaranController::class, 'index']);
+Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.show');
 
 // PemesananController
 Route::resource('pemesanans', PemesananController::class);
@@ -141,16 +156,18 @@ Route::post('/pemesanans/store', [PemesananController::class, 'store'])->name('p
 // Route untuk menampilkan form pemesanan
 Route::get('/pemesanans/create', [PemesananController::class, 'create'])->name('pemesanans.create');
 
-//utk nampilin halaman pesa
+//utk nampilin halaman pesan
 Route::get('/pemesanan/pesan/{datakos_id}', [PemesananController::class, 'pesan'])->name('pemesanan.pesan');
 
 
 Route::get('/pemesanans', [PemesananController::class, 'index'])->name('pemesanans.index');
 
-Route::get('/pemesanan/upload-bukti/{id}', function ($id) {
-    $pemesanan = Pemesanan::findOrFail($id);
+// Route
+Route::get('/pemesanan/upload-bukti/{id}', function ($id_kos) {
+    $pemesanan = Pemesanan::with('datakos')->findOrFail($id_kos);
     return view('pemesanan.upload-bukti', compact('pemesanan'));
 })->name('upload.bukti');
+
 
 Route::get('/pemesanan/card-welcome', function () {
     $datakos = Datakos::all();

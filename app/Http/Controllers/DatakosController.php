@@ -32,10 +32,10 @@ class DatakosController extends Controller
             'jumlah_kamar' => 'required|integer',
             'tipekos' => 'required|string|max:50',
             'deskripsi' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Pastikan foto adalah wajib
+            'nomor_rekening' => 'required|integer',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Inisialisasi objek Datakos baru
         $dataKos = new Datakos;
         $dataKos->nama = $validated['nama'];
         $dataKos->lokasi = $validated['lokasi'];
@@ -43,8 +43,10 @@ class DatakosController extends Controller
         $dataKos->jumlah_kamar = $validated['jumlah_kamar'];
         $dataKos->tipekos = $validated['tipekos'];
         $dataKos->deskripsi = $validated['deskripsi'];
+        $dataKos->nomor_rekening = $validated['nomor_rekening'];
         $dataKos->notlp = PemilikKos::findOrFail(Auth::guard('pemilik_kos')->user()->id)->no_hp;
         $dataKos->pemilik_kos_id = Auth::guard('pemilik_kos')->user()->id;
+        $dataKos->status = 'pending';
 
         // Proses upload dan penyimpanan foto
         if ($request->hasFile('foto')) {
@@ -60,13 +62,9 @@ class DatakosController extends Controller
         // Redirect ke route beranda-admin dengan pesan sukses
         return redirect()->route('pemilik.datakos')->with('success', 'Data kos berhasil ditambahkan');
     }
-
-
     public function update(Request $request, $id)
     {
         $datakos = Datakos::findOrFail($id);
-        // dd($request->all());
-        // Validasi data yang diinput oleh pengguna
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'lokasi' => 'required|string|max:255',
@@ -74,7 +72,7 @@ class DatakosController extends Controller
             'jumlah_kamar' => 'required|integer',
             'tipekos' => 'required|string|max:50',
             'deskripsi' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 'nullable' allows the field to be optional
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Update data kos dengan data yang telah divalidasi
@@ -108,8 +106,6 @@ class DatakosController extends Controller
         // Redirect ke route beranda-admin dengan pesan sukses
         return redirect()->route('pemilik.datakos')->with('success', 'Data kos berhasil diperbarui');
     }
-
-
     public function edit($id)
     {
         $datakos = Datakos::findOrFail($id);
@@ -143,5 +139,18 @@ class DatakosController extends Controller
             ->get();
 
         return view('datakos.search', compact('results'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:Pending,Setuju,Tidak setuju',
+        ]);
+
+        $kos = Datakos::findOrFail($id);
+        $kos->status = $request->status;
+        $kos->save();
+
+        return redirect()->route('datakos')->with('status', 'Status kos berhasil diperbarui.');
     }
 }

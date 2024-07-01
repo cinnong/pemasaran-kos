@@ -13,7 +13,7 @@ class PemesananController extends Controller
     public function index()
     {
         $pemesanans = Pemesanan::with('user')->get();
-        return view('pemesanan.data-pemesanan', compact('pemesanans'));
+        return view('admin.data-pemesanan', compact('pemesanans'));
     }
 
     public function pesanan()
@@ -86,7 +86,7 @@ class PemesananController extends Controller
         ]);
 
         // Redirect ke halaman pemesanan dengan pesan sukses
-        return redirect()->route('pemesanans.index')->with('success', 'Pemesanan berhasil diperbarui.');
+        return redirect()->route('pemilik.pemesanan');
     }
 
 

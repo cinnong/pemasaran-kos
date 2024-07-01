@@ -35,8 +35,13 @@ class Pemesanan extends Model
         return $this->hasMany(Pembayaran::class, 'pemesanan_id');
     }
 
+    public function pemilikKos()
+    {
+        return $this->belongsTo(PemilikKos::class, 'pemilik_kos_id');
+    }
+
     public function datakos()
     {
-        return $this->hasMany(Datakos::class, 'id_kos');
+        return $this->belongsTo(Datakos::class, 'id_kos');
     }
 }

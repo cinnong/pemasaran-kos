@@ -1,125 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Kos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-</head>
-
-<body class="bg-gray-100">
-    @include('components.sidebar')
-    <div class="p-4 sm:ml-64">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-between">
-                {{-- Card DataPengguna --}}
-                <div
-                    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-red-500 text-white">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 8v4l3 3"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <h5 class="text-lg leading-6 font-semibold text-gray-900 dark:text-white">Data
-                                        Pengguna</h5>
-                                    <p class="text-sm leading-5 font-medium text-gray-500 dark:text-gray-400">Total Data
-                                        Pengguna</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">{{ $countuser }}</div>
-                        <a href="{{ route('datauser') }}"
-                            class="inline-flex items-center mt-4 text-sm font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
-                            More info
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
+@extends('layouts.admin')
+@section('content')
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title m-0 me-2 text-capitalize">Welcome to Admin
+                        {{ Auth::user()->name }}</h5>
                 </div>
-
-                <!-- Card Datakos-->
-                <div
-                    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-red-500 text-white">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 8v4l3 3"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <h5 class="text-lg leading-6 font-semibold text-gray-900 dark:text-white">Data Kos
-                                    </h5>
-                                    <p class="text-sm leading-5 font-medium text-gray-500 dark:text-gray-400">Total Data
-                                        Kos</p>
+                <p class="mt-3"><span class="fw-medium">Dashboard Admin</p>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4 col-6">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-success rounded shadow">
+                                    <i class="mdi mdi-account-outline mdi-24px"></i>
                                 </div>
                             </div>
+                            <div class="ms-3">
+                                <div class="small mb-1">Data Pengguna</div>
+                                <h5 class="mb-0">{{ $countuser }}</h5>
+                            </div>
                         </div>
-                        <div class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">{{ $count }}</div>
-                        <a href="/datakos"
-                            class="inline-flex items-center mt-4 text-sm font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
-                            More info
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
                     </div>
-                </div>
-
-                {{-- Card DataPemilik --}}
-                <div
-                    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-red-500 text-white">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 8v4l3 3"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <h5 class="text-lg leading-6 font-semibold text-gray-900 dark:text-white">Data
-                                        Pemilik</h5>
-                                    <p class="text-sm leading-5 font-medium text-gray-500 dark:text-gray-400">Total Data
-                                        Pemili</p>
+                    <div class="col-md-4 col-6">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-warning rounded shadow">
+                                    <i class="mdi mdi-cellphone-link mdi-24px"></i>
                                 </div>
                             </div>
+                            <div class="ms-3">
+                                <div class="small mb-1">Data Kos</div>
+                                <h5 class="mb-0">{{ $count }}</h5>
+                            </div>
                         </div>
-                        <div class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">{{ $countpemilik }}</div>
-                        <a href="/datapemilik"
-                            class="inline-flex items-center mt-4 text-sm font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
-                            More info
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-info rounded shadow">
+                                    <i class="mdi mdi-account-outline mdi-24px"></i>
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <div class="small mb-1">Data Pemilik</div>
+                                <h5 class="mb-0">{{ $countpemilik }}</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-
-</html>
+@endsection

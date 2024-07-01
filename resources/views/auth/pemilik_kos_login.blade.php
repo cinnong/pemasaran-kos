@@ -20,7 +20,7 @@
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Masuk Ke kosPedia
+                        Masuk Sebagai Pemilik Kos
                     </h1>
                     <form method="POST" action="{{ route('pemilik_kos.login') }}" class="space-y-4 md:space-y-6">
                         @csrf
@@ -68,7 +68,7 @@
                         </x-primary-button>
 
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Tidak punya akun? <a href="/register"
+                            Tidak punya akun? <a href="/pemilik_kos/register"
                                 class="font-medium text-primary-600 hover:underline dark:text-primary-500">daftar
                                 disini</a>
                         </p>

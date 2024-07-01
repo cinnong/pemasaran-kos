@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -15,20 +17,31 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $admin = User::create([
-            'name' => 'Dina',
-            'email' => 'Dina@gmail.com',
-            'password' => bcrypt('12345678'),
+        DB::table('users')->insert([
+            [
+                'name' => 'Dina Oktafiani',
+                'usia' => 20,
+                'jenis_kelamin' => 'Perempuan',
+                'pekerjaan' => 'Mahasiswa',
+                'notlp' => '081234567890',
+                'email' => 'dina@gmail.com',
+                'password' => Hash::make('12345678'),
+                'role' => 'admin',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'M Fachriza Farhan',
+                'usia' => 20,
+                'jenis_kelamin' => 'Laki-Laki',
+                'pekerjaan' => 'Mahasiswa',
+                'notlp' => '081234567891',
+                'email' => 'reza@gmail.com',
+                'password' => Hash::make('admin12345'),
+                'role' => 'pencari',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
-        $admin->assignRole('admin');
-
-        $user = User::create([
-            'name' => 'User',
-            'email' => 'user@kawankoding.id',
-            'password' => bcrypt('12345678'),
-        ]);
-
-        $user->assignRole('user');
-
     }
 }

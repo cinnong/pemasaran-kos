@@ -18,69 +18,64 @@
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 @if (Route::has('login'))
                     @auth
-                        @if (Auth::user()->role === 'admin')
-                            <a href="/beranda"
-                                class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
-                        @else
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit"
-                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <!-- Unique Logout Icon -->
-                                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path d="M12 2L2 7v2h2v11h16V9h2V7zm0 2l7 4v10h-3v-8H8v8H5V8l7-4zm-3 7h6v8h-6z" />
-                                    </svg>
-                                    <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
-                                </button>
-                            </form>
-                        @endif
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <!-- Unique Logout Icon -->
+                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7v2h2v11h16V9h2V7zm0 2l7 4v10h-3v-8H8v8H5V8l7-4zm-3 7h6v8h-6z" />
+                                </svg>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
+                            </button>
+                        </form>
                     @else
-                        @if (Route::has('login'))
-                            <div class="relative">
-                                <button type="button"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-4"
-                                    aria-haspopup="true" aria-expanded="false" id="login-dropdown">
-                                    Login
-                                </button>
-                                <ul class="absolute right-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded-md shadow-lg hidden"
-                                    id="login-options">
-                                    <li>
-                                        <a href="{{ route('pemilik_kos.login_form') }}"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pemilik
-                                            Kos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('login') }}"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pencari
-                                            Kos</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        @endif
-                        @if (Route::has('register'))
-                            <div class="relative">
-                                <button type="button"
-                                    class="ml-4 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                                    aria-haspopup="true" aria-expanded="false" id="register-dropdown">
-                                    Register
-                                </button>
-                                <ul class="absolute right-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded-md shadow-lg hidden"
-                                    id="register-options">
-                                    <li>
-                                        <a href="{{ route('pemilik_kos.register') }}"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pemilik
-                                            Kos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('register') }}"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pencari
-                                            Kos</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        @endif
+                        <div class="relative">
+                            <button type="button"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-4"
+                                aria-haspopup="true" aria-expanded="false" id="login-dropdown">
+                                Login
+                            </button>
+                            <ul class="absolute right-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded-md shadow-lg hidden"
+                                id="login-options">
+                                <li>
+                                    <a href="{{ route('pemilik_kos.login_form') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pemilik
+                                        Kos</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('login-admin') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Admin</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('login') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pencari
+                                        Kos</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="relative">
+                            <button type="button"
+                                class="ml-4 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                                aria-haspopup="true" aria-expanded="false" id="register-dropdown">
+                                Register
+                            </button>
+                            <ul class="absolute right-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded-md shadow-lg hidden"
+                                id="register-options">
+                                <li>
+                                    <a href="{{ route('pemilik_kos.register') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pemilik
+                                        Kos</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('register') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white">Pencari
+                                        Kos</a>
+                                </li>
+                            </ul>
+                        </div>
                     @endauth
                 @endif
                 <button data-collapse-toggle="navbar-cta" type="button"
@@ -135,12 +130,16 @@
             const loginDropdown = document.getElementById('login-dropdown');
             const loginOptions = document.getElementById('login-options');
 
-            registerDropdown.addEventListener('click', function() {
+            registerDropdown.addEventListener('click', function(event) {
+                event.stopPropagation();
                 registerOptions.classList.toggle('hidden');
+                loginOptions.classList.add('hidden');
             });
 
-            loginDropdown.addEventListener('click', function() {
+            loginDropdown.addEventListener('click', function(event) {
+                event.stopPropagation();
                 loginOptions.classList.toggle('hidden');
+                registerOptions.classList.add('hidden');
             });
 
             // Close dropdowns if clicked outside
@@ -151,6 +150,15 @@
                 if (!loginDropdown.contains(event.target)) {
                     loginOptions.classList.add('hidden');
                 }
+            });
+
+            // Prevent dropdown from closing when clicking inside the dropdown
+            registerOptions.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+
+            loginOptions.addEventListener('click', function(event) {
+                event.stopPropagation();
             });
         });
     </script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Datakos;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use App\Models\PemilikKos;
 use App\Models\Pemesanan;
@@ -56,16 +57,17 @@ class PemilikKosController extends Controller
         return redirect()->route('pemilik_kos.index')->with('success', 'Pemilik Kos berhasil dihapus.');
     }
 
-    public function pesanan()
+    public function pemesan()
     {
-        // Mendapatkan pemilik kos yang sedang login
         $pemilikKos = Auth::guard('pemilik_kos')->user();
-
-        // Mengambil data pemesanan yang terkait dengan pemilik kos tersebut
-        $pesananKos = $pemilikKos->pemesanan()->with('user')->get();
+        $pembayaran = Pembayaran::with(['pemesanan.user'])
+            ->whereHas('pemesanan', function ($query) use ($pemilikKos) {
+                $query->where('pemilik_kos_id', $pemilikKos->id);
+            })
+            ->get();
 
         // Mengirim data ke view pemilik.pesanan.blade.php
-        return view('pemilik_kos.data-user', compact('pesananKos'));
+        return view('pemilik_kos.data-user', compact('pembayaran'));
     }
 
     public function pembayaran()

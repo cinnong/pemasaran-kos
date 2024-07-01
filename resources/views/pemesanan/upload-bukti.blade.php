@@ -16,6 +16,7 @@
                 @csrf
                 <input type="hidden" name="pemesanan_id" value="{{ $pemesanan->id }}">
                 <div class="mb-4">
+                    <p>Nomor Rekening: {{ $pemesanan->datakos->nomor_rekening }}</p>
                     <label for="upload_bukti_pembayaran" class="block text-sm font-medium text-gray-700">Upload Bukti
                         Pembayaran</label>
                     <input type="file" id="upload_bukti_pembayaran" name="upload_bukti_pembayaran"

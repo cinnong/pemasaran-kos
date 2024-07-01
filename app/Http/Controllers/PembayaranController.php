@@ -9,22 +9,12 @@ use App\Models\Pemesanan;
 
 class PembayaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $pembayarans = Pembayaran::all();
-        return view('pembayaran.data-pembayaran', compact('pembayarans'));
+        $pembayaran = Pembayaran::all();
+        return view('admin.data-pembayaran', compact('pembayaran'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($pemesanan_id)
     {
         // Mencari pemesanan berdasarkan ID
@@ -33,19 +23,9 @@ class PembayaranController extends Controller
         // Menampilkan view upload-bukti dengan data pemesanan
         return view('pemesanan.upload-bukti', compact('pemesanan'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
     // Memproses dan menyimpan data pembayaran
     public function store(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
             'pemesanan_id' => 'required',
             'upload_bukti_pembayaran' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -60,14 +40,12 @@ class PembayaranController extends Controller
             'pemesanan_id' => $request->pemesanan_id,
             'tanggal_pembayaran' => now(),
             'upload_bukti_pembayaran' => $imageName,
-            'status_pembayaran' => 'pending',
+            'status_pembayaran' => 'berhasil',
         ]);
 
         // Mengurangi jumlah kamar pada datakos
-        $pemesanan = Pemesanan::find($request->pemesanan_id); // Asumsi pemesanan_id mengacu ke Pemesanan
-        $datakos = Datakos::find($pemesanan->id_kos); // Asumsi pemesanan memiliki datakos_id
-
-        // dd($pemesanan, $datakos);
+        $pemesanan = Pemesanan::find($request->pemesanan_id);
+        $datakos = Datakos::find($pemesanan->id_kos);
 
         if ($datakos) {
             $datakos->jumlah_kamar -= 1; // Kurangi jumlah kamar
@@ -78,36 +56,16 @@ class PembayaranController extends Controller
         return redirect()->route('card.welcome')->with('success', 'Bukti pembayaran berhasil diupload. Silakan menunggu konfirmasi.');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pembayaran  $pembayaran
-     * @return \Illuminate\Http\Response
-     */
     public function show(Pembayaran $pembayaran)
     {
         return view('pembayarans.show', compact('pembayaran'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pembayaran  $pembayaran
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Pembayaran $pembayaran)
     {
         return view('pembayarans.edit', compact('pembayaran'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pembayaran  $pembayaran
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Pembayaran $pembayaran)
     {
         $request->validate([
@@ -130,13 +88,6 @@ class PembayaranController extends Controller
 
         return redirect()->route('pembayarans.index')->with('success', 'Pembayaran berhasil diperbarui.');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pembayaran  $pembayaran
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Pembayaran $pembayaran)
     {
         $pembayaran->delete();

@@ -14,7 +14,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total User</p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">1,234</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $jumlahUserPesan }}</p>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total Pemesanan</p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">567</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $jumlahPemesanan }}</p>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total Pembayaran</p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">789</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">{{ $jumlahPembayaran }}</p>
                 </div>
             </div>
         </div>

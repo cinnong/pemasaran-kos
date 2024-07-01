@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_kos')->unsigned();
+            $table->bigInteger('pemilik_kos_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->timestamp('tanggal_pemesanan')->default(now());
             $table->date('tanggal_masuk')->nullable();
@@ -23,9 +25,11 @@ return new class extends Migration
             $table->integer('per_bulan');
             $table->integer('harga');
             $table->integer('total_biaya');
-            $table->enum('aksi', ['Setuju', 'Tidak setuju']);
+            $table->enum('aksi', ['Pending','Setuju', 'Tidak setuju']);
             $table->timestamps();
             // Foreign key constraint
+            $table->foreign('id_kos')->references('id')->on('datakos');
+            $table->foreign('pemilik_kos_id')->references('id')->on('pemilik_kos');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

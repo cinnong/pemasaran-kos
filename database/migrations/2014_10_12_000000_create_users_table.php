@@ -21,11 +21,10 @@ return new class extends Migration
             $table->string('pekerjaan');
             $table->string('notlp'); // Tidak menggunakan nullable()
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('role');
             $table->timestamps();
-        });        
+        });
     }
 
     /**

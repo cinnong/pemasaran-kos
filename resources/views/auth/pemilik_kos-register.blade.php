@@ -75,7 +75,7 @@
                         {{ __('Register') }}
                     </x-primary-button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Sudah punya akun? <a href="{{ route('login') }}"
+                        Sudah punya akun? <a href="/pemilik-kos/login"
                             class="font-medium text-primary-600 hover:underline dark:text-primary-500">Masuk
                             disini</a>
                     </p>

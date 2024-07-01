@@ -28,10 +28,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $user = Auth::user();
-
-
-        return redirect()->route('beranda');
+        $role = Auth::user()->role;
+        
+        if ($role === 'admin') {
+            return redirect()->route('beranda-admin');
+        } elseif ($role === 'pencari') {
+            return redirect()->route('beranda');
+        }
     }
 
     /**
@@ -46,5 +49,24 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('beranda');
+    }
+
+    /**
+     * Handle response after user authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        switch ($user->role) {
+            case 'admin':
+                return redirect()->route('admin.dashboard');
+            case 'pencari':
+                return redirect()->route('customer.dashboard');
+            default:
+                return redirect()->route('dashboard');
+        }
     }
 }

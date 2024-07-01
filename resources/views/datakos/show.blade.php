@@ -10,8 +10,6 @@
 </head>
 
 <body class="bg-gray-100">
-    @include('components.navbar')
-
     <div class="container mx-auto py-8 mt-8">
         <div class="bg-white shadow-md rounded-lg p-6 flex flex-wrap">
             <div class="w-full lg:w-1/2">
@@ -27,6 +25,11 @@
                 <p><strong>Tipe Kos:</strong> {{ ucfirst(str_replace('_', ' ', $datakos->tipekos)) }}</p>
                 <p class="overflow-wrap break-word"><strong>Deskripsi:</strong> {{ $datakos->deskripsi }}</p>
                 <p><strong>No. Telepon:</strong> {{ $datakos->notlp }}</p>
+                <a href="{{ route('beranda')}}">
+                    <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Back
+                    </button>
+                </a>
                 <a href="tel:{{ $datakos->notlp }}">
                     <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Hubungi Pemilik

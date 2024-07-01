@@ -31,6 +31,12 @@
                             name="lokasi" id="lokasi" required>
                     </div>
                     <div class="mb-4">
+                        <label for="nomor_rekening" class="block text-gray-700">Nomor Rekening</label>
+                        <input type="number"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            name="nomor_rekening" id="nomor_rekening" required>
+                    </div>
+                    <div class="mb-4">
                         <label for="harga" class="block text-gray-700">Harga</label>
                         <input type="number"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"

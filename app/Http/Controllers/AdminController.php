@@ -2,28 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PemilikKos;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('input');
+        $users = User::all();
+        return view('admin.data-pengguna', compact('users'));
     }
-}
 
-// app/Http/Controllers/UserController.php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
-class UserController extends Controller
-{
-    public function index()
+    public function pemilik()
     {
-        return view('input');
-
-
+        $pemilikKos = PemilikKos::all();
+        return view('admin.data-pemilik', compact('pemilikKos'));
     }
 }

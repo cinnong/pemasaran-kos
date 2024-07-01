@@ -19,6 +19,7 @@
                         <th class="px-4 py-2 border-b text-left">Tipe Kos</th>
                         <th class="px-4 py-2 border-b text-left">Deskripsi</th>
                         <th class="px-4 py-2 border-b text-left">No. Telp</th>
+                        <th class="px-4 py-2 border-b text-left">Status</th>
                         <th class="px-4 py-2 border-b text-left">Foto</th>
                         <th class="px-4 py-2 border-b text-left">Actions</th>
                     </tr>
@@ -35,6 +36,7 @@
                                 <div class="truncate w-40">{{ $datakos->deskripsi }}</div>
                             </td>
                             <td class="px-4 py-2 border-b text-left">{{ $datakos->notlp }}</td>
+                            <td class="px-4 py-2 border-b text-left">{{ $datakos->status }}</td>
                             <td class="px-4 py-2 border-b text-left">
                                 @if ($datakos->foto)
                                     <img src="{{ asset('photos/kos/' . $datakos->foto) }}" alt="Foto Kos"
