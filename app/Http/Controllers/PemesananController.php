@@ -20,7 +20,7 @@ class PemesananController extends Controller
     {
         // Mendapatkan pemilik kos yang sedang login
         $pemilikKos = Auth::guard('pemilik_kos')->user();
-        
+
         // Mengambil data pemesanan yang terkait dengan pemilik kos tersebut
         $pesananKos = $pemilikKos->pemesanan;
 
@@ -44,7 +44,6 @@ class PemesananController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         // Validasi data yang diinput oleh pengguna
         $request->validate([
             'tanggal_masuk' => 'required|date',
@@ -67,7 +66,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.show', compact('pemesanan'));
     }
-
+    
     public function edit(Pemesanan $pemesanan)
     {
         return view('pemesanan.edit', compact('pemesanan'));

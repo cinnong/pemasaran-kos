@@ -132,10 +132,10 @@ class DatakosController extends Controller
     {
         $query = $request->input('query');
 
-        $results = Datakos::query() // Ganti dengan model yang sesuai
-            ->where('nama', 'like', "%{$query}%") // Ganti 'name' dengan field yang sesuai
-            ->orWhere('lokasi', 'like', "%{$query}%") // Ganti 'location' dengan field yang sesuai
-            ->orWhere('harga', 'like', "%{$query}%") // Ganti 'price' dengan field yang sesuai
+        $results = Datakos::query()
+            ->where('nama', 'like', "%{$query}%")
+            ->orWhere('lokasi', 'like', "%{$query}%")
+            ->orWhere('harga', 'like', "%{$query}%") 
             ->get();
 
         return view('datakos.search', compact('results'));

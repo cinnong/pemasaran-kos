@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
-            <span class="app-brand-text demo menu-text fw-semibold ms-2">Kos-Pedia</span>
+            <span class="app-brand-text demo menu-text fw-semibold ms-2">KosPedia</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -10,7 +10,6 @@
     </div>
 
     <div class="menu-inner-shadow"></div>
-
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item {{ request()->routeIs('beranda-admin') ? 'active open' : '' }}">
@@ -82,7 +81,7 @@
                     <div data-i18n="Front Pages">Logout</div>
                 </button>
             </form>
-            
+
         </li>
     </ul>
 

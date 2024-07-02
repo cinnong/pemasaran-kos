@@ -73,8 +73,7 @@ class PembayaranController extends Controller
             'upload_bukti_pembayaran' => 'sometimes|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status_pembayaran' => 'required|in:pending,berhasil,gagal',
         ]);
-
-        // Handle file upload if new file provided
+        
         if ($request->hasFile('upload_bukti_pembayaran')) {
             $file = $request->file('upload_bukti_pembayaran');
             $path = $file->store('bukti_pembayaran', 'public');
