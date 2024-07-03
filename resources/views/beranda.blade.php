@@ -26,15 +26,20 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white mt-8">
-        <div class="max-w-7xl mx-auto py-4 px-5 flex justify-between items-center">
-            <div class="text-sm text-center w-full">
-                &copy; 2024 KosPedia. All rights reserved.
-            </div>
-            <div class="flex justify-end w-full">
-                <a href="https://wa.me/6281241610532" class="text-gray-400 hover:text-white">Contact Us</a>
+        <div class="max-w-7xl mx-auto py-8 px-5">
+            <div class="border-t border-gray-700 pt-4 text-sm text-center">
+                <h5 class="text-lg font-bold mb-2">KosPedia</h5>
+                <p>
+                    Email:
+                    <a href="mailto:info@kospedia.com" class="text-gray-400 hover:text-white underline">
+                        info@kospedia.com
+                    </a>
+                </p>
+                <p>&copy; 2024 KosPedia. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
 </body>
 
 </html>

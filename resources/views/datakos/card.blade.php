@@ -8,7 +8,7 @@
                     class="block w-full h-full object-cover transition duration-300 transform scale-100 group-hover:scale-110"
                     alt="{{ $datakos->nama }}" />
                 <div
-                    class="absolute bottom-0 p-4 text-gray-100 group-hover:text-blue-700 transition duration-300 ease-in-out transform translate-y-0 translate-x-0 group-hover:-translate-y-1 group-hover:translate-x-3">
+                    class="absolute bottom-0 p-4 text-gray-100 group-hover:text-yellow-300 transition duration-300 ease-in-out transform translate-y-0 translate-x-0 group-hover:-translate-y-1 group-hover:translate-x-3">
                     <h1 class="text-2xl font-bold">{{ $datakos->nama }}</h1>
                     <p class="text-sm font-bold">{{ $datakos->lokasi }}</p>
                 </div>

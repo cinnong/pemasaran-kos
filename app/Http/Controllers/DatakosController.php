@@ -135,7 +135,7 @@ class DatakosController extends Controller
         $results = Datakos::query()
             ->where('nama', 'like', "%{$query}%")
             ->orWhere('lokasi', 'like', "%{$query}%")
-            ->orWhere('harga', 'like', "%{$query}%") 
+            ->orWhere('harga', 'like', "%{$query}%")
             ->get();
 
         return view('datakos.search', compact('results'));

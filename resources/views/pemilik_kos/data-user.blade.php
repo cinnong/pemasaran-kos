@@ -1,4 +1,3 @@
-<!-- resources/views/pemilik/pesanan.blade.php -->
 @extends('layouts.pemilik')
 
 @section('content')
@@ -40,7 +39,7 @@
                     </tbody>
                 </table>
             </div>
-            
+
         </div>
     </div>
 @endsection

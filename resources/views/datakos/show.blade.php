@@ -15,7 +15,7 @@
             <div class="w-full lg:w-1/2">
                 <img src="{{ asset('photos/kos/' . $datakos->foto) }}" alt="Foto Kos"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-            </div>            
+            </div>
             <div class="w-full lg:w-1/2 lg:pl-8 mt-6 lg:mt-0">
                 <h1 class="text-2xl font-bold mb-4">KOS</h1>
                 <p><strong>Nama:</strong> {{ $datakos->nama }}</p>
@@ -25,7 +25,7 @@
                 <p><strong>Tipe Kos:</strong> {{ ucfirst(str_replace('_', ' ', $datakos->tipekos)) }}</p>
                 <p class="overflow-wrap break-word"><strong>Deskripsi:</strong> {{ $datakos->deskripsi }}</p>
                 <p><strong>No. Telepon:</strong> {{ $datakos->notlp }}</p>
-                <a href="{{ route('beranda')}}">
+                <a href="{{ route('beranda') }}">
                     <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Back
                     </button>
