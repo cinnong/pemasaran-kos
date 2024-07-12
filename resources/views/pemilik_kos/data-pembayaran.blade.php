@@ -8,13 +8,13 @@
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-200 text-gray-600">
                         <tr>
+                            <th class="px-4 py-2 border-b">ID Pemesanan</th>
                             <th class="px-4 py-2 border-b">Nama User</th>
                             <th class="px-4 py-2 border-b">Usia</th>
                             <th class="px-4 py-2 border-b">Jenis Kelamin</th>
                             <th class="px-4 py-2 border-b">Pekerjaan</th>
                             <th class="px-4 py-2 border-b">No. Telp</th>
                             <th class="px-4 py-2 border-b">Email</th>
-                            <th class="px-4 py-2 border-b">ID Pemesanan</th>
                             <th class="px-4 py-2 border-b">Tanggal Pembayaran</th>
                             <th class="px-4 py-2 border-b">Bukti Pembayaran</th>
                             <th class="px-4 py-2 border-b">Status Pembayaran</th>
@@ -23,6 +23,7 @@
                     <tbody>
                         @foreach ($dataPembayaran as $pembayaran)
                             <tr>
+                                <td class="px-4 py-2 border-b text-center">{{ $pembayaran->pemesanan_id }}</td>
                                 <td class="px-4 py-2 border-b text-center">{{ $pembayaran->pemesanan->user->name }}</td>
                                 <td class="px-4 py-2 border-b text-center">{{ $pembayaran->pemesanan->user->usia }}</td>
                                 <td class="px-4 py-2 border-b text-center">{{ $pembayaran->pemesanan->user->jenis_kelamin }}
@@ -31,7 +32,6 @@
                                 </td>
                                 <td class="px-4 py-2 border-b text-center">{{ $pembayaran->pemesanan->user->notlp }}</td>
                                 <td class="px-4 py-2 border-b text-center">{{ $pembayaran->pemesanan->user->email }}</td>
-                                <td class="px-4 py-2 border-b text-center">{{ $pembayaran->pemesanan_id }}</td>
                                 <td class="px-4 py-2 border-b text-center">{{ $pembayaran->tanggal_pembayaran }}</td>
                                 <td class="px-4 py-2 border-b text-center">
                                     @if ($pembayaran->upload_bukti_pembayaran)
