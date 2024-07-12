@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mx-auto py-8">
         <div class="bg-white shadow-md rounded-lg p-6">
-            <h1 class="text-2xl font-bold mb-4">Data Pembayaran</h1>
+            <h1 class="text-2xl font-bold mb-4">Data User</h1>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-200">
@@ -17,6 +17,7 @@
                             <th class="w-1/4 px-4 py-2">Tanggal Pembayaran</th>
                             <th class="w-1/4 px-4 py-2">Upload Bukti Pembayaran</th>
                             <th class="w-1/4 px-4 py-2">Status Pembayaran</th>
+                            <th class="w-1/4 px-4 py-2">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +35,16 @@
                                         target="_blank">Lihat</a>
                                 </td>
                                 <td class="border px-4 py-2">{{ $bayar->status_pembayaran }}</td>
+                                <td class="border px-4 py-2">
+                                    {{-- <form action="{{ route('', $pembayaran->id) }}" method="POST"> --}}
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-lg">
+                                        Hapus
+                                    </button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

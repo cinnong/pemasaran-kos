@@ -56,6 +56,36 @@
                             </a>
                         </div>
                     </div>
+                    <div class="col-md-4 col-6">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-danger rounded shadow">
+                                    <i class="mdi mdi-cart-outline mdi-24px"></i>
+                                </div>
+                            </div>
+                            <a href="{{ route('pemesanans.index') }}" style="text-decoration: none; color: inherit;">
+                                <div class="ms-3">
+                                    <div class="small mb-1">Data Pemesanan</div>
+                                    {{-- <h5 class="mb-0">{{ $jumlahPemesanan }}</h5> --}}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-primary rounded shadow">
+                                    <i class="mdi mdi-cash-multiple mdi-24px"></i>
+                                </div>
+                            </div>
+                            <a href="{{ route('pembayaran.show') }}" style="text-decoration: none; color: inherit;">
+                                <div class="ms-3">
+                                    <div class="small mb-1">Data Pembayaran</div>
+                                    {{-- <h5 class="mb-0">{{ $jumlahPembayaran }}</h5> --}}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

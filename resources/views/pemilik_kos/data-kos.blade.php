@@ -21,7 +21,7 @@
                         <th class="px-4 py-2 border-b text-left">No. Telp</th>
                         <th class="px-4 py-2 border-b text-left">Status</th>
                         <th class="px-4 py-2 border-b text-left">Foto</th>
-                        <th class="px-4 py-2 border-b text-left">Actions</th>
+                        <th class="px-4 py-2 border-b text-left">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>

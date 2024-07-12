@@ -6,14 +6,15 @@
                 <table class="table table-bordered">
                     <thead class="table-light">
                         <tr>
-                            <th class="text-truncate">Nama</th>
-                            <th class="text-truncate">Pemilik</th>
+                            <th class="text-truncate">Pemilik </th>
+                            <th class="text-truncate">Nama Kos</th>
                             <th class="text-truncate">Lokasi</th>
                             <th class="text-truncate">Harga</th>
                             <th class="text-truncate">Jumlah</th>
                             <th class="text-truncate">Tipe Kos</th>
                             <th class="text-truncate">Foto</th>
                             <th class="text-truncate">Status</th>
+                            <th class="text-truncate">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,11 +41,26 @@
                                                 Pending</option>
                                             <option value="Setuju" {{ $kos->status == 'Setuju' ? 'selected' : '' }}>Setuju
                                             </option>
-                                            <option value="Tidak setuju" {{ $kos->status == 'Tidak setuju' ? 'selected' : '' }}>
+                                            <option value="Tidak setuju"
+                                                {{ $kos->status == 'Tidak setuju' ? 'selected' : '' }}>
                                                 Tidak setuju</option>
                                         </select>
                                         <button type="submit" class="btn btn-primary mt-2">Update</button>
                                     </form>
+                                </td>
+                                <td class="px-4 py-2 border-b text-left flex space-x-2">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="{{ route('beranda-admin', $kos->id) }}"
+                                            class="btn btn-primary rounded-lg">View</a>
+                                        <a href="{{ route('datakos.edit', $kos->id) }}"
+                                            class="btn btn-success rounded-lg">Edit</a>
+                                        <form action="{{ route('datakos.destroy', $kos->id) }}" method="POST"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger rounded-lg">Delete</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
