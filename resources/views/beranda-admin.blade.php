@@ -18,10 +18,12 @@
                                     <i class="mdi mdi-account-outline mdi-24px"></i>
                                 </div>
                             </div>
-                            <div class="ms-3">
-                                <div class="small mb-1">Data Pengguna</div>
-                                <h5 class="mb-0">{{ $countuser }}</h5>
-                            </div>
+                            <a href="{{ route('datauser') }}" style="text-decoration: none; color: inherit;">
+                                <div class="ms-3">
+                                    <div class="small mb-1">Data Pengguna</div>
+                                    <h5 class="mb-0">{{ $countuser }}</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-4 col-6">
@@ -31,10 +33,12 @@
                                     <i class="mdi mdi-cellphone-link mdi-24px"></i>
                                 </div>
                             </div>
-                            <div class="ms-3">
-                                <div class="small mb-1">Data Kos</div>
-                                <h5 class="mb-0">{{ $count }}</h5>
-                            </div>
+                            <a href="{{ route('datakos') }}" style="text-decoration: none; color: inherit;">
+                                <div class="ms-3">
+                                    <div class="small mb-1">Data Kos</div>
+                                    <h5 class="mb-0">{{ $count }}</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-4 col-6">
@@ -44,10 +48,12 @@
                                     <i class="mdi mdi-account-outline mdi-24px"></i>
                                 </div>
                             </div>
-                            <div class="ms-3">
-                                <div class="small mb-1">Data Pemilik</div>
-                                <h5 class="mb-0">{{ $countpemilik }}</h5>
-                            </div>
+                            <a href="{{ route('datapemilik') }}" style="text-decoration: none; color: inherit;">
+                                <div class="ms-3">
+                                    <div class="small mb-1">Data Pemilik</div>
+                                    <h5 class="mb-0">{{ $countpemilik }}</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
