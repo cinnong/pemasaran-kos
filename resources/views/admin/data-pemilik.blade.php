@@ -25,11 +25,11 @@
                                 <td class="text-truncate">{{ $pemilikKos->email }}</td>
                                 <td class="text-truncate">{{ $pemilikKos->created_at }}</td>
                                 <td class="text-truncate">
-                                    <form action="{{ route('pemilik_kos.destroy', $pemilikKos->id) }}" method="POST"
+                                    <form id="deleteAccountForm" action="{{ route('account.delete', $pemilikKos->id) }}" method="POST"
                                         class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        <button type="submit" id="deleteAccountButton" class="btn btn-danger btn-sm">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -39,4 +39,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('deleteAccountButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Anda Yakin?',
+                text: "Menghapus akun anda dapat menghapus semua data yang berkaitan dengan akun anda!!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteAccountForm').submit();
+                }
+            });
+        });
+    </script>
 @endsection

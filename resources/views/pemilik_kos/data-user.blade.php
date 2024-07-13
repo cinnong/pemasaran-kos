@@ -17,7 +17,6 @@
                             <th class="w-1/4 px-4 py-2">Tanggal Pembayaran</th>
                             <th class="w-1/4 px-4 py-2">Upload Bukti Pembayaran</th>
                             <th class="w-1/4 px-4 py-2">Status Pembayaran</th>
-                            <th class="w-1/4 px-4 py-2">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,16 +34,6 @@
                                         target="_blank">Lihat</a>
                                 </td>
                                 <td class="border px-4 py-2">{{ $bayar->status_pembayaran }}</td>
-                                <td class="border px-4 py-2">
-                                    {{-- <form action="{{ route('', $pembayaran->id) }}" method="POST"> --}}
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-lg">
-                                        Hapus
-                                    </button>
-                                    </form>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

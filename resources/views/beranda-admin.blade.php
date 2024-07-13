@@ -11,7 +11,7 @@
             </div>
             <div class="card-body">
                 <div class="row g-3">
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-2 col-sm-6">
                         <div class="d-flex align-items-center">
                             <div class="avatar">
                                 <div class="avatar-initial bg-success rounded shadow">
@@ -26,7 +26,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-2 col-sm-6">
                         <div class="d-flex align-items-center">
                             <div class="avatar">
                                 <div class="avatar-initial bg-warning rounded shadow">
@@ -41,7 +41,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-2 col-sm-6">
                         <div class="d-flex align-items-center">
                             <div class="avatar">
                                 <div class="avatar-initial bg-info rounded shadow">
@@ -56,7 +56,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-3 col-sm-6">
                         <div class="d-flex align-items-center">
                             <div class="avatar">
                                 <div class="avatar-initial bg-danger rounded shadow">
@@ -66,12 +66,12 @@
                             <a href="{{ route('pemesanans.index') }}" style="text-decoration: none; color: inherit;">
                                 <div class="ms-3">
                                     <div class="small mb-1">Data Pemesanan</div>
-                                    {{-- <h5 class="mb-0">{{ $jumlahPemesanan }}</h5> --}}
+                                    <h5 class="mb-0">{{ $countpemesanan }}</h5>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-3 col-sm-6">
                         <div class="d-flex align-items-center">
                             <div class="avatar">
                                 <div class="avatar-initial bg-primary rounded shadow">
@@ -81,7 +81,7 @@
                             <a href="{{ route('pembayaran.show') }}" style="text-decoration: none; color: inherit;">
                                 <div class="ms-3">
                                     <div class="small mb-1">Data Pembayaran</div>
-                                    {{-- <h5 class="mb-0">{{ $jumlahPembayaran }}</h5> --}}
+                                    <h5 class="mb-0">{{ $countpembayaran }}</h5>
                                 </div>
                             </a>
                         </div>

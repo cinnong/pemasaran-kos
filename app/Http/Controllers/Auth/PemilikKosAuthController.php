@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\PemilikKos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,5 +41,16 @@ class PemilikKosAuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function destroy($id)
+    {
+        $user = PemilikKos::findOrFail($id);
+
+        // Hapus pengguna beserta data terkait
+        $user->delete();
+
+        // Redirect atau berikan respon sesuai kebutuhan
+        return redirect()->route('datapemilik')->with('success', 'Account deleted successfully');
     }
 }

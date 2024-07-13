@@ -31,4 +31,15 @@ class PemilikKos extends Authenticatable
     {
         return $this->hasMany(Pemesanan::class, 'pemilik_kos_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($pemilikKos) {
+            $pemilikKos->datakos()->delete();
+            $pemilikKos->pemesanan()->delete();
+            // Tambahkan penghapusan data terkait lainnya
+        });
+    }
 }

@@ -38,4 +38,6 @@ class Datakos extends Model
     {
         return $this->hasMany(Pemesanan::class, 'id_kos');
     }
+
+    
 }

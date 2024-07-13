@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->enum('status', ['Setuju', 'Pending', 'Tidak setuju']);
             $table->timestamps();
-            $table->foreign('pemilik_kos_id')->references('id')->on('pemilik_kos');
+            $table->foreign('pemilik_kos_id')->references('id')->on('pemilik_kos')->onDelete('cascade');
         });
     }
     public function down()

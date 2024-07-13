@@ -73,9 +73,22 @@ Route::get('/beranda-admin', function () {
     $count = Datakos::count();
     $countuser = User::count();
     $countpemilik = PemilikKos::count();
-    return view('beranda-admin', compact('count', 'countuser', 'countpemilik'));
+    $countpemesanan = Pemesanan::count();
+    $countpembayaran = Pembayaran::count();
+    return view('beranda-admin', compact('count', 'countuser', 'countpemilik','countpembayaran','countpemesanan'));
 })->name('beranda-admin');
 Route::get('/datauser', [AdminController::class, 'index'])->name('datauser');
+Route::get('/detailkos/{id}', function($id) {
+    $datakos = Datakos::findOrFail($id);
+    return view('admin.detail-kos', compact('datakos'));
+})->name('detailkos');
+Route::get('/editkosadmin/{id}', function($id) {
+    $datakos = Datakos::findOrFail($id);
+    return view('admin.edit-datakos', compact('datakos'));
+})->name('edit-datakos-admin');
+Route::put('/editkos-admin/{id}', [AdminController::class, 'editKos'])->name('editkos-admin');
+Route::delete('/deletekos-admin/{id}', [AdminController::class, 'deleteKos'])->name('deletekos-admin');
+Route::delete('/account/delete/{id}', [PemilikKosAuthController::class, 'destroy'])->name('account.delete');
 
 
 
