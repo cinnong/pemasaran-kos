@@ -33,7 +33,8 @@
                             <td class="py-3 px-6 text-center">{{ $pemesanan->harga }}</td>
                             <td class="py-3 px-6 text-center">{{ $pemesanan->total_biaya }}</td>
                             <td class="py-3 px-6 text-center">
-                                <form action="{{ route('pemesanans.update', ['pemesanan' => $pemesanan]) }}" method="POST">
+                                <form id="updateForm-{{ $pemesanan->id }}"
+                                    action="{{ route('pemesanans.update', ['pemesanan' => $pemesanan]) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
@@ -47,8 +48,9 @@
                                                 Pending</option>
                                         </select>
                                     </div>
-                                    <button type="submit"
-                                        class="btn bg-blue-500 text-white rounded-lg px-4 py-2 mt-2 hover:bg-blue-600 transition duration-200">Simpan</button>
+                                    <button type="button"
+                                        class="btn bg-blue-500 text-white rounded-lg px-4 py-2 mt-2 hover:bg-blue-600 transition duration-200 updateButton"
+                                        data-id="{{ $pemesanan->id }}">Simpan</button>
                                 </form>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -63,12 +65,41 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        document.querySelectorAll('.updateButton').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const formId = this.dataset.id;
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda tidak akan bisa mengembalikan ini!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, setujui!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('updateForm-' + formId).submit();
+                    }
+                });
+            });
+        });
+
+        @if (session('success'))
+            Swal.fire({
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
         function printPemesanan(nama, tglPemesanan, tglMasuk, tglKeluar, tipeKos, perBulan, harga, totalBiaya, namaKos,
             namaPemilik) {
-            // Hitung ukuran jendela cetak
-            const width = 800; // Sesuaikan dengan lebar maksimum data
-            const height = 600; // Sesuaikan dengan tinggi maksimum data
+            const width = 800;
+            const height = 600;
 
             const printWindow = window.open('', '', `width=${width},height=${height}`);
             printWindow.document.write('<html><head><title>Print Pemesanan</title>');
@@ -78,12 +109,12 @@
                     font-family: Arial, sans-serif;
                     margin: 0;
                     padding: 20px;
-                    font-size: 20px; /* Ukuran font utama */
-                    line-height: 1.6; /* Jarak antar baris */
+                    font-size: 20px;
+                    line-height: 1.6;
                 }
                 .container {
                     width: 100%;
-                    max-width: 600px; /* Atur lebar maksimum sesuai kebutuhan */
+                    max-width: 600px;
                     margin: 0 auto;
                     padding: 20px;
                     border: 1px solid #000;
@@ -92,15 +123,15 @@
                 .center {
                     text-align: center;
                     margin-bottom: 20px;
-                    font-size: 24px; /* Ukuran font untuk judul */
+                    font-size: 24px;
                     font-weight: bold;
                 }
                 .info {
                     margin-bottom: 15px;
-                    font-size: 20px; /* Ukuran font untuk informasi */
+                    font-size: 20px;
                 }
                 .info p {
-                    margin: 10px 0; /* Jarak antar paragraf */
+                    margin: 10px 0;
                 }
                 .total {
                     font-weight: bold;
