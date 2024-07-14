@@ -68,4 +68,20 @@ class RegisteredUserController extends Controller
         $user = User::findOrFail($id);
         return view('datauser.show', compact('user'));
     }
+
+    public function destroy($id)
+    {
+        // Temukan pengguna berdasarkan ID
+        $user = User::findOrFail($id);
+
+        // Periksa apakah pengguna memiliki role "pencari"
+        if ($user->role == 'admin') {
+            return redirect()->route('datauser')->with('error', 'User tidak dapat dihapus karena bukan pencari.');
+        }
+
+        // Hapus pengguna
+        $user->delete();
+
+        return redirect()->route('datauser')->with('success', 'User berhasil dihapus.');
+    }
 }

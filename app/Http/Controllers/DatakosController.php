@@ -72,6 +72,7 @@ class DatakosController extends Controller
             'jumlah_kamar' => 'required|integer',
             'tipekos' => 'required|string|max:50',
             'deskripsi' => 'required|string',
+            'notlp' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -82,7 +83,7 @@ class DatakosController extends Controller
         $datakos->jumlah_kamar = $validated['jumlah_kamar'];
         $datakos->tipekos = $validated['tipekos'];
         $datakos->deskripsi = $validated['deskripsi'];
-        $datakos->notlp = PemilikKos::findOrFail(Auth::guard('pemilik_kos')->user()->id)->no_hp;
+        $datakos->notlp = $validated['notlp'];
 
         // Proses upload dan penggantian foto
         if ($request->hasFile('foto')) {

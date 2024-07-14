@@ -11,14 +11,13 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    use HasRoles;
     protected $fillable = [
         'name',
         'usia',
@@ -54,5 +53,13 @@ class User extends Authenticatable
         return $this->hasMany(Pemesanan::class);
     }
 
-    
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($pemilikKos) {
+            $pemilikKos->pemesanan()->delete();
+            // Tambahkan penghapusan data terkait lainnya
+        });
+    }
 }

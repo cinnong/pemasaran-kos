@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PemilikKosAuthController;
 use App\Http\Controllers\Auth\RegisteredPemilikController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PemilikKosController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
@@ -89,6 +90,7 @@ Route::get('/editkosadmin/{id}', function($id) {
 Route::put('/editkos-admin/{id}', [AdminController::class, 'editKos'])->name('editkos-admin');
 Route::delete('/deletekos-admin/{id}', [AdminController::class, 'deleteKos'])->name('deletekos-admin');
 Route::delete('/account/delete/{id}', [PemilikKosAuthController::class, 'destroy'])->name('account.delete');
+Route::delete('/user/delete/{id}', [RegisteredUserController::class, 'destroy'])->name('user.delete');
 
 
 
