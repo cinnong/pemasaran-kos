@@ -40,7 +40,8 @@ class PembayaranController extends Controller
             'pemesanan_id' => $request->pemesanan_id,
             'tanggal_pembayaran' => now(),
             'upload_bukti_pembayaran' => $imageName,
-            'status_pembayaran' => 'berhasil',
+            'total_kamar' => 1,
+            'status_pembayaran' => 'lunas',
         ]);
 
         // Mengurangi jumlah kamar pada datakos
@@ -73,7 +74,7 @@ class PembayaranController extends Controller
             'upload_bukti_pembayaran' => 'sometimes|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status_pembayaran' => 'required|in:pending,berhasil,gagal',
         ]);
-        
+
         if ($request->hasFile('upload_bukti_pembayaran')) {
             $file = $request->file('upload_bukti_pembayaran');
             $path = $file->store('bukti_pembayaran', 'public');
@@ -92,5 +93,13 @@ class PembayaranController extends Controller
         $pembayaran->delete();
 
         return redirect()->route('pembayarans.index')->with('success', 'Pembayaran berhasil dihapus.');
+    }
+
+    public function deleteAdmin($id)
+    {
+        $pembayaran = Pembayaran::findOrFail($id);
+        $pembayaran->delete();
+
+        return redirect()->route('pembayaran.show')->with('success', 'Pembayaran berhasil dihapus.');
     }
 }

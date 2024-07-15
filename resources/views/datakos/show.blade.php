@@ -22,6 +22,7 @@
                 <p><strong>Lokasi:</strong> {{ $datakos->lokasi }}</p>
                 <p><strong>Harga:</strong> {{ $datakos->harga }}</p>
                 <p><strong>Jumlah Kamar:</strong> {{ $datakos->jumlah_kamar }}</p>
+                <p><strong>Kamar Terisi:</strong> {{ $kamarTerisi }}</p>
                 <p><strong>Tipe Kos:</strong> {{ ucfirst(str_replace('_', ' ', $datakos->tipekos)) }}</p>
                 <p class="overflow-wrap break-word"><strong>Deskripsi:</strong> {{ $datakos->deskripsi }}</p>
                 <p><strong>No. Telepon:</strong> {{ $datakos->notlp }}</p>
@@ -41,6 +42,7 @@
                     </button>
                 </a>
             </div>
+
         </div>
     </div>
 </body>

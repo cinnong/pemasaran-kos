@@ -13,7 +13,8 @@ return new class extends Migration
             $table->bigInteger('pemesanan_id')->unsigned();
             $table->timestamp('tanggal_pembayaran')->default(now());
             $table->string('upload_bukti_pembayaran');
-            $table->enum('status_pembayaran', ['pending', 'berhasil', 'gagal']);
+            $table->string('total_kamar');
+            $table->enum('status_pembayaran', ['pending', 'lunas', 'belum lunas']);
             $table->foreign('pemesanan_id')->references('id')->on('pemesanans')->onDelete('cascade');
             $table->timestamps();
         });

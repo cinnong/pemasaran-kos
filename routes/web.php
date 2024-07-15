@@ -27,6 +27,8 @@ Route::get('/pemilik-kos/datakos', [PemilikKosController::class, 'datakospemilik
 Route::get('/pemilik-kos/pemesanan', [PemesananController::class, 'pesanan'])->name('pemilik.pemesanan');
 Route::get('/pemilik-kos/pesanan', [PemilikKosController::class, 'pemesan'])->name('pemilik.user');
 Route::get('/pemilik-kos/pembayaran', [PemilikKosController::class, 'pembayaran'])->name('pemilik.pembayaran');
+Route::get('/pemilik-kos/pesanan/hapus/{id}', [PemilikKosController::class, 'pemesananHapus'])->name('pemilik.pemesanan.hapus');
+Route::get('/pemilik-kos/pembayaran/hapus/{id}', [PemilikKosController::class, 'pembayaranHapus'])->name('pemilik.pembayaran.hapus');
 Route::get('/pemilik-kos/dashboard', function () {
     $pemilikKos = Auth::guard('pemilik_kos')->user();
 
@@ -91,6 +93,8 @@ Route::put('/editkos-admin/{id}', [AdminController::class, 'editKos'])->name('ed
 Route::delete('/deletekos-admin/{id}', [AdminController::class, 'deleteKos'])->name('deletekos-admin');
 Route::delete('/account/delete/{id}', [PemilikKosAuthController::class, 'destroy'])->name('account.delete');
 Route::delete('/user/delete/{id}', [RegisteredUserController::class, 'destroy'])->name('user.delete');
+Route::delete('/pemesanan/delete/{id}', [PemesananController::class, 'deleteAdmin'])->name('pemesanan.delete');
+Route::delete('/pembayaran/delete/{id}', [PembayaranController::class, 'deleteAdmin'])->name('pembayaran.delete');
 
 
 

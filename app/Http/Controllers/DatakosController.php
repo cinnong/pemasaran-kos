@@ -116,9 +116,17 @@ class DatakosController extends Controller
 
     public function show($id)
     {
-        $datakos = Datakos::with('pemilikkos')->findOrFail($id);
-        return view('datakos.show', compact('datakos'));
+        // Mengambil data kos dengan relasi pemesanan dan pembayaran
+        $datakos = Datakos::with(['pemilikkos', 'pemesanan.pembayaran'])->findOrFail($id);
+
+        // Mengambil data kamar yang terisi dari pembayaran
+        $kamarTerisi = $datakos->pemesanan->reduce(function ($carry, $pemesanan) {
+            return $carry + $pemesanan->pembayaran->sum('total_kamar');
+        }, 0);
+
+        return view('datakos.show', compact('datakos', 'kamarTerisi'));
     }
+
 
     public function destroy($id)
     {

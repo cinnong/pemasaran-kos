@@ -66,7 +66,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.show', compact('pemesanan'));
     }
-    
+
     public function edit(Pemesanan $pemesanan)
     {
         return view('pemesanan.edit', compact('pemesanan'));
@@ -95,4 +95,15 @@ class PemesananController extends Controller
 
         return redirect()->route('pemesanans.index')->with('success', 'Pemesanan berhasil dihapus.');
     }
+
+    public function deleteAdmin($id)
+    {
+        $pemesanan = Pemesanan::findOrFail($id);
+
+        $pemesanan->delete();
+
+        return redirect()->route('pemesanans.index')->with('success', 'Pemesanan berhasil dihapus.');
+    }
+
+
 }
