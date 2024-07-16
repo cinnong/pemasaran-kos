@@ -22,22 +22,25 @@
                     <input type="hidden" name="id_kos" value="{{ $datakos->id }}">
                     <input type="hidden" name="pemilik_kos_id" value="{{ $datakos->pemilik_kos_id }}">
                     <input type="hidden" name="total_biaya" id="total_biaya" value="{{ $datakos->harga }}">
+
                     <div class="mb-4">
                         <label for="tanggal_masuk" class="block text-sm font-medium text-gray-700">Tanggal Masuk</label>
                         <input type="date" id="tanggal_masuk" name="tanggal_masuk"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            onchange="updatePerBulan()">
                     </div>
                     <div class="mb-4">
                         <label for="tanggal_keluar" class="block text-sm font-medium text-gray-700">Tanggal Keluar</label>
                         <input type="date" id="tanggal_keluar" name="tanggal_keluar"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            onchange="updatePerBulan()">
                     </div>
 
                     <div class="mb-4">
                         <label for="per_bulan" class="block text-sm font-medium text-gray-700">Per Bulan</label>
                         <input type="number" id="per_bulan" name="per_bulan"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            onchange="updateTotalBiaya()">
+                            readonly>
                     </div>
                     <div class="mb-4">
                         <label for="harga" class="block text-sm font-medium text-gray-700">Harga</label>
@@ -53,10 +56,35 @@
                     </div>
 
                     <script>
+                        function updatePerBulan() {
+                            const tanggalMasuk = document.getElementById('tanggal_masuk').value;
+                            const tanggalKeluar = document.getElementById('tanggal_keluar').value;
+
+                            if (tanggalMasuk && tanggalKeluar) {
+                                const startDate = new Date(tanggalMasuk);
+                                const endDate = new Date(tanggalKeluar);
+
+                                let totalMonths = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+                                totalMonths += endDate.getMonth() - startDate.getMonth();
+
+                                // Menghitung perbedaan hari
+                                const daysDifference = endDate.getDate() - startDate.getDate();
+
+                                // Jika endDate's day is not less than startDate's day, tambah 1 bulan
+                                if (daysDifference >= 0) {
+                                    totalMonths++;
+                                }
+
+                                document.getElementById('per_bulan').value = totalMonths;
+
+                                updateTotalBiaya();
+                            }
+                        }
+
                         function updateTotalBiaya() {
-                            var harga = parseFloat(document.querySelector('input[name="harga"]').value);
-                            var perBulan = parseInt(document.querySelector('input[name="per_bulan"]').value);
-                            var totalBiaya = harga * perBulan;
+                            const harga = parseFloat(document.querySelector('input[name="harga"]').value);
+                            const perBulan = parseInt(document.querySelector('input[name="per_bulan"]').value);
+                            const totalBiaya = harga * perBulan;
                             document.getElementById('total_biaya').value = totalBiaya;
                             document.getElementById('total_biaya_label').value = totalBiaya;
                         }
