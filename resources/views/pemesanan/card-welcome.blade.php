@@ -9,12 +9,20 @@
 </head>
 
 <body class="bg-gray-100">
-    <div class="container mx-auto py-8">
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <h1 class="text-2xl font-bold mb-4">Selamat Datang🤗 </h1>
-            <a href="{{ route('beranda') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Kembali</a>
-            <!-- Your welcome message -->
+    <div class="container mx-auto py-12">
+        <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="bg-blue-500 p-4">
+                <h1 class="text-3xl font-bold text-white text-center">Selamat Datang 🤗</h1>
+            </div>
+            <div class="p-6">
+                <p class="text-lg text-gray-700 text-center mb-4">Kami sangat senang menyambut Anda di kos kami!</p>
+                <div class="flex justify-center">
+                    <a href="{{ route('beranda') }}"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out text-lg">
+                        Kembali
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </body>
