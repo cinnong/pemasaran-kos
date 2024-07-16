@@ -8,6 +8,7 @@
                         <tr>
                             <th class="text-truncate">ID</th>
                             <th class="text-truncate">Nama</th>
+                            <th class="text-truncate">No Rekening</th>
                             <th class="text-truncate">No HP</th>
                             <th class="text-truncate">Email</th>
                             <th class="text-truncate">Tanggal Dibuat</th>
@@ -21,15 +22,21 @@
                                 <td>
                                     <h6 class="mb-0 text-truncate text-capitalize">{{ $pemilikKos->nama }}</h6>
                                 </td>
+                                <td class="text-truncate">
+                                    @foreach ($pemilikKos->datakos as $datakos)
+                                        {{ $datakos->nomor_rekening }}<br>
+                                    @endforeach
+                                </td>
                                 <td class="text-truncate">{{ $pemilikKos->no_hp }}</td>
                                 <td class="text-truncate">{{ $pemilikKos->email }}</td>
                                 <td class="text-truncate">{{ $pemilikKos->created_at }}</td>
                                 <td class="text-truncate">
-                                    <form id="deleteAccountForm" action="{{ route('account.delete', $pemilikKos->id) }}" method="POST"
-                                        class="inline-block">
+                                    <form id="deleteAccountForm" action="{{ route('account.delete', $pemilikKos->id) }}"
+                                        method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" id="deleteAccountButton" class="btn btn-danger btn-sm">Hapus</button>
+                                        <button type="submit" id="deleteAccountButton"
+                                            class="btn btn-danger btn-sm">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
