@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex-1 p-6">
-        <h1 class="text-2xl font-bold mb-4">Data Pembayaran</h1>
+        <h1 class="text-2xl font-bold text-center mb-4">Data Pembayaran</h1>
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white">
