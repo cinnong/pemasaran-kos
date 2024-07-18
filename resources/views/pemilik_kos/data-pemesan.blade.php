@@ -16,7 +16,7 @@
                         <th class="py-3 px-6 text-center">Per Bulan</th>
                         <th class="py-3 px-6 text-center">Harga</th>
                         <th class="py-3 px-6 text-center">Total Biaya</th>
-                        <th class="py-3 px-6 text-center">Aksi</th>
+                        <th class="py-3 px-6 text-center">Status</th>
                         <th class="py-3 px-6 text-center">Cetak</th>
                     </tr>
                 </thead>
