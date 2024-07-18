@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <div class="card shadow">
                     <div class="card-header text-center my-3"
-                        style="background: linear-gradient(to right, #eecff3, #dcb0ef);">
+                        style="background: linear-gradient(to right, #f0def3, #dcb0ef);">
                         <div class="d-flex align-items-center justify-content-center">
                             <h5 class="card-title m-0 text-capitalize fw-bold fs-4">Welcome, {{ Auth::user()->name }}</h5>
                             {{-- <span class="badge bg-secondary ms-2">{{ Auth::user()->role }}</span> --}}
