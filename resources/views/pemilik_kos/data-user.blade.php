@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mx-auto py-8">
-        <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
             <h1 class="text-2xl font-bold mb-4">Data User</h1>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white">
